@@ -16,24 +16,45 @@
   <meta name="author" content="rightevil">
   <meta name="keywords" content="">
   
-    <meta name="description" content="编织谎言的是他，戳破谎言的也是他，这世间终究是没有任何绝对的美好，只恨那密密麻麻的花言巧语一时将我蒙蔽，如今回想起来便只剩恶心。。。彻头彻尾的恶心。   他是a，我的室友，后来也成了我的朋友，对于新鲜的大学生活我们都有讨论不完的好奇和希冀，路上来来往往的漂亮女生也经常成为我们的谈资。A这人特别耿直，好吧，与其说是耿直更类似于一种初生牛犊不怕虎的莽劲，店铺里与售货阿姨的讨价还价，人群中讲话时的">
+    <meta name="description" content="题目 1已知信息：由 abode 文档感染而来,还有一个 ip  第一问和第二问就是求主机信息，根据前面的教程，我们用 windows.info 插件就可以  1.&#x2F;vol.py -f ..&#x2F;dump&#x2F;dump1.vmem windows.info   此处-f 指定镜像内存文件      第三问 What process can be considered suspicious in Case">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编织谎言的是他，戳破谎言的也是他">
-<meta property="og:url" content="http://example.com/2022/10/16/%E7%BC%96%E7%BB%87%E8%B0%8E%E8%A8%80%E7%9A%84%E6%98%AF%E4%BB%96%EF%BC%8C%E6%88%B3%E7%A0%B4%E8%B0%8E%E8%A8%80%E7%9A%84%E4%B9%9F%E6%98%AF%E4%BB%96/index.html">
+<meta property="og:title" content="tryhackme房间volatility 取证">
+<meta property="og:url" content="http://example.com/2023/09/11/tryhackme%E6%88%BF%E9%97%B4volatility%20%E5%8F%96%E8%AF%81/index.html">
 <meta property="og:site_name" content="rightevil">
-<meta property="og:description" content="编织谎言的是他，戳破谎言的也是他，这世间终究是没有任何绝对的美好，只恨那密密麻麻的花言巧语一时将我蒙蔽，如今回想起来便只剩恶心。。。彻头彻尾的恶心。   他是a，我的室友，后来也成了我的朋友，对于新鲜的大学生活我们都有讨论不完的好奇和希冀，路上来来往往的漂亮女生也经常成为我们的谈资。A这人特别耿直，好吧，与其说是耿直更类似于一种初生牛犊不怕虎的莽劲，店铺里与售货阿姨的讨价还价，人群中讲话时的">
+<meta property="og:description" content="题目 1已知信息：由 abode 文档感染而来,还有一个 ip  第一问和第二问就是求主机信息，根据前面的教程，我们用 windows.info 插件就可以  1.&#x2F;vol.py -f ..&#x2F;dump&#x2F;dump1.vmem windows.info   此处-f 指定镜像内存文件      第三问 What process can be considered suspicious in Case">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-16T10:57:02.000Z">
-<meta property="article:modified_time" content="2022-10-16T11:02:30.476Z">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d981f70b0a96644b8e338.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9d6cec469ce44083152b8.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/6f88bf187bdfe43fc9e5f.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/8247d4d481636428691fb.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f6c9f21cc546bbae1434c.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1c317d503bcf162f98fb3.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/0b839dc4d4b38ec6bdd8c.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/19fd7393ac32f675d98a3.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/30ca5f8ebcb96c431b47e.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/663d31ed91db660eb3c19.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f3961a062c95d11f65ebf.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/904ac9588136018c151ab.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/654189c4a023ad21740a0.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/8f04e5642bdf1d58bbbf2.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/5792ece2faae0c83e681d.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7ffdc296bcca2c1db8119.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/ce4809f4968ba0365d65b.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1cefe6ad7f8b049e31e29.png">
+<meta property="article:published_time" content="2023-09-11T04:24:49.000Z">
+<meta property="article:modified_time" content="2023-09-11T04:35:32.782Z">
 <meta property="article:author" content="rightevil">
-<meta property="article:tag" content="耽美">
+<meta property="article:tag" content="volatility">
+<meta property="article:tag" content="tryhackme">
+<meta property="article:tag" content="取证">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d981f70b0a96644b8e338.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>编织谎言的是他，戳破谎言的也是他 - rightevil</title>
+  <title>tryhackme房间volatility 取证 - rightevil</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -235,7 +256,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="编织谎言的是他，戳破谎言的也是他"></span>
+            <span id="subtitle" data-typed-text="tryhackme房间volatility 取证"></span>
           
         </div>
 
@@ -246,8 +267,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-16 18:57" pubdate>
-          2022年10月16日 晚上
+        <time datetime="2023-09-11 12:24" pubdate>
+          2023年9月11日 中午
         </time>
       </span>
     
@@ -259,7 +280,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.5k 字
+          1.6k 字
         
       </span>
     
@@ -271,7 +292,7 @@
         
         
           <!-- compatible with older versions-->
-          21 分钟
+          14 分钟
         
       </span>
     
@@ -317,36 +338,99 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">编织谎言的是他，戳破谎言的也是他</h1>
+            <h1 style="display: none">tryhackme房间volatility 取证</h1>
             
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>  编织谎言的是他，戳破谎言的也是他，这世间终究是没有任何绝对的美好，只恨那密密麻麻的花言巧语一时将我蒙蔽，如今回想起来便只剩恶心。。。彻头彻尾的恶心。</p>
+                <h1 id="题目-1"><a href="#题目-1" class="headerlink" title="题目 1"></a>题目 1</h1><p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d981f70b0a96644b8e338.png" srcset="/img/loading.gif" lazyload><br>已知信息：由 abode 文档感染而来,还有一个 ip</p>
+<ul>
+<li>第一问和第二问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9d6cec469ce44083152b8.png" srcset="/img/loading.gif" lazyload><br>就是求主机信息，根据前面的教程，我们用 windows.info 插件就可以</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump1.vmem windows.info<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此处-f 指定镜像内存文件</p>
 </blockquote>
 <blockquote>
-<p>他是a，我的室友，后来也成了我的朋友，对于新鲜的大学生活我们都有讨论不完的好奇和希冀，路上来来往往的漂亮女生也经常成为我们的谈资。A这人特别耿直，好吧，与其说是耿直更类似于一种初生牛犊不怕虎的莽劲，店铺里与售货阿姨的讨价还价，人群中讲话时的泰然自若，竟是让我慢慢对他有了一些依赖，仿佛在他的陪伴下，社恐的我也能稍稍树立自信在人群中多了一些坦然。可能就是这样的原因，我们在一起的时间越来越多，吃饭与上课，自习与逛街，我们在校园的各个角落皆留下了足迹，慢慢的，我也察觉到一些古怪，因为他总是找一些机会与我进行肢体接触，早先尚未在意，不过是两个大老爷们之间的恶趣味，但后来便发现些异常，走路时他总喜欢挽着我或者抓着我的胳膊，回到寝室待我坐在椅子上时他会时不时走过来从后面抱着我，用胸膛贴着我的后脑勺。我一合计，这tm不跟街上一对对的男女一样嘛？于是我便找了一个机会。</p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/6f88bf187bdfe43fc9e5f.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
+<ul>
+<li>第三问 <u><br>What process can be considered suspicious in Case 001?</u><br>哪个是可疑进程，用 windows.pslist 求出进程列表就行，如果没发现，就用 windows.psscan，可以看隐藏的进程</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump1.vmem windows.pslist<br></code></pre></td></tr></table></figure>
+
 <blockquote>
-<p>与其说是我找的机会，倒不如说是他专门等待的一个偶然，那天晚上，我一样坐在椅子上做作业，他便如往常般晃了过来，不及他将手拢下，我将身子转过去，直勾勾的望着他，他也被我突然的动作怔住，只留脸上依旧灿烂的微笑。我幽幽的冒了一句：“咱俩那个，是不是。。。”。他立马接过话：“你丫的，我不就碰你几下嘛，还能想到那去，咋滴，你是什么金贵娇躯挨不得呀。”一向如此，我的心理想法总能第一时间被他捕捉到，无论是晚上回来带的夜宵，还是在密麻人群里对我的体贴和照顾，他总能知道我心里在想什么，需要什么。“不过。。。”他随即把头一转，思索片刻后开口：“如果不介意的话，哈哈哈，前提是你不介意。“听此我赶紧抬手：”哥们哥们你这这不太合适吧，我就当你开玩笑了。。。“相顾无言，随后默契的做各自的事情去了，由于那晚其他室友都还在外面，所以房间很快陷入了沉默，这种沉默也包括了我躺在床上时的忐忑。</p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/8247d4d481636428691fb.png" srcset="/img/loading.gif" lazyload><br>根据之前给的提示，就是这个 reader_sl.exe 进程，把这个的信息交上去即可</p>
 </blockquote>
+<ul>
+<li>第 456 问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f6c9f21cc546bbae1434c.png" srcset="/img/loading.gif" lazyload><br>就是求父进程信息，可疑进程 pid，父进程 pid，我们用 windows.pstree</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump1.vmem windows.pstree<br></code></pre></td></tr></table></figure>
+
 <blockquote>
-<p>之后的第二天我们像往常一样一起去上课，一起去食堂，只是玩笑话少了，不过这并未使我们之间的氛围变得冰冷，因为他始终挂着那招牌的笑容，灿烂，如春风。</p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1c317d503bcf162f98fb3.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
+<ul>
+<li>第七八问<blockquote>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/0b839dc4d4b38ec6bdd8c.png" srcset="/img/loading.gif" lazyload><br>求 user-agent 以及一个银行也没有关系，这个时候就要查一个具体的进程内容了<br>这个时候，可以用 windows.memmap.Memmap 插件看内存信息，然后–dump 给保存下来</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump1.vmem -o /tmp/ windows.memmap.Memmap --pid 1640 --dump<br></code></pre></td></tr></table></figure>
+
 <blockquote>
-<p>一直持续到一场记忆犹新的考试，之所以说是记忆犹新，因为那天的雨真的特别tm的大，那把伞至今也被我搁放在阳台，奈何现在的天气，它已经晒了好久的太阳，另外那次考试也确实把我恶心到了，花几周在图书馆自习的题目是丁点不沾，各种奇形怪状的问题让我在考场上差点直接交卷走人，走出考场，心情是阴冷的，天气也如是，闷闷的走进了雨里也不想打伞，即便是a的身影也被我直接略过，心里一直想着一堆努力仍是付诸东流最后挂科补考又如何是好，越想越烦躁，越想越郁闷，待他撑伞走来带着招牌笑容问我晚上去哪里吃饭时我看他笑容是越看越气，便将一些郁闷化作一拳捶在他胳膊上，他也不在意，只是用手轻拍我的肩头，又缓缓将手上升抚摸了一下我的额头，温热的触感让本就被雨淋湿的身体打起激灵，我下意识扯了扯他的外套，他只是望着我，我便也呆呆的看向他，有风吹过，着实是把我冷了一下，就又靠近了他一些，慢慢的，竟是直接碰到了他脖颈，他将手绕过我的身体，贴在我的后背上，此刻照平时我该一把推开拔腿走人，可当时心里真的的很混乱，加上湿冷的身体，便默默靠着他，也不说话，也不知如何说话，最后仍是他开口，继续问我晚上去哪里吃饭，他依然挂着浅浅的笑，我也索性由着接下话，便自然而然的松开，走出教学楼的大门。</p>
+<p>-o 指定输出路径，–pid 指定进程 pid，–dump 保存进程信息<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/19fd7393ac32f675d98a3.png" srcset="/img/loading.gif" lazyload><br>这是正常的输出<br>然后用 strings 命令打印输出</p>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">strings /tmp/*.dmp | grep -i user-agent<br></code></pre></td></tr></table></figure>
+
 <blockquote>
-<p>那天他到底吻没吻我我确实想不太清，因为那天我们出去喝了酒，记得是描述中“好多好多的酒“然后迷糊糊被他带往某处宽敞的地方，只记得那里天上的星空实在好看，可惜忘了拍照，然后还有。。。喋喋不休的蝉鸣？想不大透彻，大致是如此，然后回了寝室，瘫软在床上，昏昏然的睡去了。</p>
+<p>grep -i 忽略大小写<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/30ca5f8ebcb96c431b47e.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">strings /tmp/*.dmp | grep -i chase<br></code></pre></td></tr></table></figure>
+
 <blockquote>
-<p>他对我真的很好，忙前忙后尽是为我在操心着，一天的心情，一夜的悄悄话，一路的陪伴，我感觉那时他的眼睛里只有我，我曾经的思想枷锁也被悄然打破，彻底的投入了这一段奇妙的感情。那时在我眼中，他是早餐的微光，是午时的太阳，是夜晚的星辰，在我的心里发光发热，长久不息。我以为世间的美好不过如此，便是书上记载的爱情也囊括不了我们的浪漫，天上的神仙也要羡慕三分。。。我陶醉，我迷恋，彻底放下了防备，却不知将日的无情之刃早已磨出锋芒只待给我彻底一击。</p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/663d31ed91db660eb3c19.png" srcset="/img/loading.gif" lazyload><br>看到输出了和 chase 有关的网站，那就是有关了</p>
 </blockquote>
+<h1 id="题目-2"><a href="#题目-2" class="headerlink" title="题目 2"></a>题目 2</h1><p>题目内容是中了勒索病毒</p>
+<ul>
+<li>第一问<br>求可疑进程，用 windows.pslist 即可，然后就可以看见大名鼎鼎的@WanaDecryptor@<br>可以看出来和 wannacry 有关，pid 为 740</li>
+</ul>
+<ul>
+<li>第 2345 问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f3961a062c95d11f65ebf.png" srcset="/img/loading.gif" lazyload><br>父进程可以用 windows.pstree 求出来<br>完整路径可以用 windows.dlllist</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump2.raw windows.dlllist | grep @WanaDecryptor@.exe<br></code></pre></td></tr></table></figure>
+
 <blockquote>
-<p> 具体是什么时候已无从想起，在发现真相之前我也只是粗略察觉到一些异样，这些异样倒也证实不了什么，我往往以自己内心过于敏感为由说服自己。可是随着时间流逝，我感觉他是越来越忙，可能是参加了一些活动比赛吧，这些不与我说也无妨，即便是真有疑惑其实以我的性子也只会闷着，更多的想法还是通过他那敏锐的目光所发现，于是我也不做表示，他似乎也漏了这点心思，整日只是忙自己的事情中去了。终于到这样一天，几个室友在在他进门的时候笑了起来，有一个人用揶揄的语气调侃道“a哥，看来得发点喜糖啊”，我一时愣住，不及反应，另一道声音响起“快把女朋友照片给哥几个瞅瞅呗，欣赏一下哈哈哈”轰的一下，我的大脑像是被什么东西狠狠砸了一下，呆呆的，只是呆呆的坐在床边，也顾不得看他，也不想去问，脑子一片空白，唯有室友的声音不断环绕，叽叽喳喳，嬉笑打闹。我当时恨不得将他们全部赶出去，不过事实上，我却自己偷偷溜出了寝室，吹着走廊尽头的风，不知道下一步该做什么，只是站着，仿佛过了很久，一只手突然碰到我的肩膀，我猛的向前一闪，转过头果然是他，他也不做多余动作，讲道：”你是男的，她是女的，双方又不矛盾，何必想多呢是不是“说罢，他的招牌笑容竟又重现在他的脸上。恶心，神经病！我如此想，随即跑开，顾不得他在背后表情如何，我只觉得自己像刚从臭水沟爬出来的老鼠，自顾自向离他最远的方向走开，神经病！神经病！神经病！我呢喃着，只是不知为何泪水也缓缓溢出，我的情绪变得混乱不堪，哭泣的同时又觉得好笑，自己的真心竟是交给了这样的人渣，又哭又笑，最后又归于了沉默，无数的回忆略过，无数的声音响起，最最让我厌惧的还是他始终挂着的招牌笑容，记忆里的画面越来越诡异，我想我将被这个笑容的恐惧笼罩很久很久，很久很久。。。</p>
+<p>此处也可以用–pid 指定进程，然后可以看见第一个出来的就是他的完整路径<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/904ac9588136018c151ab.png" srcset="/img/loading.gif" lazyload><br>至于第 5 问，把可疑进程名字放到浏览器一搜就可以看见大名鼎鼎的 Wannacry 病毒</p>
 </blockquote>
-<p>来自网友光的投稿，希望各位善意评论</p>
+<ul>
+<li>第 6 问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/654189c4a023ad21740a0.png" srcset="/img/loading.gif" lazyload><br>问 decryptor 加载了什么 dll 去创建 socket，之前可以知道 decryptor 就是 taskche.exe，pid 为 1940<br>先用 windows.dlllist 求出所有的 dll</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump2.raw windows.dlllist --pid 1940 | grep .dll<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/8f04e5642bdf1d58bbbf2.png" srcset="/img/loading.gif" lazyload><br>然后把所有信息复制下来去问 gpt，让他讲解这里面的 dll 都是什么功能<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/5792ece2faae0c83e681d.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<ul>
+<li>第 7 问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7ffdc296bcca2c1db8119.png" srcset="/img/loading.gif" lazyload><br>哪些互斥体(mutex)可以看出是恶意软件<br>想知道 mutex 是什么可以去问 gpt<br>这个时候我们就需要用到 windows.handles，这个插件可以列出一个进程的所有句柄<br>那么，句柄（handles）又是什么呢？</li>
+</ul>
+<blockquote>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/ce4809f4968ba0365d65b.png" srcset="/img/loading.gif" lazyload>可以参考这个，学过操作系统的应该都可以明白</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump2.raw windows.handles --pid 1940<br></code></pre></td></tr></table></figure>
+
+<p>现在来看看输出</p>
+<blockquote>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1cefe6ad7f8b049e31e29.png" srcset="/img/loading.gif" lazyload><br>现在不明白的都可以看到了，至于哪个是答案，可以从搜索引擎得到答案，搜索引擎很重要</p>
+</blockquote>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Wannacry mutant</span><br></code></pre></td></tr></table></figure>
+
+<p>这样搜即可</p>
+<ul>
+<li>最后一问，这个我也不会，没搞明白，也是通过看提示 windows.filescan，这就是答案</li>
+</ul>
+<h1 id="推荐文章视频"><a href="#推荐文章视频" class="headerlink" title="推荐文章视频"></a>推荐文章视频</h1><p>大神做这个房间的时候的视频（youtube）：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2DZqg2rcYTk">volatility 视频</a><br>有关 Wannacry 的文章，在这里面可以找到有关哪个 mutant 和 dll 的讲解：<a target="_blank" rel="noopener" href="https://www.mandiant.com/resources/blog/wannacry-malware-profile">WannaCry Malware Profile</a></p>
 
                 
               </div>
@@ -355,11 +439,56 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/tryhackme/" class="category-chain-item">tryhackme</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8F%96%E8%AF%81/" class="category-chain-item">取证</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/volatility/" class="category-chain-item">volatility</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%80%BD%E7%BE%8E/">#耽美</a>
+        <a href="/tags/volatility/">#volatility</a>
+      
+        <a href="/tags/tryhackme/">#tryhackme</a>
+      
+        <a href="/tags/%E5%8F%96%E8%AF%81/">#取证</a>
       
     </div>
   
@@ -371,8 +500,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>编织谎言的是他，戳破谎言的也是他</div>
-      <div>http://example.com/2022/10/16/编织谎言的是他，戳破谎言的也是他/</div>
+      <div>tryhackme房间volatility 取证</div>
+      <div>http://example.com/2023/09/11/tryhackme房间volatility 取证/</div>
     </div>
     <div class="license-meta">
       
@@ -384,7 +513,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月16日</div>
+          <div>2023年9月11日</div>
         </div>
       
       
@@ -416,18 +545,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/12/%E5%8F%8B%E8%B0%8A/" title="友谊">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">友谊</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/13/%E7%BB%BF%E8%8C%B6-or-%E4%B8%8D%E5%A4%9F%E5%8B%87%E6%95%A2/" title="绿茶 or 不够勇敢?">
-                        <span class="hidden-mobile">绿茶 or 不够勇敢?</span>
+                      <a href="/2022/10/11/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
