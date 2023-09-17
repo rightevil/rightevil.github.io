@@ -1,7 +1,7 @@
-https://rightevil.github.io/2023/09/11/tryhackme%E6%88%BF%E9%97%B4volatility%20%E5%8F%96%E8%AF%81/
+https://rightevil.github.io/tryhackme%E6%88%BF%E9%97%B4volatility%20%E5%8F%96%E8%AF%81/
 https://rightevil.github.io/%E6%99%AE%E9%AB%98200%E5%A4%A9/index.html
 https://rightevil.github.io/about/index.html
-https://rightevil.github.io/2022/12/09/hello-world/
+https://rightevil.github.io/hello-world/
 https://rightevil.github.io/
 https://rightevil.github.io/tags/volatility/
 https://rightevil.github.io/tags/tryhackme/
