@@ -56,20 +56,6 @@
 
   
   <url>
-    <loc>https://rightevil.github.io/tags/Linux/</loc>
-    <lastmod>2023-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rightevil.github.io/tags/clash/</loc>
-    <lastmod>2023-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://rightevil.github.io/tags/volatility/</loc>
     <lastmod>2023-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -90,24 +76,24 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://rightevil.github.io/tags/Linux/</loc>
+    <lastmod>2023-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rightevil.github.io/tags/clash/</loc>
+    <lastmod>2023-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
-    <loc>https://rightevil.github.io/categories/Linux/</loc>
-    <lastmod>2023-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://rightevil.github.io/categories/tryhackme/</loc>
-    <lastmod>2023-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://rightevil.github.io/categories/clash/</loc>
     <lastmod>2023-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -122,6 +108,20 @@
   
   <url>
     <loc>https://rightevil.github.io/categories/volatility/</loc>
+    <lastmod>2023-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rightevil.github.io/categories/Linux/</loc>
+    <lastmod>2023-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://rightevil.github.io/categories/clash/</loc>
     <lastmod>2023-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
