@@ -16,45 +16,31 @@
   <meta name="author" content="rightevil">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目 1已知信息：由 abode 文档感染而来,还有一个 ip  第一问和第二问就是求主机信息，根据前面的教程，我们用 windows.info 插件就可以  1.&#x2F;vol.py -f ..&#x2F;dump&#x2F;dump1.vmem windows.info   此处-f 指定镜像内存文件      第三问 What process can be considered suspicious in Case">
+    <meta name="description" content="如何超级简单的使用魔法，在你的虚拟机中？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tryhackme房间volatility 取证">
-<meta property="og:url" content="https://rightevil.github.io/tryhackme%E6%88%BF%E9%97%B4volatility%20%E5%8F%96%E8%AF%81/index.html">
+<meta property="og:title" content="Linux使用clash简便方法">
+<meta property="og:url" content="https://rightevil.github.io/Linux%E4%BD%BF%E7%94%A8clash%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="rightevil">
-<meta property="og:description" content="题目 1已知信息：由 abode 文档感染而来,还有一个 ip  第一问和第二问就是求主机信息，根据前面的教程，我们用 windows.info 插件就可以  1.&#x2F;vol.py -f ..&#x2F;dump&#x2F;dump1.vmem windows.info   此处-f 指定镜像内存文件      第三问 What process can be considered suspicious in Case">
+<meta property="og:description" content="如何超级简单的使用魔法，在你的虚拟机中？">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d981f70b0a96644b8e338.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9d6cec469ce44083152b8.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/6f88bf187bdfe43fc9e5f.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/8247d4d481636428691fb.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f6c9f21cc546bbae1434c.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1c317d503bcf162f98fb3.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/0b839dc4d4b38ec6bdd8c.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/19fd7393ac32f675d98a3.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/30ca5f8ebcb96c431b47e.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/663d31ed91db660eb3c19.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f3961a062c95d11f65ebf.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/904ac9588136018c151ab.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/654189c4a023ad21740a0.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/8f04e5642bdf1d58bbbf2.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/5792ece2faae0c83e681d.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7ffdc296bcca2c1db8119.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/ce4809f4968ba0365d65b.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1cefe6ad7f8b049e31e29.png">
-<meta property="article:published_time" content="2023-09-11T04:24:49.000Z">
-<meta property="article:modified_time" content="2023-09-11T04:35:32.782Z">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/bd6da1cfa43536515211b.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f04002b20e7398c81cd1f.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/2a6c3590350c838c1c0a3.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/05b311eecc4013f3b4d68.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/21e0106f6e08af927e5f7.png">
+<meta property="article:published_time" content="2023-09-27T13:31:10.000Z">
+<meta property="article:modified_time" content="2023-09-27T14:16:17.866Z">
 <meta property="article:author" content="rightevil">
-<meta property="article:tag" content="volatility">
-<meta property="article:tag" content="tryhackme">
-<meta property="article:tag" content="取证">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="clash">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d981f70b0a96644b8e338.png">
+<meta name="twitter:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/bd6da1cfa43536515211b.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>tryhackme房间volatility 取证 - rightevil</title>
+  <title>Linux使用clash简便方法 - rightevil</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -285,7 +271,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="tryhackme房间volatility 取证"></span>
+            <span id="subtitle" data-typed-text="Linux使用clash简便方法"></span>
           
         </div>
 
@@ -296,8 +282,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-11 12:24" pubdate>
-          2023年9月11日 中午
+        <time datetime="2023-09-27 21:31" pubdate>
+          2023年9月27日 晚上
         </time>
       </span>
     
@@ -309,7 +295,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          621 字
         
       </span>
     
@@ -321,7 +307,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          6 分钟
         
       </span>
     
@@ -367,99 +353,42 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">tryhackme房间volatility 取证</h1>
+            <h1 style="display: none">Linux使用clash简便方法</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="题目-1"><a href="#题目-1" class="headerlink" title="题目 1"></a>题目 1</h1><p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d981f70b0a96644b8e338.png" srcset="/img/loading.gif" lazyload><br>已知信息：由 abode 文档感染而来,还有一个 ip</p>
+                <h2 id="如何超级简单的使用魔法，在你的虚拟机中？"><a href="#如何超级简单的使用魔法，在你的虚拟机中？" class="headerlink" title="如何超级简单的使用魔法，在你的虚拟机中？"></a>如何超级简单的使用魔法，在你的虚拟机中？</h2><p>平时在虚拟机中总会遇到用魔法的时候，但是有这么几个问题？</p>
 <ul>
-<li>第一问和第二问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9d6cec469ce44083152b8.png" srcset="/img/loading.gif" lazyload><br>就是求主机信息，根据前面的教程，我们用 windows.info 插件就可以</li>
+<li>linux 不同于 windows，操作安装都简单（大佬略过），我们在 linux 上安装 v2ray 或者 clash 都会可能时不时遇到报错，又或者配置错误</li>
+<li>可能会有很多太虚拟机，每台虚拟机都配置一下岂不是很烦？</li>
+<li>有的魔法会限制设备数，虚拟机和本机是算一个还是多个（这个我不知道，存疑）</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump1.vmem windows.info<br></code></pre></td></tr></table></figure>
-
+<p>诸如以上的问题，那要如何方便的使用魔法，只需俩步：</p>
+<h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h4><p>在 windows 的 clash 客户端中开启 Allow Lan 选项，如图</p>
 <blockquote>
-<p>此处-f 指定镜像内存文件</p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/bd6da1cfa43536515211b.png" srcset="/img/loading.gif" lazyload><br>此时记住我们的端口号</p>
 </blockquote>
+<h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h4><p>打开我们的虚拟机的设置，按以下步骤设置</p>
 <blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/6f88bf187bdfe43fc9e5f.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f04002b20e7398c81cd1f.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
-<ul>
-<li>第三问 <u><br>What process can be considered suspicious in Case 001?</u><br>哪个是可疑进程，用 windows.pslist 求出进程列表就行，如果没发现，就用 windows.psscan，可以看隐藏的进程</li>
+<h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><blockquote>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/2a6c3590350c838c1c0a3.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<p>此时我们在终端和浏览器中都可以访问外网了<br>这样我们 git 也快很多，也不必换源了。<br>v2ray 的话没有去试过，因为之前 v2ray 的订阅过期了，但是 v2ray 里有个相同的设置，按道理应该也可以</p>
+<blockquote>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/05b311eecc4013f3b4d68.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>一般物理机 ip 分配的不会变，但是如果虚拟机不能施展魔法了，请查看物理机 ip 是否改变</li>
+<li>虚拟机和物理机要在同一个局域网中，建议使用虚拟机中的桥接模式，然后在网络设置中选择和物理机同一张网卡</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump1.vmem windows.pslist<br></code></pre></td></tr></table></figure>
-
+<h4 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h4><p>我之前是用的 ubuntu23 版本，然后在网上换了个阿里云的源，后面下载 ssh 服务和其他东西的的时候一直报错安装不了</p>
 <blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/8247d4d481636428691fb.png" srcset="/img/loading.gif" lazyload><br>根据之前给的提示，就是这个 reader_sl.exe 进程，把这个的信息交上去即可</p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/21e0106f6e08af927e5f7.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
-<ul>
-<li>第 456 问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f6c9f21cc546bbae1434c.png" srcset="/img/loading.gif" lazyload><br>就是求父进程信息，可疑进程 pid，父进程 pid，我们用 windows.pstree</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump1.vmem windows.pstree<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1c317d503bcf162f98fb3.png" srcset="/img/loading.gif" lazyload></p>
-</blockquote>
-<ul>
-<li>第七八问<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/0b839dc4d4b38ec6bdd8c.png" srcset="/img/loading.gif" lazyload><br>求 user-agent 以及一个银行也没有关系，这个时候就要查一个具体的进程内容了<br>这个时候，可以用 windows.memmap.Memmap 插件看内存信息，然后–dump 给保存下来</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump1.vmem -o /tmp/ windows.memmap.Memmap --pid 1640 --dump<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>-o 指定输出路径，–pid 指定进程 pid，–dump 保存进程信息<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/19fd7393ac32f675d98a3.png" srcset="/img/loading.gif" lazyload><br>这是正常的输出<br>然后用 strings 命令打印输出</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">strings /tmp/*.dmp | grep -i user-agent<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>grep -i 忽略大小写<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/30ca5f8ebcb96c431b47e.png" srcset="/img/loading.gif" lazyload></p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">strings /tmp/*.dmp | grep -i chase<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/663d31ed91db660eb3c19.png" srcset="/img/loading.gif" lazyload><br>看到输出了和 chase 有关的网站，那就是有关了</p>
-</blockquote>
-<h1 id="题目-2"><a href="#题目-2" class="headerlink" title="题目 2"></a>题目 2</h1><p>题目内容是中了勒索病毒</p>
-<ul>
-<li>第一问<br>求可疑进程，用 windows.pslist 即可，然后就可以看见大名鼎鼎的@WanaDecryptor@<br>可以看出来和 wannacry 有关，pid 为 740</li>
-</ul>
-<ul>
-<li>第 2345 问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f3961a062c95d11f65ebf.png" srcset="/img/loading.gif" lazyload><br>父进程可以用 windows.pstree 求出来<br>完整路径可以用 windows.dlllist</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump2.raw windows.dlllist | grep @WanaDecryptor@.exe<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>此处也可以用–pid 指定进程，然后可以看见第一个出来的就是他的完整路径<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/904ac9588136018c151ab.png" srcset="/img/loading.gif" lazyload><br>至于第 5 问，把可疑进程名字放到浏览器一搜就可以看见大名鼎鼎的 Wannacry 病毒</p>
-</blockquote>
-<ul>
-<li>第 6 问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/654189c4a023ad21740a0.png" srcset="/img/loading.gif" lazyload><br>问 decryptor 加载了什么 dll 去创建 socket，之前可以知道 decryptor 就是 taskche.exe，pid 为 1940<br>先用 windows.dlllist 求出所有的 dll</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump2.raw windows.dlllist --pid 1940 | grep .dll<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/8f04e5642bdf1d58bbbf2.png" srcset="/img/loading.gif" lazyload><br>然后把所有信息复制下来去问 gpt，让他讲解这里面的 dll 都是什么功能<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/5792ece2faae0c83e681d.png" srcset="/img/loading.gif" lazyload></p>
-</blockquote>
-<ul>
-<li>第 7 问<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7ffdc296bcca2c1db8119.png" srcset="/img/loading.gif" lazyload><br>哪些互斥体(mutex)可以看出是恶意软件<br>想知道 mutex 是什么可以去问 gpt<br>这个时候我们就需要用到 windows.handles，这个插件可以列出一个进程的所有句柄<br>那么，句柄（handles）又是什么呢？</li>
-</ul>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/ce4809f4968ba0365d65b.png" srcset="/img/loading.gif" lazyload>可以参考这个，学过操作系统的应该都可以明白</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./vol.py -f ../dump/dump2.raw windows.handles --pid 1940<br></code></pre></td></tr></table></figure>
-
-<p>现在来看看输出</p>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1cefe6ad7f8b049e31e29.png" srcset="/img/loading.gif" lazyload><br>现在不明白的都可以看到了，至于哪个是答案，可以从搜索引擎得到答案，搜索引擎很重要</p>
-</blockquote>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">Wannacry mutant</span><br></code></pre></td></tr></table></figure>
-
-<p>这样搜即可</p>
-<ul>
-<li>最后一问，这个我也不会，没搞明白，也是通过看提示 windows.filescan，这就是答案</li>
-</ul>
-<h1 id="推荐文章视频"><a href="#推荐文章视频" class="headerlink" title="推荐文章视频"></a>推荐文章视频</h1><p>大神做这个房间的时候的视频（youtube）：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=2DZqg2rcYTk">volatility 视频</a><br>有关 Wannacry 的文章，在这里面可以找到有关哪个 mutant 和 dll 的讲解：<a target="_blank" rel="noopener" href="https://www.mandiant.com/resources/blog/wannacry-malware-profile">WannaCry Malware Profile</a></p>
+<p>当时一直问 gpt，然后没解决，后面百度了” g++ : 依赖: cpp (= 4:9.3.0-1ubuntu2) 但是 4:12.2.0-3ubuntu1 正要被安装”才知道是因为源的问题，然后我又换回原来的源</p>
 
                 
               </div>
@@ -478,7 +407,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/tryhackme/" class="category-chain-item">tryhackme</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -488,17 +417,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%8F%96%E8%AF%81/" class="category-chain-item">取证</a>
-  
-  
-
-      </span>
-    
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/volatility/" class="category-chain-item">volatility</a>
+  <a href="/categories/clash/" class="category-chain-item">clash</a>
   
   
 
@@ -513,11 +432,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/volatility/">#volatility</a>
+        <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/tryhackme/">#tryhackme</a>
-      
-        <a href="/tags/%E5%8F%96%E8%AF%81/">#取证</a>
+        <a href="/tags/clash/">#clash</a>
       
     </div>
   
@@ -529,8 +446,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>tryhackme房间volatility 取证</div>
-      <div>https://rightevil.github.io/tryhackme房间volatility 取证/</div>
+      <div>Linux使用clash简便方法</div>
+      <div>https://rightevil.github.io/Linux使用clash简便方法/</div>
     </div>
     <div class="license-meta">
       
@@ -542,7 +459,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月11日</div>
+          <div>2023年9月27日</div>
         </div>
       
       
@@ -574,18 +491,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Linux%E4%BD%BF%E7%94%A8clash%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95/" title="Linux使用clash简便方法">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux使用clash简便方法</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/tryhackme%E6%88%BF%E9%97%B4volatility%20%E5%8F%96%E8%AF%81/" title="tryhackme房间volatility 取证">
+                        <span class="hidden-mobile">tryhackme房间volatility 取证</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

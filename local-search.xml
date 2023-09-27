@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>Linux使用clash简便方法</title>
+    <link href="/Linux%E4%BD%BF%E7%94%A8clash%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95/"/>
+    <url>/Linux%E4%BD%BF%E7%94%A8clash%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h2 id="如何超级简单的使用魔法，在你的虚拟机中？"><a href="#如何超级简单的使用魔法，在你的虚拟机中？" class="headerlink" title="如何超级简单的使用魔法，在你的虚拟机中？"></a>如何超级简单的使用魔法，在你的虚拟机中？</h2><p>平时在虚拟机中总会遇到用魔法的时候，但是有这么几个问题？</p><ul><li>linux 不同于 windows，操作安装都简单（大佬略过），我们在 linux 上安装 v2ray 或者 clash 都会可能时不时遇到报错，又或者配置错误</li><li>可能会有很多太虚拟机，每台虚拟机都配置一下岂不是很烦？</li><li>有的魔法会限制设备数，虚拟机和本机是算一个还是多个（这个我不知道，存疑）</li></ul><p>诸如以上的问题，那要如何方便的使用魔法，只需俩步：</p><h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h4><p>在 windows 的 clash 客户端中开启 Allow Lan 选项，如图</p><blockquote><p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/bd6da1cfa43536515211b.png"><br>此时记住我们的端口号</p></blockquote><h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h4><p>打开我们的虚拟机的设置，按以下步骤设置</p><blockquote><p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f04002b20e7398c81cd1f.png"></p></blockquote><h4 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h4><blockquote><p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/2a6c3590350c838c1c0a3.png"></p></blockquote><p>此时我们在终端和浏览器中都可以访问外网了<br>这样我们 git 也快很多，也不必换源了。<br>v2ray 的话没有去试过，因为之前 v2ray 的订阅过期了，但是 v2ray 里有个相同的设置，按道理应该也可以</p><blockquote><p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/05b311eecc4013f3b4d68.png"></p></blockquote><h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul><li>一般物理机 ip 分配的不会变，但是如果虚拟机不能施展魔法了，请查看物理机 ip 是否改变</li><li>虚拟机和物理机要在同一个局域网中，建议使用虚拟机中的桥接模式，然后在网络设置中选择和物理机同一张网卡</li></ul><h4 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h4><p>我之前是用的 ubuntu23 版本，然后在网上换了个阿里云的源，后面下载 ssh 服务和其他东西的的时候一直报错安装不了</p><blockquote><p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/21e0106f6e08af927e5f7.png"></p></blockquote><p>当时一直问 gpt，然后没解决，后面百度了” g++ : 依赖: cpp (= 4:9.3.0-1ubuntu2) 但是 4:12.2.0-3ubuntu1 正要被安装”才知道是因为源的问题，然后我又换回原来的源</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+      <category>clash</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+      <tag>clash</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>tryhackme房间volatility 取证</title>
     <link href="/tryhackme%E6%88%BF%E9%97%B4volatility%20%E5%8F%96%E8%AF%81/"/>
     <url>/tryhackme%E6%88%BF%E9%97%B4volatility%20%E5%8F%96%E8%AF%81/</url>
