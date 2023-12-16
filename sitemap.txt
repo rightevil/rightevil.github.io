@@ -1,3 +1,4 @@
+https://rightevil.github.io/vulnhub-wp-BsidesVancouver/
 https://rightevil.github.io/vulnhub-wp-Billy-Madison/
 https://rightevil.github.io/vulnhub-wp-Bob-1-0-1/
 https://rightevil.github.io/vulnhub-wp-funbox1/
@@ -14,8 +15,8 @@ https://rightevil.github.io/tags/vulnhub/
 https://rightevil.github.io/tags/Linux/
 https://rightevil.github.io/tags/clash/
 https://rightevil.github.io/categories/tryhackme/
+https://rightevil.github.io/categories/vulnhub/
 https://rightevil.github.io/categories/%E5%8F%96%E8%AF%81/
 https://rightevil.github.io/categories/%E5%8F%96%E8%AF%81/volatility/
-https://rightevil.github.io/categories/vulnhub/
 https://rightevil.github.io/categories/Linux/
 https://rightevil.github.io/categories/clash/
