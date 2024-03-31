@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://rightevil.github.io/vulnhub-wp-katana/</loc>
+    
+    <lastmod>2024-03-31</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://rightevil.github.io/Linux%E4%BD%BF%E7%94%A8clash%E7%AE%80%E4%BE%BF%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2024-03-17</lastmod>
@@ -175,7 +184,7 @@
 
   <url>
     <loc>https://rightevil.github.io/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -183,56 +192,56 @@
   
   <url>
     <loc>https://rightevil.github.io/tags/penetrate/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/tags/tunnel/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/tags/Linux/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/tags/clash/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/tags/volatility/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/tags/tryhackme/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/tags/%E5%8F%96%E8%AF%81/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/tags/vulnhub/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -241,49 +250,49 @@
   
   <url>
     <loc>https://rightevil.github.io/categories/note/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/categories/Linux/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/categories/tryhackme/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/categories/vulnhub/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/categories/clash/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/categories/%E5%8F%96%E8%AF%81/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://rightevil.github.io/categories/%E5%8F%96%E8%AF%81/volatility/</loc>
-    <lastmod>2024-03-17</lastmod>
+    <lastmod>2024-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
