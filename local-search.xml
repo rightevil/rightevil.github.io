@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>shiro复现</title>
+    <link href="/shiro%E5%A4%8D%E7%8E%B0/"/>
+    <url>/shiro%E5%A4%8D%E7%8E%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>以下漏洞都可以从vulhub下载<br>@<a href="https://github.com/vulhub/vulhub/tree/master/shiro">https://github.com/vulhub/vulhub/tree/master/shiro</a></p><h1 id="CVE-2010-3863"><a href="#CVE-2010-3863" class="headerlink" title="CVE-2010-3863"></a>CVE-2010-3863</h1><p>影响版本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Apache Shiro &lt; 1.1.0<br>JSecurity 0.9.x<br></code></pre></td></tr></table></figure><p>漏洞原理<br>shiro进行权限验证前未对url做标准化处理，可以通过构造/、//、/./、/../等绕过权限验证<br>docker启动</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> vulhub/shiro/CVE-2010-3863;<br>docker-compose up -d;<br></code></pre></td></tr></table></figure><p>访问ip:8080<br>正常请求/admin会跳转回登录页面<br><img src="https://ibb.co/hR4TtjXh"><br>构造/./admin绕过验证<br><img src="https://ibb.co/WWTn1pxX"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>漏洞复现</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>漏洞复现</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>vulnhub-wp katana</title>
     <link href="/vulnhub-wp-katana/"/>
     <url>/vulnhub-wp-katana/</url>
@@ -138,18 +163,18 @@
     
     <categories>
       
-      <category>note</category>
-      
       <category>Linux</category>
+      
+      <category>note</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>penetrate</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>penetrate</tag>
       
     </tags>
     

