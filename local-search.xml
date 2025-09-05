@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>隧道工具的使用</title>
+    <link href="/%E9%9A%A7%E9%81%93%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/%E9%9A%A7%E9%81%93%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>note</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>penetrate</tag>
+      
+      <tag>tunnel</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>fastjson漏洞复现</title>
     <link href="/fastjson%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
     <url>/fastjson%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</url>
@@ -188,18 +215,18 @@
     
     <categories>
       
-      <category>note</category>
-      
       <category>Linux</category>
+      
+      <category>note</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>penetrate</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>penetrate</tag>
       
     </tags>
     
