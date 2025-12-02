@@ -16,17 +16,32 @@
   <meta name="author" content="rightevil">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="环境的话随便自己搭建一个内网环境，或者用网上的域环境或者内网靶场也好我的网络情况是这样的 12host&lt;--&gt;win10&lt;--&gt;win7即本机可以访问win10，win10可以出网，win10有2张网卡，可以访问win7 物理机无法访问这个内网页面，虚拟机win10可以访问 frp + proxifier服务端配置文件 123[common]bind_port &#x3D; 7000">
+<meta property="og:type" content="article">
 <meta property="og:title" content="隧道工具的使用">
 <meta property="og:url" content="https://rightevil.github.io/%E9%9A%A7%E9%81%93%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="rightevil">
+<meta property="og:description" content="环境的话随便自己搭建一个内网环境，或者用网上的域环境或者内网靶场也好我的网络情况是这样的 12host&lt;--&gt;win10&lt;--&gt;win7即本机可以访问win10，win10可以出网，win10有2张网卡，可以访问win7 物理机无法访问这个内网页面，虚拟机win10可以访问 frp + proxifier服务端配置文件 123[common]bind_port &#x3D; 7000">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.ibb.co/dsvntH3q/image.png">
+<meta property="og:image" content="https://i.ibb.co/RGWxtrb1/image.png">
+<meta property="og:image" content="https://i.ibb.co/CshLNnx3/image.png">
+<meta property="og:image" content="https://i.ibb.co/cScYRbvf/image.png">
+<meta property="og:image" content="https://i.ibb.co/whL2nRYR/image.png">
+<meta property="og:image" content="https://i.ibb.co/bjnP1Ys9/image.png">
+<meta property="og:image" content="https://i.ibb.co/q3ywKvTT/image.png">
+<meta property="og:image" content="https://i.ibb.co/4ZQybs2q/image.png">
+<meta property="og:image" content="https://i.ibb.co/C3zkVvRK/image.png">
+<meta property="og:image" content="https://i.ibb.co/tpG6F958/image.png">
+<meta property="og:image" content="https://i.ibb.co/4wYr3czc/image.png">
+<meta property="og:image" content="https://i.ibb.co/G4V7bJP3/image.png">
 <meta property="article:published_time" content="2025-09-05T08:44:43.000Z">
-<meta property="article:modified_time" content="2025-09-05T08:45:34.119Z">
+<meta property="article:modified_time" content="2025-09-06T05:27:26.748Z">
 <meta property="article:author" content="rightevil">
 <meta property="article:tag" content="penetrate">
 <meta property="article:tag" content="tunnel">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.ibb.co/dsvntH3q/image.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -275,7 +290,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          0 字
+          1.4k 字
         
       </span>
     
@@ -287,7 +302,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          12 分钟
         
       </span>
     
@@ -338,7 +353,28 @@
             
               <div class="markdown-body">
                 
-                
+                <p>环境的话随便自己搭建一个内网环境，或者用网上的域环境或者内网靶场也好<br>我的网络情况是这样的</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gcode">host&lt;--&gt;wi<span class="hljs-symbol">n10</span>&lt;--&gt;wi<span class="hljs-symbol">n7</span><br>即本机可以访问wi<span class="hljs-symbol">n10</span>，wi<span class="hljs-symbol">n10</span>可以出网，wi<span class="hljs-symbol">n10</span>有<span class="hljs-number">2</span>张网卡，可以访问wi<span class="hljs-symbol">n7</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://i.ibb.co/dsvntH3q/image.png" srcset="/img/loading.gif" lazyload><br>物理机无法访问这个内网页面，虚拟机win10可以访问<br><img src="https://i.ibb.co/RGWxtrb1/image.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="frp-proxifier"><a href="#frp-proxifier" class="headerlink" title="frp + proxifier"></a>frp + proxifier</h1><p>服务端配置文件</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[common]</span><br><span class="hljs-attr">bind_port</span> = <span class="hljs-number">7000</span><br><span class="hljs-attr">token</span> = test@<span class="hljs-number">123</span><br></code></pre></td></tr></table></figure>
+<p>然后服务端指定配置文件运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./frps -c frps.ini<br></code></pre></td></tr></table></figure>
+<p>将frpc.exe传到win10，配置文件这样写</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[common]</span><br><span class="hljs-attr">server_addr</span> = x.x.x.x <span class="hljs-comment">#这里填你服务器的ip</span><br><span class="hljs-attr">server_port</span> = <span class="hljs-number">7000</span><br><span class="hljs-attr">token</span> = test@<span class="hljs-number">123</span><br><span class="hljs-section">[socks5]</span><br><span class="hljs-attr">type</span> = tcp<br><span class="hljs-attr">remote_port</span> = <span class="hljs-number">1081</span><br><span class="hljs-attr">plugin</span> = socks5<br><span class="hljs-attr">plugin_user</span> = test<br><span class="hljs-attr">plugin_passwd</span> = <span class="hljs-number">123</span><br><span class="hljs-attr">use_encryption</span> = <span class="hljs-literal">true</span><br><span class="hljs-attr">use_compression</span> = <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<p>然后同样指定配置文件运行</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">frpc.exe -<span class="hljs-keyword">c</span> frpc.ini<br></code></pre></td></tr></table></figure>
+<p><img src="https://i.ibb.co/CshLNnx3/image.png" srcset="/img/loading.gif" lazyload><br>这个时候已经连接成功，然后使用proxifier代理流量<br><img src="https://i.ibb.co/cScYRbvf/image.png" srcset="/img/loading.gif" lazyload><br>选择socks5协议，规则默认即可<br><img src="https://i.ibb.co/whL2nRYR/image.png" srcset="/img/loading.gif" lazyload><br>然后物理机就可以访问win7的服务了<br><img src="https://i.ibb.co/bjnP1Ys9/image.png" srcset="/img/loading.gif" lazyload><br>如果有多级的主机那就要多级的代理<br>vps&lt;–&gt;win10(边界主机，可以访问内网和外网)&lt;–&gt;win10 a(内网)&lt;–&gt;win10 b<br>如果想代理到win10 b的话那就要vps运行服务端，win10运行服务端和客户端，win10 a运行服务端和客户端，然后win10 运行客户端，这样层层代理下来，当然是每一次的网段不一样菜肴这样，如果网段一样在win10就可以访问win10 b的话就没必要这样了</p>
+<h1 id="venom-proxifier"><a href="#venom-proxifier" class="headerlink" title="venom + proxifier"></a>venom + proxifier</h1><p>服务端运行</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">admin_linux_x86</span> -lport <span class="hljs-number">7000</span> -passwd test@<span class="hljs-number">123</span><br></code></pre></td></tr></table></figure>
+<p>win10运行agent</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">.\agent.exe -rhost <span class="hljs-number">192.210</span>.<span class="hljs-keyword">x</span>.<span class="hljs-keyword">x</span> -rport <span class="hljs-number">7000</span> -passwd test<span class="hljs-title">@123</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://i.ibb.co/q3ywKvTT/image.png" srcset="/img/loading.gif" lazyload><br>然后进入node 1开启socks，然后同样的在proxifier连接好，物理机又可以访问win7的网络了<br><img src="https://i.ibb.co/4ZQybs2q/image.png" srcset="/img/loading.gif" lazyload><br>venom在多级级联的时候会比较方便，比如vps–A–B代理，A可以出网，B不可以出网，这个时候只要A运行agent指定服务端为vps，假设此处A在vps为节点1，B为节点2，然后在vps的venom终端<code>goto 1</code>进入节点1，然后<code>listen port</code>，B运行agent指定A为服务端，然后在venom处<code>goto 2</code>开启socks<code>socks port</code>即可实现多级代理，这样比frp好一些，不用写很多配置文件</p>
+<h1 id="ligolo-ng"><a href="#ligolo-ng" class="headerlink" title="ligolo-ng"></a>ligolo-ng</h1><p>ligolo-ng我目前使用是发现只能本机使用，如果想要web访问页面的话，vps得有图形化界面，否则只能命令行访问<br>linux下</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo<span class="hljs-built_in"> ip </span>tuntap <span class="hljs-built_in">add</span><span class="hljs-built_in"> user </span>kali mode tun ligolo<br></code></pre></td></tr></table></figure>
+<p>添加虚拟网卡，然后受害者主机启动agent<br><img src="https://i.ibb.co/C3zkVvRK/image.png" srcset="/img/loading.gif" lazyload><br>然后在服务端上给网卡添加网段并在session中start启动<br><img src="https://i.ibb.co/tpG6F958/image.png" srcset="/img/loading.gif" lazyload><br>然后就可以访问内网了<br><img src="https://i.ibb.co/4wYr3czc/image.png" srcset="/img/loading.gif" lazyload><br>windows的话有点麻烦<br><img src="https://i.ibb.co/G4V7bJP3/image.png" srcset="/img/loading.gif" lazyload><br>或许是可以找一个方法让我们的主机在访问时进过vps的代理，这样子的话就可以不用一个有图形化界面的vps了，这个还在研究中</p>
+<h1 id="chisel"><a href="#chisel" class="headerlink" title="chisel"></a>chisel</h1><p>目前还在摸索中</p>
+
                 
               </div>
             
@@ -429,6 +465,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/%E7%99%BD%E5%8A%A0%E9%BB%91%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%99%BD%E7%A8%8B%E5%BA%8F%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C/" title="白加黑中如何使白程序正常运行">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">白加黑中如何使白程序正常运行</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
