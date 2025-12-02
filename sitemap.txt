@@ -1,3 +1,4 @@
+https://rightevil.github.io/%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B/
 https://rightevil.github.io/%E7%99%BD%E5%8A%A0%E9%BB%91%E4%B8%AD%E5%A6%82%E4%BD%95%E4%BD%BF%E7%99%BD%E7%A8%8B%E5%BA%8F%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C/
 https://rightevil.github.io/%E9%9A%A7%E9%81%93%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/
 https://rightevil.github.io/Port-redirection-Tunnel/
@@ -32,6 +33,7 @@ https://rightevil.github.io/tags/tryhackme/
 https://rightevil.github.io/tags/%E5%8F%96%E8%AF%81/
 https://rightevil.github.io/tags/vulnhub/
 https://rightevil.github.io/tags/%E5%85%8D%E6%9D%80/
+https://rightevil.github.io/tags/note/
 https://rightevil.github.io/categories/Linux/
 https://rightevil.github.io/categories/note/
 https://rightevil.github.io/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/
