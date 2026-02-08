@@ -1,0 +1,920 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rightevil">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="意识到了自己其实还挺菜的，比赛的三小时一个没做出来 这个笔记真的安全吗？昨天比赛的时候没做出来，后面结束后群里大佬提示是最近挺火的一个next.js的漏洞，就是哪个评分10分的哪个   那我们找个exp用一下看看   成功执行啊，那后面找找flag文件，后面也可以手动复现一下这个漏洞，挺有学习价值的 但是不知道为什么，这个脚本执行ls命令返回500，然后就换了一个工具   然后拿到flag   工">
+<meta property="og:type" content="article">
+<meta property="og:title" content="破阵阁-巅峰赛">
+<meta property="og:url" content="https://rightevil.github.io/%E7%A0%B4%E9%98%B5%E9%98%81-%E5%B7%85%E5%B3%B0%E8%B5%9B/index.html">
+<meta property="og:site_name" content="rightevil">
+<meta property="og:description" content="意识到了自己其实还挺菜的，比赛的三小时一个没做出来 这个笔记真的安全吗？昨天比赛的时候没做出来，后面结束后群里大佬提示是最近挺火的一个next.js的漏洞，就是哪个评分10分的哪个   那我们找个exp用一下看看   成功执行啊，那后面找找flag文件，后面也可以手动复现一下这个漏洞，挺有学习价值的 但是不知道为什么，这个脚本执行ls命令返回500，然后就换了一个工具   然后拿到flag   工">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770521332749-bf7e0efe-8ba7-41b1-9b09-c605a2487372.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770521478215-1160f3dc-f61b-440e-a805-2bcbed4eae93.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770522403489-b4e7097b-b137-4561-9ad1-b15bbb131f2f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770522442725-ff2b1457-925a-4627-9221-01fe6d49faf8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526265618-ed9e4391-0994-4d89-9192-b3be6faef540.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526305883-b1cf2ece-d0ea-4237-bc83-88ee6acda04e.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526640629-0123ce23-d62c-4d7f-beb7-cc5a64cadde8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526684120-846ee144-d85a-480e-a176-9f99847e5ecc.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526710523-fe9c538f-a7e9-43c3-b2b4-116181a4f8aa.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526814840-3bcdfed8-370c-4f15-bd71-b825468e24d1.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770527501323-49beab63-3183-4bc0-a3f0-babb9bb6874c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770527536186-a6a2579d-347f-47aa-b6e1-6870a7c651ae.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770527600342-64fa8ec1-a234-4a19-9b0c-4671ac43cf50.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770527970790-d2c0eb51-5771-4d17-b878-8bc696270482.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529143642-f80e4105-fbe5-4868-803b-669e72a5f9ff.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529186482-6fbab05f-c30d-4152-8e56-76381de4b3e6.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529204182-3cb09c48-2f2e-499a-9876-c5b9872d2deb.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529297851-286672b7-7d5d-4376-83d6-c4797719c3d0.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529353373-eb16a16a-6a3c-4146-96e0-2dfb3e9ece7d.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770530910035-4899e6e7-293d-4c29-b438-1c3ca7936008.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770531082941-4ed8cf2b-e04a-470a-9d11-aa50670d84c1.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532152907-a4c70e78-bb39-45b0-b126-d7fd378a13d8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532221278-ca63c272-2b1d-461b-bbad-48cd672e0dea.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532855310-61c9657b-5ef5-433c-88b5-44511d0ee784.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532841314-a54b51f9-71a7-4bd3-aa3d-4247f53b7e77.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532963433-6a8567ec-1748-4527-9b68-7a1a7740be92.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770533085235-7512dd39-bc60-48fb-8a86-bc748537dd33.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770533192566-11b80a64-10da-43b3-b333-675b4f2be16b.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534358949-db221ee2-0985-4a60-a2c0-3575eb6443cf.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534586583-b075defc-b50f-46a3-8af5-7871b3753e9c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534636247-b4b12bab-a59e-42f9-9447-fbdd1c1240f1.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534805454-c704bfa5-d5b7-4964-bb66-545d3ad1caf6.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534882249-9f1f37b0-3a8f-4cc8-80b0-0a42fb4d7c25.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534920248-ec9418c2-3c46-432f-88dc-56bc9321e07f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770535129361-0a85ec11-27f4-4efe-bba7-b1b09cd4f551.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770535371810-e66ca97e-2931-4f57-a384-6328ea1ac935.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770537020475-535fbb64-42d9-489e-bd2e-9ded5a310784.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770539159631-9233f48f-024b-4ffb-8ba8-4070b9d2d8e6.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770540289397-70c68e43-eae3-4e1e-a713-93c197bfdebc.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770540362075-a4049a03-d264-482c-9c91-f8a31cebc54e.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770543815100-fafcabe1-fb76-4179-aada-2f3968394646.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770543842935-659be2f7-f150-4f26-91a0-f9c97038d328.png">
+<meta property="article:published_time" content="2026-02-08T09:51:12.000Z">
+<meta property="article:modified_time" content="2026-02-08T09:52:10.632Z">
+<meta property="article:author" content="rightevil">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770521332749-bf7e0efe-8ba7-41b1-9b09-c605a2487372.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>破阵阁-巅峰赛 - rightevil</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rightevil.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-285611083-1","gtag":"G-TKYW22HREX","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-285611083-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-TKYW22HREX', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TKYW22HREX');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0"></script>
+  <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>舔狗日记</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                好友blog
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="破阵阁-巅峰赛"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-08 17:51" pubdate>
+          2026年2月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          95 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">破阵阁-巅峰赛</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>意识到了自己其实还挺菜的，比赛的三小时一个没做出来</p>
+<h1 id="这个笔记真的安全吗？"><a href="#这个笔记真的安全吗？" class="headerlink" title="这个笔记真的安全吗？"></a>这个笔记真的安全吗？</h1><p>昨天比赛的时候没做出来，后面结束后群里大佬提示是最近挺火的一个next.js的漏洞，就是哪个评分10分的哪个</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770521332749-bf7e0efe-8ba7-41b1-9b09-c605a2487372.png" srcset="/img/loading.gif" lazyload></p>
+<p>那我们找个exp用一下看看</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770521478215-1160f3dc-f61b-440e-a805-2bcbed4eae93.png" srcset="/img/loading.gif" lazyload></p>
+<p>成功执行啊，那后面找找flag文件，后面也可以手动复现一下这个漏洞，挺有学习价值的</p>
+<p>但是不知道为什么，这个脚本执行ls命令返回500，然后就换了一个工具</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770522403489-b4e7097b-b137-4561-9ad1-b15bbb131f2f.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后拿到flag</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770522442725-ff2b1457-925a-4627-9221-01fe6d49faf8.png" srcset="/img/loading.gif" lazyload></p>
+<p>工具在这：<a target="_blank" rel="noopener" href="https://github.com/Rsatan/Next.js-Exploit-Tool/releases/tag/v1.3.0">https://github.com/Rsatan/Next.js-Exploit-Tool/releases/tag/v1.3.0</a></p>
+<h1 id="secure-file-viewer"><a href="#secure-file-viewer" class="headerlink" title="secure file viewer"></a>secure file viewer</h1><p>这个题是一个文件包含的题，比赛的时候试了挺久没做出啦，后面群里大佬提示有bak文件，然后现在重新做一次</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526265618-ed9e4391-0994-4d89-9192-b3be6faef540.png" srcset="/img/loading.gif" lazyload></p>
+<p>得到源码</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526305883-b1cf2ece-d0ea-4237-bc83-88ee6acda04e.png" srcset="/img/loading.gif" lazyload></p>
+<p>直接问Gemini</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526640629-0123ce23-d62c-4d7f-beb7-cc5a64cadde8.png" srcset="/img/loading.gif" lazyload></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526684120-846ee144-d85a-480e-a176-9f99847e5ecc.png" srcset="/img/loading.gif" lazyload></p>
+<p>最后成功拿到，以后扫路径还是要多加点条件</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526710523-fe9c538f-a7e9-43c3-b2b4-116181a4f8aa.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="源自于真实"><a href="#源自于真实" class="headerlink" title="源自于真实"></a>源自于真实</h1><p>初步看起来应该是爆破</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770526814840-3bcdfed8-370c-4f15-bd71-b825468e24d1.png" srcset="/img/loading.gif" lazyload></p>
+<p>那hydra爆破一下admin试试</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770527501323-49beab63-3183-4bc0-a3f0-babb9bb6874c.png" srcset="/img/loading.gif" lazyload></p>
+<p>先等着爆破admin，我们试试题目给的初试用户</p>
+<p>发现有验证码</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770527536186-a6a2579d-347f-47aa-b6e1-6870a7c651ae.png" srcset="/img/loading.gif" lazyload></p>
+<p>抓包发现可以更改verify用户</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770527600342-64fa8ec1-a234-4a19-9b0c-4671ac43cf50.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后现在爆破看看</p>
+<p>发现全部失败，换回sectest看看</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770527970790-d2c0eb51-5771-4d17-b878-8bc696270482.png" srcset="/img/loading.gif" lazyload></p>
+<p>但是很奇怪，我后面又爆破了一遍admin，又出来了</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529143642-f80e4105-fbe5-4868-803b-669e72a5f9ff.png" srcset="/img/loading.gif" lazyload></p>
+<p>我不知道是不是我一开始请求了一下verify还是上次我没看到成功的爆破</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529186482-6fbab05f-c30d-4152-8e56-76381de4b3e6.png" srcset="/img/loading.gif" lazyload></p>
+<p>成功拿下</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529204182-3cb09c48-2f2e-499a-9876-c5b9872d2deb.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="东西很老，能用就好"><a href="#东西很老，能用就好" class="headerlink" title="东西很老，能用就好"></a>东西很老，能用就好</h1><p>打开是一个很老的wordpress站点</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529297851-286672b7-7d5d-4376-83d6-c4797719c3d0.png" srcset="/img/loading.gif" lazyload></p>
+<p>搜了一下发现有漏洞</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770529353373-eb16a16a-6a3c-4146-96e0-2dfb3e9ece7d.png" srcset="/img/loading.gif" lazyload></p>
+<p>wpscan扫出来也是这些漏洞</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770530910035-4899e6e7-293d-4c29-b438-1c3ca7936008.png" srcset="/img/loading.gif" lazyload></p>
+<p>但是试了exploit-db的脚本，发现不太好使，然后换sqlmap扫</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770531082941-4ed8cf2b-e04a-470a-9d11-aa50670d84c1.png" srcset="/img/loading.gif" lazyload></p>
+<p>一个个试，然后找到一个权限高的，改模板页面</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532152907-a4c70e78-bb39-45b0-b126-d7fd378a13d8.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后成功读到</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532221278-ca63c272-2b1d-461b-bbad-48cd672e0dea.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="综合挑战"><a href="#综合挑战" class="headerlink" title="综合挑战"></a>综合挑战</h1><p>进去是一个sql注入测试页面</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532855310-61c9657b-5ef5-433c-88b5-44511d0ee784.png" srcset="/img/loading.gif" lazyload></p>
+<p>sqlmap没扫出来，看看有没有其他文件</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532841314-a54b51f9-71a7-4bd3-aa3d-4247f53b7e77.png" srcset="/img/loading.gif" lazyload></p>
+<p>试了一下test可以读文件，add可以上传图片</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770532963433-6a8567ec-1748-4527-9b68-7a1a7740be92.png" srcset="/img/loading.gif" lazyload></p>
+<p>但是不知道文件去哪了</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770533085235-7512dd39-bc60-48fb-8a86-bc748537dd33.png" srcset="/img/loading.gif" lazyload></p>
+<p>那试试能不能读网页文件</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770533192566-11b80a64-10da-43b3-b333-675b4f2be16b.png" srcset="/img/loading.gif" lazyload></p>
+<p>可以读，那我们把这些文件都读了看看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;?php<br>ob_start();<br>session_start();<br><br>include(&#x27;c.php&#x27;);<br>include(&#x27;head.php&#x27;);<br><span class="hljs-meta prompt_">if(@$</span><span class="language-bash">_SESSION[<span class="hljs-string">&#x27;logged&#x27;</span>]!=<span class="hljs-literal">true</span>)</span><br>&#123;<br><span class="hljs-meta prompt_">	$</span><span class="language-bash">_SESSION[<span class="hljs-string">&#x27;logged&#x27;</span>]=<span class="hljs-string">&#x27;&#x27;</span>;</span><br><br>&#125;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">if($</span><span class="language-bash">_SESSION[<span class="hljs-string">&#x27;logged&#x27;</span>]==<span class="hljs-literal">true</span> &amp;&amp;  <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">&#x27;admin&#x27;</span>]!=<span class="hljs-string">&#x27;&#x27;</span>)</span><br>&#123;<br><br>	echo &quot;you are logged in :)&quot;;<br>	header(&#x27;Location: panel.php&#x27;, true, 302);<br>&#125;<br>else<br>&#123;<br>echo &#x27;&lt;div align=center style=&quot;margin:30px 0px 0px 0px;&quot;&gt;<br>&lt;font size=8 face=&quot;comic sans ms&quot;&gt;--==[[ Lab ]]==--&lt;/font&gt;<br>&lt;br&gt;&lt;br&gt;<br>Show me your SQLI skills &lt;br&gt;<br>&lt;form method=post&gt;<br>Username :- &lt;Input type=text name=un&gt; &amp;nbsp Password:- &lt;input type=password name=ps&gt; &lt;br&gt;&lt;br&gt;<br>&lt;input type=submit name=login value=&quot;let\&#x27;s login&quot;&gt;&#x27;;<br>&#125;<br><span class="hljs-meta prompt_">if(isset($</span><span class="language-bash">_POST[<span class="hljs-string">&#x27;login&#x27;</span>]))</span><br>&#123;<br><span class="hljs-meta prompt_">	$</span><span class="language-bash"><span class="hljs-built_in">uname</span>=str_replace(<span class="hljs-string">&#x27;\&#x27;</span><span class="hljs-string">&#x27;,&#x27;</span><span class="hljs-string">&#x27;,urldecode($_POST[&#x27;</span>un<span class="hljs-string">&#x27;]));</span></span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash"><span class="hljs-string">pass=str_replace(&#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,urldecode(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;ps&#x27;</span>]));</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">run=<span class="hljs-string">&#x27;select * from auth where  pass=\&#x27;</span><span class="hljs-string">&#x27;.$pass.&#x27;</span>\<span class="hljs-string">&#x27; and uname=\&#x27;</span><span class="hljs-string">&#x27;.$uname.&#x27;</span>\<span class="hljs-string">&#x27;&#x27;</span>;</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">result = mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-variable">$run</span>);</span><br>if (mysqli_num_rows($result) &gt; 0) &#123;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">$</span><span class="language-bash">row = mysqli_fetch_assoc(<span class="hljs-variable">$result</span>);</span><br>	   echo &quot;You are allowed&lt;br&gt;&quot;;<br>	   $_SESSION[&#x27;logged&#x27;]=true;<br>	   $_SESSION[&#x27;admin&#x27;]=$row[&#x27;username&#x27;];<br><br>	 header(&#x27;Location: panel.php&#x27;, true, 302);<br><br>&#125;<br>else<br>&#123;<br>	echo &quot;&lt;script&gt;alert(&#x27;Try again&#x27;);&lt;/script&gt;&quot;;<br>&#125;<br><br>&#125;<br>echo &quot;&lt;font size=5 face=\&quot;comic sans ms\&quot; style=\&quot;left: 0;bottom: 0; position: absolute;margin: 0px 0px 5px;\&quot;&gt;B0X Powered By &lt;font color=#ff9933&gt;Pirates&lt;/font&gt; &quot;;<br><br>?&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;?php<br><br><br>function file_download($download)<br>&#123;<br><span class="hljs-meta prompt_">	if(file_exists($</span><span class="language-bash">download))</span><br>				&#123;<br>					header(&quot;Content-Description: File Transfer&quot;); <br>					<br>					header(&#x27;Content-Transfer-Encoding: binary&#x27;);<br>					header(&#x27;Expires: 0&#x27;);<br>					header(&#x27;Cache-Control: must-revalidate, post-check=0, pre-check=0&#x27;);<br>					header(&#x27;Pragma: public&#x27;);<br>					header(&#x27;Accept-Ranges: bytes&#x27;);<br>					header(&#x27;Content-Disposition: attachment; filename=&quot;&#x27;.basename($download).&#x27;&quot;&#x27;); <br>					header(&#x27;Content-Length: &#x27; . filesize($download));<br>					header(&#x27;Content-Type: application/octet-stream&#x27;); <br>					ob_clean();<br>					flush();<br>					readfile ($download);<br>				&#125;<br>				else<br>				&#123;<br>				echo &quot;file not found&quot;;	<br>				&#125;<br>	<br>&#125;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">if(isset($</span><span class="language-bash">_POST[<span class="hljs-string">&#x27;file&#x27;</span>]))</span><br>&#123;<br><span class="hljs-meta prompt_">file_download($</span><span class="language-bash">_POST[<span class="hljs-string">&#x27;file&#x27;</span>]);</span><br>&#125;<br>else&#123;<br><br>echo &#x27;\&#x27;file\&#x27; parameter is empty. Please provide file path in \&#x27;file\&#x27; parameter &#x27;;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;?php<br>echo &#x27;<br>&lt;html&gt;<br>&lt;head&gt;<br>&lt;/script&gt;<br>&lt;title&gt;--==[[Lab]]==--&lt;/title&gt;<br>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;<br>&lt;STYLE&gt;<br>body &#123;<br>    font-family: Tahoma;<br>    color: black;<br>&#125;<br>.side-pan &#123;<br>   margin: 0;<br>   border:0px;<br><br>   width:200px;<br>   padding: 5px 23px;<br>   margin:0px;<br>   -webkit-border-radius: 0px;<br>   -moz-border-radius: 0px;<br>   border-radius: 0px;<br>   border-bottom: 1px solid black;<br>   color: white;<br>   font-size: 20px;<br>   font-family: Georgia, serif;<br>   text-decoration: none;<br>   vertical-align: left;<br>   align:left;<br>   &#125;<br><span class="hljs-meta prompt_">   div#</span><span class="language-bash">left &#123;</span><br>    width: 100%;<br>    height: 50px;<br>    float: left;<br>	&#125;<br><span class="hljs-meta prompt_">div#</span><span class="language-bash">right &#123;</span><br>    margin-left: 20%;<br>    height: 50px;<br>	color: white;<br>    font-size: 20px;<br>    font-family: Georgia, serif;<br>	&#125;<br>.main div &#123;<br>  float: left;<br>  clear: none;<br>	&#125;<br>submit &#123;<br>BORDER:  buttonhighlight 2px outset;<br>BACKGROUND-COLOR: Black;<br>width: 30%;<br>color: #FFF;<br>&#125;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">t input[<span class="hljs-built_in">type</span>=\<span class="hljs-string">&#x27;submit\&#x27;</span>]&#123;</span><br>	COLOR: White;<br>	border:none;<br>	BACKGROUND-COLOR: black;<br>&#125;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">t input[<span class="hljs-built_in">type</span>=\<span class="hljs-string">&#x27;submit\&#x27;</span>]:hover &#123;</span><br><br>	BACKGROUND-COLOR: #ff9933;<br>	color: black;<br><br>&#125;<br>tr &#123;<br>BORDER: dashed 1px #333;<br>color: #000;<br>&#125;<br>td &#123;<br>BORDER: dashed 0px ;<br>&#125;<br>.table1 &#123;<br>BORDER: 0px Black;<br>BACKGROUND-COLOR: Black;<br>color: #FFF;<br>&#125;<br>.td1 &#123;<br>BORDER: 0px;<br>BORDER-COLOR: #333333;<br>font: 7pt Verdana;<br>color: Green;<br>&#125;<br>.tr1 &#123;<br>BORDER: 0px;<br>BORDER-COLOR: #333333;<br>color: #FFF;<br>&#125;<br>table &#123;<br>BORDER: dashed 2px #333;<br>BORDER-COLOR: #333333;<br>BACKGROUND-COLOR: #191919;;<br>color: #FFF;<br>&#125;<br>textarea &#123;<br>border			: dashed 2px #333;<br>BACKGROUND-COLOR: Black;<br>font: Fixedsys bold;<br>color: #999;<br>&#125;<br>A:link &#123;<br>border: 1px;<br>	COLOR: red; TEXT-DECORATION: none<br>&#125;<br>A:visited &#123;<br>	COLOR: red; TEXT-DECORATION: none<br>&#125;<br>A:hover &#123;<br>	color: White; TEXT-DECORATION: none<br>&#125;<br>A:active &#123;<br>	color: white; TEXT-DECORATION: none<br>&#125;<br><br>.download &#123;<br>   margin: 0;<br>   border:0px;<br>   background:#C0C0C0;<br>   width:110px;<br>   height:30px;<br><br>   margin:0px;<br>   -webkit-border-radius: 0px;<br>   -moz-border-radius: 0px;<br>   border-radius: 6px;<br>   border-bottom: 1px solid black;<br>   color: #28597a;<br>   font-size: 20px;<br>   font-family: Georgia, serif;<br>   text-decoration: none;<br>   vertical-align: left;<br>   align:left;<br>   &#125;<br><br>&lt;/STYLE&gt;<br>&lt;script type=&quot;text/javascript&quot;&gt;<br>&lt;!--<br>    function lhook(id) &#123;<br>       var e = document.getElementById(id);<br>       if(e.style.display == \&#x27;block\&#x27;)<br>          e.style.display = \&#x27;none\&#x27;;<br>       else<br>          e.style.display = \&#x27;block\&#x27;;<br>    &#125;<br><span class="hljs-meta prompt_">//--&gt;</span><span class="language-bash"></span><br><span class="language-bash">&lt;/script&gt;</span><br>&#x27;;<br><br>?&gt;<br><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;?php<br><span class="hljs-meta prompt_">#</span><span class="language-bash">header( <span class="hljs-string">&#x27;Z-Powered-By:its chutiyapa xD&#x27;</span> );</span><br>header(&#x27;X-Frame-Options: SAMEORIGIN&#x27;);<br>header( &#x27;Server:testing only&#x27; );<br>header( &#x27;X-Powered-By:testing only&#x27; );<br><br>ini_set( &#x27;session.cookie_httponly&#x27;, 1 );<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">$</span><span class="language-bash">conn = mysqli_connect(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-string">&quot;ica&quot;</span>,<span class="hljs-string">&quot;fEjGCK7bDHdiXocN&quot;</span>,<span class="hljs-string">&quot;ica_lab&quot;</span>);</span><br><br>// Check connection<br>if (mysqli_connect_errno())<br>  &#123;<br>  echo &quot;connection failed -&gt;  &quot; . mysqli_connect_error();<br>  &#125;<br><br>?&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;?php<br>include(&#x27;c.php&#x27;);<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">if(isset($</span><span class="language-bash">_POST[<span class="hljs-string">&#x27;continue&#x27;</span>]))</span><br>&#123;<br><span class="hljs-meta prompt_">	$</span><span class="language-bash">run=<span class="hljs-string">&#x27;select * from users &#x27;</span>;</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">result = mysqli_query(<span class="hljs-variable">$conn</span>, <span class="hljs-variable">$run</span>);</span><br>if (mysqli_num_rows($result) &gt; 0) &#123;<br>echo &quot;&lt;table width=90% &gt;&lt;tr&gt;&lt;td&gt;ID&lt;/td&gt;&lt;td&gt;User&lt;/td&gt;&lt;td&gt;Address&lt;/td&gt;&lt;td&gt;Image&lt;/td&gt;&lt;/tr&gt;&quot;;<br><span class="hljs-meta prompt_"> while($</span><span class="language-bash">row = mysqli_fetch_assoc(<span class="hljs-variable">$result</span>))</span> <br>   &#123;<br>	   echo &#x27;&lt;tr&gt;&lt;td&gt;&#x27;.$row[&#x27;id&#x27;].&#x27;&lt;/td&gt;&lt;td&gt;&#x27;.htmlspecialchars ($row[&#x27;name&#x27;],ENT_COMPAT).&#x27;&lt;/td&gt;&lt;td&gt;&#x27;.htmlspecialchars ($row[&#x27;address&#x27;],ENT_COMPAT).&#x27;&lt;/td&gt;&lt;td&gt;&lt;img src=&quot;uploaded_images/&#x27;.htmlspecialchars ($row[&#x27;image&#x27;],ENT_COMPAT).&#x27;&quot; height=90px width=100px&gt;&lt;/td&gt;&lt;/tr&gt;&#x27;;<br>&#125;<br>   echo &quot;&lt;/table&gt;&quot;;<br>&#125;<br>&#125;<br><br>?&gt;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;?php<br><br><br>echo &#x27;&lt;form  method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;<br>    Select image to upload:<br>    &lt;input type=&quot;file&quot; name=image&gt;<br>	&lt;input type=text name=name value=&quot;name&quot;&gt;<br>	&lt;input type=text name=address value=&quot;address&quot;&gt;<br>	&lt;input type=text name=id value=1337 &gt;<br>    &lt;input type=&quot;submit&quot; value=&quot;upload&quot; name=&quot;upload&quot;&gt;<br>&lt;/form&gt;&#x27;;<br><br><br><br>?&gt;<br><br></code></pre></td></tr></table></figure>
+
+<p>然后ai分析一波</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534358949-db221ee2-0985-4a60-a2c0-3575eb6443cf.png" srcset="/img/loading.gif" lazyload></p>
+<p>panel.php内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;?php<br>ob_start();<br>session_start();<br><br>include(&#x27;c.php&#x27;);<br>include(&#x27;head2.php&#x27;);<br><span class="hljs-meta prompt_">if(@$</span><span class="language-bash">_SESSION[<span class="hljs-string">&#x27;logged&#x27;</span>]!=<span class="hljs-literal">true</span> )</span><br>&#123;<br>		header(&#x27;Location: index.php&#x27;, true, 302);<br>		exit();<br><br>&#125;<br><br><br><br>echo &quot;Welcome to Lab &quot;;<br>echo &#x27;&lt;form method=post style=&quot;margin: 10px 0px 10px 95%;&quot;&gt;&lt;input type=submit name=lg value=Logout&gt;&lt;/form&gt;&#x27;;<br><span class="hljs-meta prompt_">if(isset($</span><span class="language-bash">_POST[<span class="hljs-string">&#x27;lg&#x27;</span>]))</span><br>&#123;<br><span class="hljs-meta prompt_">	unset($</span><span class="language-bash">_SESSION[<span class="hljs-string">&#x27;logged&#x27;</span>]);</span><br><span class="hljs-meta prompt_">	unset($</span><span class="language-bash">_SESSION[<span class="hljs-string">&#x27;admin&#x27;</span>]);</span><br>	header(&#x27;Location: index.php&#x27;, true, 302);<br>&#125;<br>echo &#x27;&lt;hr&gt;&lt;br&gt;&#x27;;<br><br>echo &#x27;&lt;form method=post&gt;<br><br>&lt;select name=load&gt;<br>    &lt;option value=&quot;show&quot;&gt;Show Users&lt;/option&gt;<br>	&lt;option value=&quot;add&quot;&gt;Add User&lt;/option&gt;<br>&lt;/select&gt;<br><br> &amp;nbsp&lt;input type=submit name=continue value=&quot;continue&quot;&gt;&lt;/form&gt;&lt;br&gt;&lt;br&gt;&#x27;;<br><span class="hljs-meta prompt_">if(isset($</span><span class="language-bash">_POST[<span class="hljs-string">&#x27;continue&#x27;</span>]))</span><br>&#123;<br><span class="hljs-meta prompt_">	$</span><span class="language-bash"><span class="hljs-built_in">dir</span>=getcwd();</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">choice=str_replace(<span class="hljs-string">&#x27;./&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;load&#x27;</span>]);</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">	if($</span><span class="language-bash">choice===<span class="hljs-string">&#x27;add&#x27;</span>)</span><br>	&#123;<br>       		include($dir.&#x27;/&#x27;.$choice.&#x27;.php&#x27;);<br>			die();<br>	&#125;<br><br>        if($choice===&#x27;show&#x27;)<br>	&#123;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">		include($</span><span class="language-bash"><span class="hljs-built_in">dir</span>.<span class="hljs-string">&#x27;/&#x27;</span>.<span class="hljs-variable">$choice</span>.<span class="hljs-string">&#x27;.php&#x27;</span>);</span><br>		die();<br>	&#125;<br>	else<br>	&#123;<br><span class="hljs-meta prompt_">		include($</span><span class="language-bash"><span class="hljs-built_in">dir</span>.<span class="hljs-string">&#x27;/&#x27;</span>.<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;load&#x27;</span>]);</span><br>	&#125;<br><br>&#125;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">if(isset($</span><span class="language-bash">_POST[<span class="hljs-string">&#x27;upload&#x27;</span>]))</span><br>&#123;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">name=mysqli_real_escape_string(<span class="hljs-variable">$conn</span>,<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;name&#x27;</span>]);</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">address=mysqli_real_escape_string(<span class="hljs-variable">$conn</span>,<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;address&#x27;</span>]);</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash"><span class="hljs-built_in">id</span>=mysqli_real_escape_string(<span class="hljs-variable">$conn</span>,<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;id&#x27;</span>]);</span><br><br>	if(!empty($_FILES[&#x27;image&#x27;][&#x27;name&#x27;]))<br>	&#123;<br><span class="hljs-meta prompt_">		$</span><span class="language-bash">iname=mysqli_real_escape_string(<span class="hljs-variable">$conn</span>,<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;image&#x27;</span>][<span class="hljs-string">&#x27;name&#x27;</span>]);</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">r=pathinfo(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;image&#x27;</span>][<span class="hljs-string">&#x27;name&#x27;</span>],PATHINFO_EXTENSION);</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">image=array(<span class="hljs-string">&#x27;jpeg&#x27;</span>,<span class="hljs-string">&#x27;jpg&#x27;</span>,<span class="hljs-string">&#x27;gif&#x27;</span>,<span class="hljs-string">&#x27;png&#x27;</span>);</span><br><span class="hljs-meta prompt_">	if(in_array($</span><span class="language-bash">r,<span class="hljs-variable">$image</span>))</span><br>	&#123;<br><span class="hljs-meta prompt_">		$</span><span class="language-bash">finfo = @new finfo(FILEINFO_MIME);</span><br><span class="hljs-meta prompt_">	$</span><span class="language-bash">filetype = @<span class="hljs-variable">$finfo</span>-&gt;file(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;image&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>]);</span><br>		if(preg_match(&#x27;/image\/jpeg/&#x27;,$filetype )  || preg_match(&#x27;/image\/png/&#x27;,$filetype ) || preg_match(&#x27;/image\/gif/&#x27;,$filetype ))<br>				&#123;<br>					if (move_uploaded_file($_FILES[&#x27;image&#x27;][&#x27;tmp_name&#x27;], &#x27;uploaded_images/&#x27;.$_FILES[&#x27;image&#x27;][&#x27;name&#x27;]))<br>							 &#123;<br>							  echo &quot;Uploaded successfully &quot;;<br>							  $update=&#x27;insert into users(name,address,image,id) values(\&#x27;&#x27;.$name.&#x27;\&#x27;,\&#x27;&#x27;.$address.&#x27;\&#x27;,\&#x27;&#x27;.$iname.&#x27;\&#x27;, \&#x27;&#x27;.$id.&#x27;\&#x27;)&#x27;;<br>							 mysqli_query($conn, $update);<br><br>							&#125;<br>				&#125;<br>			else<br>			&#123;<br>				echo &quot;&lt;br&gt;i told you dear, only png,jpg and gif file are allowed&quot;;<br>			&#125;<br>	&#125;<br>	else<br>	&#123;<br>		echo &quot;&lt;br&gt;only png,jpg and gif file are allowed&quot;;<br><br>	&#125;<br>&#125;<br><br><br>&#125;<br><br>?&gt;<br></code></pre></td></tr></table></figure>
+
+<p>然后得到渗透路径</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534586583-b075defc-b50f-46a3-8af5-7871b3753e9c.png" srcset="/img/loading.gif" lazyload></p>
+<p>上传图片马</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534636247-b4b12bab-a59e-42f9-9447-fbdd1c1240f1.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后在panel通过show读取图片马路径</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534805454-c704bfa5-d5b7-4964-bb66-545d3ad1caf6.png" srcset="/img/loading.gif" lazyload></p>
+<p>接下来就是读取flag</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534882249-9f1f37b0-3a8f-4cc8-80b0-0a42fb4d7c25.png" srcset="/img/loading.gif" lazyload></p>
+<p>成功读取</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770534920248-ec9418c2-3c46-432f-88dc-56bc9321e07f.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="内部监控暴露"><a href="#内部监控暴露" class="headerlink" title="内部监控暴露"></a>内部监控暴露</h1><p>打开是一个等待页面，我们直接扫目录</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770535129361-0a85ec11-27f4-4efe-bba7-b1b09cd4f551.png" srcset="/img/loading.gif" lazyload></p>
+<p>systemchart.php是一个get登录验证。info是phpinfo页面，blocks和chart用admin/admin进去后就是404，文件不存在</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770535371810-e66ca97e-2931-4f57-a384-6328ea1ac935.png" srcset="/img/loading.gif" lazyload></p>
+<p>又扫了一遍，发现了一些新东西</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770537020475-535fbb64-42d9-489e-bd2e-9ded5a310784.png" srcset="/img/loading.gif" lazyload></p>
+<p>打开发现是mantis，然后直接用mantis的历史漏洞去试</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770539159631-9233f48f-024b-4ffb-8ba8-4070b9d2d8e6.png" srcset="/img/loading.gif" lazyload></p>
+<p>但是不知道是不出网还是我的云服务器在国外连不上，只能手动去复现，但是这个漏洞确实是成功了的，因为可以用重置后的password登录进去，没办法反弹，那我们就写一个webshell</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770540289397-70c68e43-eae3-4e1e-a713-93c197bfdebc.png" srcset="/img/loading.gif" lazyload></p>
+<p>没办法直接读，得提权</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770540362075-a4049a03-d264-482c-9c91-f8a31cebc54e.png" srcset="/img/loading.gif" lazyload></p>
+<p>用蚁剑手动反弹一个shell，然后上传linpeas.sh，执行，原来之前反弹不成功是没有bash，用nc才成功，linpeas.sh也没发现什么有用的内容，后面看了别人的wp是通过计划任务反弹，然后有一个root的小文件，但是任何人都可以更改</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770543815100-fafcabe1-fb76-4179-aada-2f3968394646.png" srcset="/img/loading.gif" lazyload></p>
+<p>往其中插入反弹shell的语句即可</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://cdn.nlark.com/yuque/0/2026/png/57713373/1770543842935-659be2f7-f150-4f26-91a0-f9c97038d328.png" srcset="/img/loading.gif" lazyload></p>
+<p>挺奇怪的，不知道是不是我的shell问题还是怎么，linpeas应该是可以把这种文件找出来的，但是并没有找到</p>
+<p>别人wp：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/cchl/articles/vulnhub_tre_1.html#%E6%96%B9%E6%B3%95%E4%B8%89%E9%80%9A%E7%94%A8%E6%BC%8F%E6%B4%9E%E7%9A%84%E5%88%A9%E7%94%A8">Vulnhub打靶记录：tre_1 - C_CHL - 博客园</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/note/" class="category-chain-item">note</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ctf/" class="category-chain-item">ctf</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/ctf/">#ctf</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>破阵阁-巅峰赛</div>
+      <div>https://rightevil.github.io/破阵阁-巅峰赛/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rightevil</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年2月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9B/" title="最近的一些比赛">
+                        <span class="hidden-mobile">最近的一些比赛</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="lv-container" data-id="city" data-uid="MTAyMC81NzQyNC8zMzg4OA==">
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#lv-container', function() {
+        Fluid.utils.createScript('https://cdn-city.livere.com/js/embed.dist.js');
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
